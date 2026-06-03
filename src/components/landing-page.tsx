@@ -1,80 +1,772 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import {
-  Menu,
-  X,
-  ArrowRight,
-  ChevronRight,
-  Mail,
-  Dumbbell,
-  Utensils,
-  ClipboardList,
-  MessageCircle,
-  TrendingUp,
-  Shield,
-  GraduationCap,
-  Briefcase,
-  Zap,
-  Check,
-  Trophy,
-  Phone,
-  FileText,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { motion, useInView } from "framer-motion"
+import { ArrowRight, ArrowDown, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+// ── Animation Variants ────────────────────────────────────────────────
+type Ease4 = [number, number, number, number]
+const EASE: Ease4 = [0.25, 0.1, 0.25, 1]
+
+const reveal = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
+}
+
+const revealLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: EASE } },
+}
+
+const revealRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: EASE } },
+}
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+}
+
+// ── Icons ─────────────────────────────────────────────────────────────
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={cn("h-4 w-4", className)} fill="currentColor" aria-hidden="true">
     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34v-7.1a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.63z" />
   </svg>
 )
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-}
-
-const itemFadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
-
-const navLinks = [
-  ["#programs", "Programs"],
-  ["#process", "Process"],
+// ── Nav ───────────────────────────────────────────────────────────────
+const NAV_LINKS = [
   ["#about", "About"],
+  ["#process", "Process"],
   ["#results", "Results"],
-  ["#apply", "Apply"],
+  ["#pricing", "Pricing"],
 ] as const
 
-function RadioGroup({
-  name,
-  options,
-  label,
-}: {
-  name: string
-  options: string[]
-  label: string
-}) {
+function Nav() {
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <div className="space-y-2">
-      <label className="text-sm font-medium leading-none">{label}</label>
-      <div className="flex flex-wrap gap-2 pt-1">
+    <motion.nav
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        scrolled
+          ? "bg-[#080808]/90 backdrop-blur-md border-b border-white/[0.07]"
+          : "bg-transparent"
+      )}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#f0ece4]">
+          The Standard
+        </Link>
+
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-[10px] tracking-widest uppercase text-[#f0ece4]/50 hover:text-[#f0ece4] transition-colors duration-200"
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+
+        <Link
+          href="#apply"
+          className="hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[#c9a84c] border border-[#c9a84c]/40 px-4 py-2 hover:bg-[#c9a84c]/10 transition-colors duration-200"
+        >
+          Apply
+          <ArrowRight className="h-3 w-3" />
+        </Link>
+
+        <button
+          className="md:hidden text-[#f0ece4] p-1"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        >
+          <div className="w-5 space-y-[5px]">
+            <span
+              className={cn(
+                "block h-px bg-current transition-all duration-300 origin-center",
+                mobileOpen && "rotate-45 translate-y-[7px]"
+              )}
+            />
+            <span
+              className={cn(
+                "block h-px bg-current transition-all duration-300",
+                mobileOpen && "opacity-0 scale-x-0"
+              )}
+            />
+            <span
+              className={cn(
+                "block h-px bg-current transition-all duration-300 origin-center",
+                mobileOpen && "-rotate-45 -translate-y-[7px]"
+              )}
+            />
+          </div>
+        </button>
+      </div>
+
+      <motion.div
+        initial={false}
+        animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: EASE }}
+        className="md:hidden overflow-hidden bg-[#080808] border-b border-white/[0.07]"
+      >
+        <div className="px-6 pb-6 pt-2 space-y-1">
+          {([...NAV_LINKS, ["#apply", "Apply"]] as [string, string][]).map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-between py-3 text-sm tracking-widest uppercase text-[#f0ece4]/60 hover:text-[#f0ece4] border-b border-white/[0.05] last:border-0 transition-colors duration-200"
+            >
+              {label}
+              <ArrowRight className="h-3 w-3 opacity-30" />
+            </Link>
+          ))}
+        </div>
+      </motion.div>
+    </motion.nav>
+  )
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────
+function Hero() {
+  return (
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808]">
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-no-repeat"
+          style={{ backgroundImage: "url('/images/hero/hero.jpg')", backgroundPosition: "center top" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/60 via-[#080808]/40 to-[#080808]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-transparent to-[#080808]/80" />
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-8"
+        >
+          — Online Fitness Coaching —
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: EASE }}
+          className="font-display leading-[1.05] mb-6"
+        >
+          <span
+            className="block font-light text-[#f0ece4]/90"
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+          >
+            You&apos;re not
+          </span>
+          <span
+            className="block font-black italic text-[#f0ece4]"
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+          >
+            a generic plan.
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
+          className="text-[#f0ece4]/55 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
+        >
+          1-on-1 coaching built around your schedule, your body, and your life.{" "}
+          Not someone else&apos;s template.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0, ease: EASE }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link
+            href="#apply"
+            className="inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+          >
+            Apply for Coaching
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link
+            href="#about"
+            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/50 hover:text-[#f0ece4] transition-colors duration-200"
+          >
+            See how it works
+          </Link>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown className="h-4 w-4 text-[#f0ece4]/25" />
+        </motion.div>
+      </motion.div>
+    </section>
+  )
+}
+
+// ── Marquee ───────────────────────────────────────────────────────────
+const MARQUEE_BASE = [
+  "Custom Program",
+  "Weekly Check-ins",
+  "24hr Access",
+  "Evidence-Based",
+  "No Templates",
+  "Built For Your Life",
+]
+
+function Marquee() {
+  const items = [...MARQUEE_BASE, ...MARQUEE_BASE]
+  return (
+    <div className="border-y border-white/[0.07] bg-[#0a0a0a] py-4 overflow-hidden">
+      <div className="marquee-track flex gap-12 whitespace-nowrap">
+        {items.map((item, i) => (
+          <span key={i} className="flex items-center gap-12 flex-shrink-0">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/30">{item}</span>
+            <span className="w-1 h-1 rounded-full bg-[#c9a84c]/50 flex-shrink-0" />
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Section Header ────────────────────────────────────────────────────
+function SectionHeader({
+  label,
+  line1,
+  line2,
+  note,
+}: {
+  label: string
+  line1: string
+  line2: string
+  note?: string
+}) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={reveal}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="mb-16 md:mb-24"
+    >
+      <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-4">{label}</p>
+      <h2
+        className="font-display text-[#f0ece4] leading-tight"
+        style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+      >
+        <span className="font-light">{line1}</span>
+        <span className="block font-black italic">{line2}</span>
+      </h2>
+      {note && (
+        <p className="text-[#f0ece4]/45 text-lg mt-6 max-w-lg leading-relaxed">{note}</p>
+      )}
+    </motion.div>
+  )
+}
+
+// ── Philosophy ────────────────────────────────────────────────────────
+function Philosophy() {
+  const leftRef = useRef(null)
+  const rightRef = useRef(null)
+  const leftInView = useInView(leftRef, { once: true, amount: 0.2 })
+  const rightInView = useInView(rightRef, { once: true, amount: 0.2 })
+
+  return (
+    <section id="about" className="bg-[#080808] py-32 md:py-40">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
+          <motion.div
+            ref={leftRef}
+            variants={revealLeft}
+            initial="hidden"
+            animate={leftInView ? "visible" : "hidden"}
+          >
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-8">
+              The Philosophy
+            </p>
+            <h2
+              className="font-display leading-tight mb-6"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+            >
+              <span className="font-light text-[#f0ece4]">Most programs are built for a client</span>
+              <span className="block font-black italic text-[#f0ece4]"> who doesn&apos;t exist.</span>
+            </h2>
+            <div className="w-12 h-px bg-[#c9a84c] mb-8" />
+            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
+              Pre-med cramming for the MCAT. Young professional pulling 50-hour weeks. Lifter with a
+              rotator cuff injury and no time to spare. None of them fit a generic program.
+            </p>
+            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-10">
+              I only take clients I know I can genuinely help. If you apply and I don&apos;t think
+              the timing is right, I&apos;ll tell you.
+            </p>
+            <Link
+              href="#apply"
+              className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#c9a84c] border-b border-[#c9a84c]/40 pb-1 hover:border-[#c9a84c] transition-colors duration-200 group"
+            >
+              Apply Now
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+
+          <motion.div
+            ref={rightRef}
+            variants={revealRight}
+            initial="hidden"
+            animate={rightInView ? "visible" : "hidden"}
+            className="relative"
+          >
+            <div className="relative aspect-[3/4] overflow-hidden border border-white/[0.07]">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/images/hero/hero.jpg')" }}
+              />
+              <div className="absolute inset-0 bg-[#1a1410]/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="font-display text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-1">
+                  Amir Cohen-Simayof
+                </p>
+                <p className="text-[#f0ece4]/40 text-xs tracking-wide">
+                  Online Fitness Coach · @amir_csim
+                </p>
+              </div>
+            </div>
+            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#c9a84c]/20 -z-10" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── What You Get ──────────────────────────────────────────────────────
+const FEATURES = [
+  {
+    num: "01",
+    title: "Custom Training Program",
+    body: "Splits designed around your schedule, equipment, and weak points. Built for your actual life, not an idealized one.",
+  },
+  {
+    num: "02",
+    title: "Evidence-Based Nutrition",
+    body: "Macro targets calibrated to your body and lifestyle. Kosher, travel, picky eater — we make it work.",
+  },
+  {
+    num: "03",
+    title: "Weekly Check-ins",
+    body: "Every Sunday you submit weight, adherence, and biofeedback. Your plan adjusts in real time.",
+  },
+  {
+    num: "04",
+    title: "Direct Access to Me",
+    body: "WhatsApp, Loom video feedback, email. You're never left guessing what to do or why.",
+  },
+  {
+    num: "05",
+    title: "Data-Driven Adjustments",
+    body: "Calories, training load, and recovery move based on actual results — not a generic timeline.",
+  },
+]
+
+function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: number }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={reveal}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      transition={{ delay: index * 0.05 }}
+      className="py-8 md:py-10 grid md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 items-start group hover:bg-white/[0.02] transition-colors duration-300 cursor-default"
+    >
+      <span className="font-display text-3xl font-light text-[#f0ece4]/15 group-hover:text-[#c9a84c]/40 transition-colors duration-300">
+        {feature.num}
+      </span>
+      <h3 className="text-[#f0ece4] font-medium text-lg leading-snug">{feature.title}</h3>
+      <p className="text-[#f0ece4]/50 leading-relaxed">{feature.body}</p>
+    </motion.div>
+  )
+}
+
+function Included() {
+  return (
+    <section className="bg-[#080808] py-24 border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="What You Get" line1="Everything you need." line2="Nothing you don't." />
+        <div className="divide-y divide-white/[0.07]">
+          {FEATURES.map((f, i) => (
+            <FeatureRow key={f.num} feature={f} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────
+const STATS = [
+  { value: "100%", label: "Custom-built programs" },
+  { value: "24hr", label: "Check-in response time" },
+  { value: "12wk", label: "Minimum commitment" },
+  { value: "0", label: "Templates ever used" },
+]
+
+function Stats() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
+  return (
+    <section className="bg-[#0a0a0a] py-24 border-y border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.07]"
+        >
+          {STATS.map((s) => (
+            <motion.div key={s.label} variants={reveal} className="bg-[#0a0a0a] p-10 md:p-14 text-center">
+              <p
+                className="font-display font-black text-[#f0ece4] leading-none mb-3"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+              >
+                {s.value}
+              </p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/35">{s.label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// ── Process ───────────────────────────────────────────────────────────
+const STEPS = [
+  { num: "01", title: "Apply", body: "Short form. Amir reviews every one personally before any money changes hands." },
+  { num: "02", title: "Discovery Call", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
+  { num: "03", title: "Your Program", body: "Custom training + nutrition delivered within 48 hours of signing." },
+  { num: "04", title: "Weekly Check-ins", body: "Submit data every Sunday. Adjustments live within 24 hours." },
+  { num: "05", title: "Results", body: "Progressive recomposition with habits that hold up long after the program ends." },
+]
+
+function Process() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.1 })
+
+  return (
+    <section id="process" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="The Process" line1="Application to results." line2="Five steps." />
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid md:grid-cols-5 gap-px bg-white/[0.07]"
+        >
+          {STEPS.map((s) => (
+            <motion.div
+              key={s.num}
+              variants={reveal}
+              className="bg-[#080808] p-8 group hover:bg-white/[0.02] transition-colors duration-300"
+            >
+              <p className="font-display text-4xl font-light text-[#f0ece4]/10 group-hover:text-[#c9a84c]/30 transition-colors duration-300 mb-6">
+                {s.num}
+              </p>
+              <h3 className="text-[#f0ece4] font-semibold mb-3">{s.title}</h3>
+              <p className="text-[#f0ece4]/45 text-sm leading-relaxed">{s.body}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────
+const TESTIMONIALS = [
+  {
+    quote:
+      "I was studying for the MCAT and working as an EMT 20 hours a week. I told Amir I had no time. He built me a 45-minute program and macros around my actual food. Three weeks in and I can already see the difference.",
+    author: "Akiva P.",
+    detail: "Pre-med student, USC",
+  },
+  {
+    quote:
+      "I have ADHD and a rotator cuff issue and I kept burning out every time I tried to get consistent. Amir didn't just give me a plan — he gave me one I could actually stick to. Four days a week for two months straight.",
+    author: "Jacob R.",
+    detail: "Student & RBT",
+  },
+  {
+    quote:
+      "I travel for work every other week. Every coach I tried gave me the same program regardless. Amir adjusts my training based on where I am and how I'm sleeping. First time fitness has actually fit my life.",
+    author: "Daniel M.",
+    detail: "Sales Manager, 28",
+  },
+  {
+    quote:
+      "Lost 18 pounds in 14 weeks without feeling like I was on a diet. He kept my calories surprisingly high, changed my training split entirely, and answered every question within hours.",
+    author: "Sarah K.",
+    detail: "Nurse, 25",
+  },
+]
+
+function Testimonials() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.1 })
+
+  return (
+    <section id="results" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="Results" line1="Real people." line2="Real schedules." />
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid md:grid-cols-2 gap-px bg-white/[0.07]"
+        >
+          {TESTIMONIALS.map((t, i) => (
+            <motion.div
+              key={i}
+              variants={reveal}
+              className="bg-[#080808] p-10 md:p-12 hover:bg-white/[0.02] transition-colors duration-300"
+            >
+              <p className="font-display text-5xl text-[#c9a84c]/30 font-black leading-none mb-6">
+                &ldquo;
+              </p>
+              <blockquote className="text-[#f0ece4]/80 text-lg leading-relaxed mb-8">
+                {t.quote}
+              </blockquote>
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                <div>
+                  <p className="text-[#f0ece4] text-sm font-medium">{t.author}</p>
+                  <p className="text-[#f0ece4]/35 text-xs tracking-wide mt-0.5">{t.detail}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// ── Transformation ────────────────────────────────────────────────────
+function Transformation() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.15 })
+
+  return (
+    <section className="bg-[#080808] py-32 border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="The Proof" line1="12 weeks." line2="What that looks like." />
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid md:grid-cols-2 gap-px bg-white/[0.07]"
+        >
+          {/* Before */}
+          <motion.div variants={revealLeft} className="relative bg-[#0a0a0a]">
+            <div className="aspect-[3/4] relative overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-top bg-no-repeat"
+                style={{ backgroundImage: "url('/images/before.png')" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/40 mb-2">Before</p>
+                <p className="font-display text-2xl font-light text-[#f0ece4]/60 leading-tight">
+                  Not there yet.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* After */}
+          <motion.div variants={revealRight} className="relative bg-[#0a0a0a]">
+            <div className="aspect-[3/4] relative overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-top bg-no-repeat"
+                style={{ backgroundImage: "url('/images/after.png')" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-2">After</p>
+                <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
+                  The Standard.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <p className="text-[#f0ece4]/25 text-xs tracking-[0.2em] uppercase text-center mt-8">
+          Amir&apos;s personal transformation &mdash; the same system he runs for every client.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// ── Pricing ───────────────────────────────────────────────────────────
+const PLANS = [
+  {
+    name: "Standard",
+    price: "$297",
+    note: "per month · 12-week minimum",
+    features: [
+      "Custom training program",
+      "Macro-based nutrition plan",
+      "Weekly check-ins & adjustments",
+      "WhatsApp access to Amir",
+      "Progress tracking system",
+      "Full health & injury screening",
+    ],
+    cta: "Apply for Standard",
+    featured: false,
+  },
+  {
+    name: "Premium",
+    price: "$497",
+    note: "per month · 12-week minimum",
+    features: [
+      "Everything in Standard",
+      "Bi-weekly Loom video reviews",
+      "Priority 12hr response time",
+      "Monthly strategy call",
+      "Supplement guidance",
+      "Lifestyle & recovery coaching",
+    ],
+    cta: "Apply for Premium",
+    featured: true,
+  },
+]
+
+function Pricing() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
+  return (
+    <section id="pricing" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader
+          label="Investment"
+          line1="Simple pricing."
+          line2="No surprises."
+          note="12-week minimum on both plans. Real change takes time — Amir is serious about delivering it."
+        />
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid md:grid-cols-2 gap-px bg-white/[0.07] max-w-3xl"
+        >
+          {PLANS.map((plan) => (
+            <motion.div
+              key={plan.name}
+              variants={reveal}
+              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#0f0f0f]" : "bg-[#080808]")}
+            >
+              {plan.featured && (
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-6">
+                  Most Popular
+                </p>
+              )}
+              <h3 className="text-[#f0ece4] text-xl font-semibold mb-2">{plan.name}</h3>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span
+                  className="font-display font-black text-[#f0ece4]"
+                  style={{ fontSize: "clamp(2.5rem, 4vw, 3rem)" }}
+                >
+                  {plan.price}
+                </span>
+              </div>
+              <p className="text-[#f0ece4]/35 text-xs tracking-wide mb-8">{plan.note}</p>
+              <ul className="space-y-3 mb-10 flex-1">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-center gap-3 text-sm text-[#f0ece4]/65">
+                    <Check className="h-3.5 w-3.5 text-[#c9a84c] flex-shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="#apply"
+                className={cn(
+                  "text-center text-xs tracking-[0.2em] uppercase py-4 transition-colors duration-200",
+                  plan.featured
+                    ? "bg-[#c9a84c] text-[#080808] hover:bg-[#c9a84c]/90"
+                    : "border border-white/20 text-[#f0ece4]/70 hover:border-white/40 hover:text-[#f0ece4]"
+                )}
+              >
+                {plan.cta}
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// ── Apply ─────────────────────────────────────────────────────────────
+function RadioGroup({ name, label, options }: { name: string; label: string; options: string[] }) {
+  return (
+    <div>
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/40 mb-3">
+        {label}
+      </label>
+      <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
           <label key={opt} className="cursor-pointer select-none">
             <input type="radio" name={name} value={opt} className="sr-only peer" />
-            <span className="inline-block rounded-3xl border px-3 py-1.5 text-sm transition-colors peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary hover:bg-muted">
+            <span className="inline-block border border-white/[0.12] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/50 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/25 hover:text-[#f0ece4]/70">
               {opt}
             </span>
           </label>
@@ -84,1024 +776,250 @@ function RadioGroup({
   )
 }
 
-export function LandingPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
+function Apply() {
+  const splashRef = useRef(null)
+  const leftRef = useRef(null)
+  const rightRef = useRef(null)
+  const splashInView = useInView(splashRef, { once: true, amount: 0.3 })
+  const leftInView = useInView(leftRef, { once: true, amount: 0.2 })
+  const rightInView = useInView(rightRef, { once: true, amount: 0.1 })
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const inputClass =
+    "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/25 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
+  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/40 mb-3"
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#faf9f7]">
-      {/* ── Header ── */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`sticky top-0 z-50 w-full border-b bg-[#faf9f7]/95 backdrop-blur supports-[backdrop-filter]:bg-[#faf9f7]/60 ${scrollY > 50 ? "shadow-md" : ""}`}
+    <section id="apply" className="bg-[#080808] border-t-2 border-[#c9a84c]/50">
+      {/* Chapter opener — full-width splash that makes the section entry unmistakable */}
+      <motion.div
+        ref={splashRef}
+        variants={reveal}
+        initial="hidden"
+        animate={splashInView ? "visible" : "hidden"}
+        className="text-center pt-24 pb-20 px-6 border-b border-white/[0.07] relative overflow-hidden"
       >
-        <div className="container mx-auto flex h-16 items-center justify-between border-x border-muted">
-          <Link href="/" className="flex items-center space-x-3">
-            <motion.div
-              whileHover={{ rotate: 5, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="h-10 w-10 rounded-3xl bg-primary flex items-center justify-center"
-            >
-              <Dumbbell className="h-5 w-5 text-primary-foreground" />
-            </motion.div>
-            <span className="font-semibold text-xl">Amir Coaching</span>
-          </Link>
+        {/* Ghost watermark */}
+        <p
+          aria-hidden="true"
+          className="font-display font-black text-[#f0ece4] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
+          style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.028 }}
+        >
+          APPLY
+        </p>
 
-          <nav className="hidden md:flex gap-6">
-            {navLinks.map(([href, label]) => (
-              <Link key={href} href={href} className="text-sm font-medium transition-colors hover:text-primary">
-                {label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden md:flex items-center gap-3">
-            <Link href="#apply" className={cn(buttonVariants({ size: "sm" }), "rounded-3xl")}>
-              Apply Now
-            </Link>
-          </div>
-
-          <button className="flex md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle menu</span>
-          </button>
+        <div className="relative z-10">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-8">
+            — Apply Now —
+          </p>
+          <h2
+            className="font-display leading-tight"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+          >
+            <span className="font-light text-[#f0ece4]">Let&apos;s see if</span>
+            <span className="block font-black italic text-[#f0ece4]">we&apos;re a fit.</span>
+          </h2>
+          <p className="text-[#f0ece4]/40 text-base max-w-xs mx-auto leading-relaxed mt-6">
+            Takes about 3 minutes. Amir personally reviews every application.
+          </p>
         </div>
-      </motion.header>
+      </motion.div>
 
-      {/* ── Mobile Menu ── */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-[#faf9f7] md:hidden"
-        >
-          <div className="container mx-auto flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-3xl bg-primary flex items-center justify-center">
-                <Dumbbell className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-semibold text-xl">Amir Coaching</span>
-            </Link>
-            <button onClick={() => setIsMenuOpen(false)}>
-              <X className="h-6 w-6" />
-              <span className="sr-only">Close menu</span>
-            </button>
-          </div>
-          <motion.nav
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="container mx-auto grid gap-3 pb-8 pt-6"
-          >
-            {navLinks.map(([href, item]) => (
-              <motion.div key={href} variants={itemFadeIn}>
-                <Link
-                  href={href}
-                  className="flex items-center justify-between rounded-3xl px-3 py-2 text-lg font-medium hover:bg-accent"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                  <ChevronRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div variants={itemFadeIn} className="pt-4">
-              <Link
-                href="#apply"
-                onClick={() => setIsMenuOpen(false)}
-                className={cn(buttonVariants(), "w-full rounded-3xl")}
-              >
-                Apply Now
-              </Link>
-            </motion.div>
-          </motion.nav>
-        </motion.div>
-      )}
-
-      <main className="flex-1">
-        {/* ── Hero ── */}
-        <section className="w-full py-16 md:py-28 lg:py-36 overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl bg-gradient-to-br from-background to-muted/30 relative overflow-hidden">
-            {/* decorative background blobs */}
-            <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-orange-400/10 blur-3xl" />
-
-            <div className="flex flex-col items-center text-center py-16 space-y-6 relative z-10">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center rounded-3xl bg-muted px-3 py-1 text-sm"
-              >
-                <Zap className="mr-1 h-3 w-3" />
-                Evidence-Based Online Coaching
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl/none max-w-4xl"
-              >
-                Transform your body without{" "}
-                <span className="bg-gradient-to-r from-primary to-orange-500 bg-clip-text text-transparent">
-                  giving up your life
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="max-w-2xl text-muted-foreground md:text-xl leading-relaxed"
-              >
-                Personalized 1-on-1 coaching built around your schedule, goals, and lifestyle, not someone
-                else&apos;s cookie-cutter plan.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="flex flex-col gap-3 sm:flex-row justify-center"
-              >
-                <Link href="#apply" className={cn(buttonVariants({ size: "lg" }), "rounded-3xl group")}>
-                  Apply Now
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="#process"
-                  className={cn(buttonVariants({ variant: "outline", size: "lg" }), "rounded-3xl")}
-                >
-                  See How It Works
-                </Link>
-              </motion.div>
-
-              {/* Social proof cards */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.55 }}
-                className="w-full max-w-3xl space-y-3 pt-4"
-              >
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: "100%", label: "Personalized" },
-                    { value: "24hr", label: "Response time" },
-                    { value: "12wk", label: "Min. program" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="rounded-3xl border bg-background/80 p-4 text-center">
-                      <p className="text-2xl font-semibold text-primary">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-3">
-                  <div className="rounded-3xl border bg-background/80 p-6 shadow-sm text-left">
-                    <p className="text-base font-medium leading-relaxed text-foreground/90">
-                      &quot;Down 12 lbs in 8 weeks and I actually enjoy training now. Amir completely worked around
-                      my schedule.&quot;
-                    </p>
-                    <p className="mt-3 text-sm text-muted-foreground">&middot; Jacob R., student &amp; RBT</p>
-                  </div>
-                  <div className="rounded-3xl border bg-muted/40 p-5 space-y-2.5 text-left">
-                    {[
-                      "Custom program delivered within 48 hours",
-                      "Weekly adjustments based on real data",
-                      "Direct WhatsApp access to Amir",
-                    ].map((item) => (
-                      <div key={item} className="flex items-center gap-2 text-sm">
-                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Built For ── */}
-        <section id="programs" className="w-full py-12 md:py-16 lg:py-20">
+      {/* Form */}
+      <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
           <motion.div
+            ref={leftRef}
+            variants={revealLeft}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl bg-muted/20"
+            animate={leftInView ? "visible" : "hidden"}
           >
-            <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-              <div className="space-y-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm"
-                >
-                  Who This Is For
-                </motion.div>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
-                >
-                  Built for people like you
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed leading-relaxed"
-                >
-                  This coaching is for people who are serious about results. You need a plan that holds up in real
-                  life, not just in theory.
-                </motion.p>
-              </div>
-            </div>
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mx-auto grid max-w-4xl gap-4 pb-10 md:grid-cols-3"
-            >
-              {[
-                {
-                  icon: <GraduationCap className="h-8 w-8 text-primary" />,
-                  title: "Busy Students",
-                  description:
-                    "MCAT prep, nursing school, med school. You have zero margin but serious goals. You know something has to change.",
-                },
-                {
-                  icon: <Briefcase className="h-8 w-8 text-primary" />,
-                  title: "Young Professionals",
-                  description:
-                    "Long hours, late nights, travel. You want a body that reflects how hard you work, without your health becoming another thing that slips.",
-                },
-                {
-                  icon: <Dumbbell className="h-8 w-8 text-primary" />,
-                  title: "Dedicated Lifters",
-                  description:
-                    "You've been putting in the work but the results aren't matching. You need someone to dial in the details and make the data work for you.",
-                },
-              ].map((persona, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemFadeIn}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="group relative overflow-hidden rounded-3xl border p-6 bg-background/80 hover:shadow-md transition-all"
-                >
-                  <div className="absolute -right-16 -top-16 h-32 w-32 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-all duration-300" />
-                  <div className="relative space-y-3">
-                    <div className="mb-4">{persona.icon}</div>
-                    <h3 className="text-xl font-semibold">{persona.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{persona.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── What's Included ── */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl"
-          >
-            <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-              <div className="space-y-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm"
-                >
-                  What&apos;s Included
-                </motion.div>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
-                >
-                  Everything you need, thoughtfully designed
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="mx-auto max-w-[900px] text-muted-foreground md:text-xl/relaxed leading-relaxed"
-                >
-                  Every client gets a fully customized system. No templates, no PDFs, no group programs.
-                </motion.p>
-              </div>
-            </div>
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mx-auto grid max-w-5xl gap-4 py-12 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {[
-                {
-                  icon: <Dumbbell className="h-10 w-10 text-primary" />,
-                  title: "Custom Training Program",
-                  description:
-                    "Splits designed around your schedule, equipment, and weak points. Built for your life, not a hypothetical one.",
-                },
-                {
-                  icon: <Utensils className="h-10 w-10 text-primary" />,
-                  title: "Evidence-Based Nutrition",
-                  description:
-                    "Macro targets built for your body and lifestyle. Kosher, picky eater, eat out four times a week. We make it work.",
-                },
-                {
-                  icon: <ClipboardList className="h-10 w-10 text-primary" />,
-                  title: "Weekly Check-ins",
-                  description:
-                    "Every Sunday you submit weight, adherence, biofeedback, and progress photos. Your plan adjusts in real time.",
-                },
-                {
-                  icon: <MessageCircle className="h-10 w-10 text-primary" />,
-                  title: "Direct Access",
-                  description:
-                    "WhatsApp, Loom video feedback, and email. You are never left wondering what to do next or why.",
-                },
-                {
-                  icon: <TrendingUp className="h-10 w-10 text-primary" />,
-                  title: "Data-Driven Adjustments",
-                  description:
-                    "Calories, training load, and recovery all move based on your actual results, not a generic timeline.",
-                },
-                {
-                  icon: <Shield className="h-10 w-10 text-primary" />,
-                  title: "Safety First",
-                  description:
-                    "Full health screening before we start. Evidence-based protocols throughout. No fads, no shortcuts.",
-                },
-              ].map((service, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemFadeIn}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="group relative overflow-hidden rounded-3xl border p-6 shadow-sm transition-all hover:shadow-md bg-background/80"
-                >
-                  <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-all duration-300" />
-                  <div className="relative space-y-3">
-                    <div className="mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-semibold">{service.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── The Process ── */}
-        <section id="process" className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl bg-muted/10"
-          >
-            <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-              <div className="space-y-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm"
-                >
-                  How It Works
-                </motion.div>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
-                >
-                  From application to results
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="mx-auto max-w-[900px] text-muted-foreground md:text-xl/relaxed leading-relaxed"
-                >
-                  A clear, systematic process designed to get you results and keep them.
-                </motion.p>
-              </div>
-            </div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mx-auto grid max-w-6xl gap-4 py-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-            >
-              {[
-                {
-                  step: "01",
-                  icon: <FileText className="h-8 w-8 text-primary" />,
-                  title: "Apply",
-                  description:
-                    "Fill out a short form so Amir can make sure this is the right fit before any money changes hands.",
-                },
-                {
-                  step: "02",
-                  icon: <Phone className="h-8 w-8 text-primary" />,
-                  title: "Discovery Call",
-                  description:
-                    "A free 20-minute call to talk goals, obstacles, and whether coaching makes sense right now.",
-                },
-                {
-                  step: "03",
-                  icon: <Dumbbell className="h-8 w-8 text-primary" />,
-                  title: "Your Program",
-                  description:
-                    "Custom training split and macro targets delivered within 48 hours of signing. Built specifically for you.",
-                },
-                {
-                  step: "04",
-                  icon: <ClipboardList className="h-8 w-8 text-primary" />,
-                  title: "Weekly Check-ins",
-                  description:
-                    "Submit your data every Sunday. Amir reviews everything and adjusts your program within 24 hours.",
-                },
-                {
-                  step: "05",
-                  icon: <Trophy className="h-8 w-8 text-primary" />,
-                  title: "Real Results",
-                  description:
-                    "Progressive body recomposition with sustainable habits that hold up long after the program ends.",
-                },
-              ].map((step, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemFadeIn}
-                  className="relative flex flex-col rounded-3xl border bg-background/80 p-6 shadow-sm"
-                >
-                  <span className="absolute top-4 right-4 text-6xl font-black text-muted/30 leading-none select-none">
-                    {step.step}
-                  </span>
-                  <div className="mb-4 relative z-10">{step.icon}</div>
-                  <h3 className="text-lg font-semibold relative z-10">{step.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed relative z-10">{step.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <div className="flex justify-center pb-10">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="#apply" className={cn(buttonVariants({ size: "lg" }), "rounded-3xl group")}>
-                  Start Your Application
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* ── About Amir ── */}
-        <section id="about" className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl"
-          >
-            <div className="grid gap-6 lg:grid-cols-2">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="space-y-4 p-6 flex flex-col justify-center items-center text-center lg:items-start lg:text-left"
-              >
-                <div className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm">About Amir</div>
-                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                  Coaching that actually gets it
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed leading-relaxed">
-                  I built this coaching system because I&apos;ve seen what happens when you try to follow a plan that
-                  wasn&apos;t made for you: burnout, guilt, and zero results.
-                </p>
-                <p className="text-muted-foreground md:text-xl/relaxed leading-relaxed">
-                  My clients are busy people with real lives. Pre-med students cramming for the MCAT. Young
-                  professionals pulling 50-hour weeks. People dealing with ADHD, rotator cuff injuries, and brutal
-                  schedules. I&apos;ve built a system that actually works for them. I only take clients I know I
-                  can genuinely help.
-                </p>
-                <div className="pt-2">
-                  <Link href="#apply" className={cn(buttonVariants({ size: "lg" }), "rounded-3xl")}>
-                    Start Your Application
-                  </Link>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="flex items-center justify-center p-6"
-              >
-                <div className="relative w-full h-[400px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-muted/30 flex items-center justify-center p-8">
-                  <div className="grid grid-cols-2 gap-3 w-full">
-                    {[
-                      "Evidence-based protocols",
-                      "Full health screening",
-                      "Selective client intake",
-                      "Weekly plan adjustments",
-                      "24hr WhatsApp support",
-                      "No cookie-cutter plans",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="flex items-center gap-2 rounded-2xl bg-background/80 px-3 py-2 text-sm font-medium shadow-sm"
-                      >
-                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* ── Pricing ── */}
-        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-muted rounded-3xl bg-muted/20"
-          >
-            <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-              <div className="space-y-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm"
-                >
-                  Investment
-                </motion.div>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
-                >
-                  Simple, transparent pricing
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed leading-relaxed"
-                >
-                  Both plans include a 12-week minimum commitment. Real change takes time. Amir is serious
-                  about delivering it.
-                </motion.p>
-              </div>
-            </div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mx-auto grid max-w-4xl gap-6 pb-12 md:grid-cols-2"
-            >
-              <motion.div
-                variants={itemFadeIn}
-                whileHover={{ y: -8 }}
-                className="flex flex-col rounded-3xl border bg-background p-8 shadow-sm"
-              >
-                <h3 className="text-2xl font-semibold">Standard</h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">$297</span>
-                  <span className="text-muted-foreground">/month</span>
-                </div>
-                <p className="mt-2 text-sm text-muted-foreground">12-week minimum · billed monthly</p>
-                <ul className="mt-6 space-y-3 flex-1">
-                  {[
-                    "Custom training program",
-                    "Macro-based nutrition plan",
-                    "Weekly check-ins & adjustments",
-                    "WhatsApp access to Amir",
-                    "Progress tracking system",
-                    "Full health & injury screening",
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="#apply" className={cn(buttonVariants({ variant: "outline" }), "mt-8 rounded-3xl")}>
-                  Apply for Standard
-                </Link>
-              </motion.div>
-
-              <motion.div
-                variants={itemFadeIn}
-                whileHover={{ y: -8 }}
-                className="flex flex-col rounded-3xl border-2 border-primary bg-background p-8 shadow-md relative overflow-hidden"
-              >
-                <div className="absolute top-4 right-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                  Most Popular
-                </div>
-                <h3 className="text-2xl font-semibold">Premium</h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">$497</span>
-                  <span className="text-muted-foreground">/month</span>
-                </div>
-                <p className="mt-2 text-sm text-muted-foreground">12-week minimum · billed monthly</p>
-                <ul className="mt-6 space-y-3 flex-1">
-                  {[
-                    "Everything in Standard",
-                    "Bi-weekly Loom video reviews",
-                    "Priority 12hr response time",
-                    "Monthly strategy call",
-                    "Supplement guidance",
-                    "Lifestyle & recovery coaching",
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="#apply" className={cn(buttonVariants(), "mt-8 rounded-3xl")}>
-                  Apply for Premium
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── Testimonials (dark section) ── */}
-        <section id="results" className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto px-4 md:px-6 border border-zinc-800 rounded-3xl bg-zinc-900"
-          >
-            <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-              <div className="space-y-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block rounded-3xl bg-white/10 px-3 py-1 text-sm text-white/80"
-                >
-                  Results
-                </motion.div>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl text-white"
-                >
-                  What clients say
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="mx-auto max-w-[900px] text-white/60 md:text-xl/relaxed leading-relaxed"
-                >
-                  Real people, real schedules, real results.
-                </motion.p>
-              </div>
-            </div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mx-auto grid max-w-5xl gap-4 py-12 lg:grid-cols-2"
-            >
-              {[
-                {
-                  quote:
-                    "I was studying for the MCAT and working as an EMT 20 hours a week. I told Amir I had no time. He built me a 45-minute program and macros around my actual food. Three weeks in and I can already see the difference.",
-                  author: "Akiva P.",
-                  detail: "Pre-med student, USC",
-                },
-                {
-                  quote:
-                    "I have ADHD and a rotator cuff issue and I kept burning out every time I tried to get consistent. Amir didn't just give me a plan. He gave me one I could actually stick to. I've been going 4 days a week for two months straight.",
-                  author: "Jacob R.",
-                  detail: "Student & RBT",
-                },
-                {
-                  quote:
-                    "I travel for work every other week. Every coach I tried before gave me the same program regardless. Amir adjusts my training based on where I am and how I'm sleeping. It's the first time fitness has actually fit my life.",
-                  author: "Daniel M.",
-                  detail: "Sales manager, 28",
-                },
-                {
-                  quote:
-                    "I lost 18 pounds in 14 weeks without feeling like I was on a diet. He kept my calories surprisingly high, changed my training split entirely, and answered every question I had within hours.",
-                  author: "Sarah K.",
-                  detail: "Nurse, 25",
-                },
-              ].map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemFadeIn}
-                  whileHover={{ y: -8 }}
-                  className="flex flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-6 shadow-sm"
-                >
-                  <div>
-                    <div className="flex gap-0.5 text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="h-5 w-5"
-                        >
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <blockquote className="mt-4 text-base font-medium leading-relaxed text-white/90">
-                      &quot;{testimonial.quote}&quot;
-                    </blockquote>
-                  </div>
-                  <div className="mt-6 flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center font-semibold text-white">
-                      {testimonial.author[0]}
-                    </div>
-                    <div className="ml-4">
-                      <p className="font-medium text-white">{testimonial.author}</p>
-                      <p className="text-sm text-white/60">{testimonial.detail}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── Apply / Contact ── */}
-        <section id="apply" className="w-full py-12 md:py-24 lg:py-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="container mx-auto grid items-start gap-6 px-4 md:px-6 lg:grid-cols-2 border border-muted rounded-3xl"
-          >
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-4 p-6 flex flex-col justify-center items-center text-center lg:items-start lg:text-left"
-            >
-              <div className="inline-block rounded-3xl bg-muted px-3 py-1 text-sm">Apply Now</div>
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl/tight">
-                Let&apos;s see if we&apos;re a good fit
-              </h2>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed leading-relaxed">
-                Fill out a short application. If it looks like a match, you&apos;ll get a link to book a free
-                20-minute discovery call with Amir. No pressure, no pitch.
-              </p>
-
-              <div className="mt-6 space-y-4 w-full max-w-sm">
-                <motion.div whileHover={{ x: 5 }} className="flex items-start gap-3">
-                  <div className="rounded-3xl bg-muted p-2 flex-shrink-0">
-                    <Mail className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Email Amir</h3>
-                    <p className="text-sm text-muted-foreground">amirsimayof@gmail.com</p>
-                  </div>
-                </motion.div>
-
-                <motion.div whileHover={{ x: 5 }} className="flex items-start gap-3">
-                  <div className="rounded-3xl bg-muted p-2 flex-shrink-0">
-                    <TikTokIcon />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">TikTok</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Follow along for daily training &amp; nutrition tips
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-
-              <div className="mt-4">
-                <motion.div whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.9 }} className="inline-block">
-                  <Link
-                    href="https://www.tiktok.com/@amir_csim"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-3xl border p-2 text-muted-foreground hover:text-foreground hover:border-primary transition-colors inline-flex"
-                  >
-                    <TikTokIcon />
-                    <span className="sr-only">TikTok</span>
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="rounded-3xl border bg-background p-6 shadow-sm my-6"
-            >
-              <h3 className="text-xl font-semibold">Tell me about yourself</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                Takes about 3 minutes. Amir personally reviews every application.
-              </p>
-
-              <form className="mt-6 space-y-5">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <label htmlFor="first-name" className="text-sm font-medium leading-none">
-                      First name
-                    </label>
-                    <Input id="first-name" placeholder="First name" className="rounded-3xl" />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="last-name" className="text-sm font-medium leading-none">
-                      Last name
-                    </label>
-                    <Input id="last-name" placeholder="Last name" className="rounded-3xl" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium leading-none">
-                    Email
-                  </label>
-                  <Input id="email" type="email" placeholder="your@email.com" className="rounded-3xl" />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="goal" className="text-sm font-medium leading-none">
-                    What are you trying to achieve in the next 12 weeks?
-                  </label>
-                  <Textarea
-                    id="goal"
-                    placeholder="Be specific, e.g. lose 15 lbs before my wedding in August, get visible abs while keeping my strength..."
-                    className="min-h-[90px] rounded-3xl"
-                  />
-                </div>
-
-                <RadioGroup
-                  name="training-days"
-                  label="How many days per week can you realistically train?"
-                  options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
-                />
-
-                <div className="space-y-2">
-                  <label htmlFor="obstacle" className="text-sm font-medium leading-none">
-                    What&apos;s your biggest obstacle right now?
-                  </label>
-                  <Input
-                    id="obstacle"
-                    placeholder="e.g. no time, injured shoulder, don't know where to start..."
-                    className="rounded-3xl"
-                  />
-                </div>
-
-                <RadioGroup
-                  name="budget"
-                  label="Monthly investment you're comfortable with?"
-                  options={["Under $200", "$200–$400", "$400+", "Depends on the value"]}
-                />
-
-                <RadioGroup
-                  name="prior-coaching"
-                  label="Have you worked with a coach before?"
-                  options={["Yes", "No", "Sort of"]}
-                />
-
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button type="submit" className="w-full rounded-3xl">
-                    Submit Application
-                  </Button>
-                </motion.div>
-              </form>
-            </motion.div>
-          </motion.div>
-        </section>
-      </main>
-
-      {/* ── Footer ── */}
-      <footer className="w-full border-t">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="container mx-auto grid gap-6 px-4 py-10 md:px-6 lg:grid-cols-4 border-x border-muted"
-        >
-          <div className="space-y-3 lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-3">
-              <motion.div
-                whileHover={{ rotate: 5, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="h-10 w-10 rounded-3xl bg-primary flex items-center justify-center"
-              >
-                <Dumbbell className="h-5 w-5 text-primary-foreground" />
-              </motion.div>
-              <span className="font-semibold text-xl">Amir Coaching</span>
-            </Link>
-            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Evidence-based 1-on-1 online fitness coaching for busy people who are serious about results.
+            <div className="w-12 h-px bg-[#c9a84c] mb-8" />
+            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
+              Fill out the application. If it looks like a match, you&apos;ll get a link to book a
+              free 20-minute discovery call. No pressure, no pitch.
             </p>
-            <div className="flex space-x-3">
-              <motion.div whileHover={{ y: -5, scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-12">
+              If the timing isn&apos;t right, Amir will tell you. He only takes clients he knows
+              he can genuinely help.
+            </p>
+            <div className="space-y-5">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                <span className="text-[#f0ece4]/40 text-sm tracking-wide">amirsimayof@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
                 <Link
                   href="https://www.tiktok.com/@amir_csim"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-[#f0ece4]/40 text-sm tracking-wide hover:text-[#f0ece4]/70 transition-colors"
                 >
-                  <TikTokIcon />
-                  <span className="sr-only">TikTok</span>
+                  @amir_csim on TikTok
                 </Link>
-              </motion.div>
+              </div>
             </div>
+          </motion.div>
+
+          <motion.div
+            ref={rightRef}
+            variants={revealRight}
+            initial="hidden"
+            animate={rightInView ? "visible" : "hidden"}
+          >
+            <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/25 mb-8">
+              Takes about 3 minutes
+            </p>
+            <form className="space-y-8">
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className={labelClass}>First name</label>
+                  <input className={inputClass} placeholder="First" />
+                </div>
+                <div>
+                  <label className={labelClass}>Last name</label>
+                  <input className={inputClass} placeholder="Last" />
+                </div>
+              </div>
+
+              <div>
+                <label className={labelClass}>Email</label>
+                <input type="email" className={inputClass} placeholder="your@email.com" />
+              </div>
+
+              <div>
+                <label className={labelClass}>
+                  What are you trying to achieve in 12 weeks?
+                </label>
+                <textarea
+                  className={cn(inputClass, "resize-none min-h-[90px]")}
+                  placeholder="Be specific: lose 15 lbs before August, get visible abs while keeping strength..."
+                />
+              </div>
+
+              <div>
+                <label className={labelClass}>Biggest obstacle right now</label>
+                <input
+                  className={inputClass}
+                  placeholder="No time, injured shoulder, don't know where to start..."
+                />
+              </div>
+
+              <RadioGroup
+                name="days"
+                label="Training days per week"
+                options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
+              />
+              <RadioGroup
+                name="budget"
+                label="Monthly investment"
+                options={["Under $200", "$200–$400", "$400+", "Depends on value"]}
+              />
+              <RadioGroup
+                name="prior"
+                label="Worked with a coach before?"
+                options={["Yes", "No", "Sort of"]}
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group"
+              >
+                Submit Application
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Footer ────────────────────────────────────────────────────────────
+function Footer() {
+  return (
+    <footer className="bg-[#080808] border-t border-white/[0.07] py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-4 gap-10 mb-16">
+          <div className="md:col-span-2">
+            <p className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#f0ece4] mb-4">
+              The Standard
+            </p>
+            <p className="text-[#f0ece4]/35 text-sm leading-relaxed max-w-xs mb-6">
+              Evidence-based 1-on-1 online fitness coaching for busy people who are serious about
+              results.
+            </p>
+            <Link
+              href="https://www.tiktok.com/@amir_csim"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#f0ece4]/35 hover:text-[#f0ece4]/70 transition-colors duration-200"
+            >
+              <TikTokIcon />
+              <span className="text-xs tracking-widest">@amir_csim</span>
+            </Link>
           </div>
 
           <div>
-            <h3 className="text-lg font-medium">Navigation</h3>
-            <nav className="mt-4 flex flex-col space-y-2 text-sm">
-              <Link href="#programs" className="text-muted-foreground hover:text-foreground">Programs</Link>
-              <Link href="#process" className="text-muted-foreground hover:text-foreground">Process</Link>
-              <Link href="#about" className="text-muted-foreground hover:text-foreground">About Amir</Link>
-              <Link href="#results" className="text-muted-foreground hover:text-foreground">Results</Link>
-              <Link href="#apply" className="text-muted-foreground hover:text-foreground">Apply Now</Link>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/25 mb-5">Navigate</p>
+            <nav className="space-y-3">
+              {[
+                ["#about", "About"],
+                ["#process", "Process"],
+                ["#results", "Results"],
+                ["#pricing", "Pricing"],
+                ["#apply", "Apply"],
+              ].map(([href, label]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="block text-sm text-[#f0ece4]/40 hover:text-[#f0ece4]/70 transition-colors duration-200"
+                >
+                  {label}
+                </Link>
+              ))}
             </nav>
           </div>
 
-          <div className="space-y-3">
-            <h3 className="text-lg font-medium">Get weekly tips</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Training and nutrition insights delivered to your inbox every week.
-            </p>
-            <form className="flex space-x-2">
-              <Input type="email" placeholder="your@email.com" className="max-w-lg flex-1 rounded-3xl" />
-              <Button type="submit" className="rounded-3xl">
-                Subscribe
-              </Button>
-            </form>
-          </div>
-        </motion.div>
-
-        <div className="border-t">
-          <div className="container mx-auto flex flex-col items-center justify-between gap-3 py-6 md:h-16 md:flex-row md:py-0">
-            <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} Amir Coaching. All rights reserved.
-            </p>
-            <p className="text-xs text-muted-foreground">Built for athletes with real lives.</p>
+          <div>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/25 mb-5">Contact</p>
+            <div className="space-y-3 text-sm text-[#f0ece4]/40">
+              <p>amirsimayof@gmail.com</p>
+              <p className="leading-relaxed">Built for athletes with real lives.</p>
+            </div>
           </div>
         </div>
-      </footer>
+
+        <div className="border-t border-white/[0.07] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[#f0ece4]/20 text-xs tracking-wide">
+            © {new Date().getFullYear()} The Standard. All rights reserved.
+          </p>
+          <p className="text-[#f0ece4]/20 text-xs tracking-wide italic font-display">
+            You&apos;re not a generic plan.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+// ── Main Export ───────────────────────────────────────────────────────
+export function LandingPage() {
+  return (
+    <div className="bg-[#080808] text-[#f0ece4] min-h-screen">
+      <Nav />
+      <Hero />
+      <Marquee />
+      <Philosophy />
+      <Included />
+      <Stats />
+      <Process />
+      <Testimonials />
+      <Transformation />
+      <Pricing />
+      <Apply />
+      <Footer />
     </div>
   )
 }
