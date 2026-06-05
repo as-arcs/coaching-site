@@ -324,13 +324,13 @@ function Philosophy() {
               className="font-display leading-tight mb-6"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
-              <span className="font-light text-[#f0ece4]">Most programs are built for a client</span>
-              <span className="block font-black italic text-[#f0ece4]"> who doesn&apos;t exist.</span>
+              <span className="font-light text-[#f0ece4]">The internet has overcomplicated things</span>
+              <span className="block font-black italic text-[#f0ece4]"> But it doesn't have to be this way</span>
             </h2>
             <div className="w-12 h-px bg-[#c9a84c] mb-8" />
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Pre-med cramming for the MCAT. Young professional pulling 50-hour weeks. Lifter with a
-              rotator cuff injury and no time to spare. None of them fit a generic program.
+              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks. Lifter with a
+              rotator cuff injury and no time to spare. Your goals are achievable.
             </p>
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-10">
               I only take clients I know I can genuinely help. If you apply and I don&apos;t think
@@ -354,8 +354,8 @@ function Philosophy() {
           >
             <div className="relative aspect-[3/4] overflow-hidden border border-white/[0.07]">
               <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/images/hero/hero.jpg')" }}
+                className="absolute inset-0 bg-cover bg-top"
+                style={{ backgroundImage: "url('/images/philosophy.png')" }}
               />
               <div className="absolute inset-0 bg-[#1a1410]/40" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent" />
@@ -386,7 +386,7 @@ const FEATURES = [
   {
     num: "02",
     title: "Evidence-Based Nutrition",
-    body: "Macro targets calibrated to your body and lifestyle. Kosher, travel, picky eater — we make it work.",
+    body: "Macro targets calibrated to your body and lifestyle. Picky eater, travel, nights out, we will make it work.",
   },
   {
     num: "03",
@@ -396,12 +396,12 @@ const FEATURES = [
   {
     num: "04",
     title: "Direct Access to Me",
-    body: "WhatsApp, Loom video feedback, email. You're never left guessing what to do or why.",
+    body: "WhatsApp, video feedback, email. You're never left guessing what to do or why.",
   },
   {
     num: "05",
     title: "Data-Driven Adjustments",
-    body: "Calories, training load, and recovery move based on actual results — not a generic timeline.",
+    body: "Calories, training load, and recovery move based on actual results, not a generic timeline.",
   },
 ]
 
@@ -602,7 +602,7 @@ function Transformation() {
   return (
     <section className="bg-[#080808] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader label="The Proof" line1="12 weeks." line2="What that looks like." />
+        <SectionHeader label="The Proof" line1="My Personal Transformation" line2="What that looks like." />
         <motion.div
           ref={ref}
           variants={stagger}
@@ -676,7 +676,7 @@ const PLANS = [
     note: "per month · 12-week minimum",
     features: [
       "Everything in Standard",
-      "Bi-weekly Loom video reviews",
+      "Bi-weekly video check-ins",
       "Priority 12hr response time",
       "Monthly strategy call",
       "Supplement guidance",
@@ -776,6 +776,36 @@ function RadioGroup({ name, label, options }: { name: string; label: string; opt
   )
 }
 
+function CalEmbed() {
+  useEffect(() => {
+    const existing = document.getElementById("cal-embed-script")
+    if (existing) return
+
+    const script = document.createElement("script")
+    script.id = "cal-embed-script"
+    script.src = "https://app.cal.com/embed/embed.js"
+    script.async = true
+    script.onload = () => {
+      const Cal = (window as Window & { Cal?: (...args: unknown[]) => void }).Cal
+      if (!Cal) return
+      Cal("init", "coaching", { origin: "https://cal.com" })
+      ;(Cal as unknown as Record<string, (...args: unknown[]) => void>)["ns.coaching"]?.("inline", {
+        elementOrSelector: "#cal-inline",
+        calLink: "amir-cohen-simayof",
+        config: { layout: "month_view" },
+      })
+      Cal("inline", {
+        elementOrSelector: "#cal-inline",
+        calLink: "amir-cohen-simayof",
+        config: { layout: "month_view" },
+      })
+    }
+    document.head.appendChild(script)
+  }, [])
+
+  return <div id="cal-inline" style={{ width: "100%", minHeight: "600px" }} />
+}
+
 function Apply() {
   const splashRef = useRef(null)
   const leftRef = useRef(null)
@@ -784,13 +814,50 @@ function Apply() {
   const leftInView = useInView(leftRef, { once: true, amount: 0.2 })
   const rightInView = useInView(rightRef, { once: true, amount: 0.1 })
 
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
+
   const inputClass =
     "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/25 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
   const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/40 mb-3"
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setError("")
+    setSubmitting(true)
+
+    const data = new FormData(e.currentTarget)
+    const body = {
+      firstName: data.get("firstName") as string,
+      lastName: data.get("lastName") as string,
+      email: data.get("email") as string,
+      goal: data.get("goal") as string,
+      biggestObstacle: data.get("biggestObstacle") as string,
+      trainingDays: data.get("days") as string,
+      budget: data.get("budget") as string,
+      priorCoaching: data.get("prior") as string,
+    }
+
+    try {
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error ?? "Something went wrong.")
+      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <section id="apply" className="bg-[#080808] border-t-2 border-[#c9a84c]/50">
-      {/* Chapter opener — full-width splash that makes the section entry unmistakable */}
+      {/* Chapter opener */}
       <motion.div
         ref={splashRef}
         variants={reveal}
@@ -798,7 +865,6 @@ function Apply() {
         animate={splashInView ? "visible" : "hidden"}
         className="text-center pt-24 pb-20 px-6 border-b border-white/[0.07] relative overflow-hidden"
       >
-        {/* Ghost watermark */}
         <p
           aria-hidden="true"
           className="font-display font-black text-[#f0ece4] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
@@ -824,113 +890,153 @@ function Apply() {
         </div>
       </motion.div>
 
-      {/* Form */}
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+        {submitted ? (
+          /* ── Success state ── */
           <motion.div
-            ref={leftRef}
-            variants={revealLeft}
+            variants={reveal}
             initial="hidden"
-            animate={leftInView ? "visible" : "hidden"}
+            animate="visible"
+            className="max-w-2xl mx-auto text-center"
           >
-            <div className="w-12 h-px bg-[#c9a84c] mb-8" />
+            <div className="w-12 h-px bg-[#c9a84c] mx-auto mb-10" />
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-6">
+              — Application Received —
+            </p>
+            <h3
+              className="font-display font-black text-[#f0ece4] mb-6"
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+            >
+              You&apos;re in.
+            </h3>
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Fill out the application. If it looks like a match, you&apos;ll get a link to book a
-              free 20-minute discovery call. No pressure, no pitch.
+              Pick a time below for your free 20-minute discovery call. No pressure, no pitch —
+              just a real conversation about where you&apos;re at and where you want to go.
             </p>
-            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-12">
-              If the timing isn&apos;t right, Amir will tell you. He only takes clients he knows
-              he can genuinely help.
+            <p className="text-[#f0ece4]/35 text-sm leading-relaxed mb-12">
+              Want to hit the ground running?{" "}
+              <span className="text-[#c9a84c]">Fill out the intake form</span> before the call
+              and Amir can skip the basics and get straight to your plan.
             </p>
-            <div className="space-y-5">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
-                <span className="text-[#f0ece4]/40 text-sm tracking-wide">amirsimayof@gmail.com</span>
+            <CalEmbed />
+          </motion.div>
+        ) : (
+          /* ── Application form ── */
+          <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+            <motion.div
+              ref={leftRef}
+              variants={revealLeft}
+              initial="hidden"
+              animate={leftInView ? "visible" : "hidden"}
+            >
+              <div className="w-12 h-px bg-[#c9a84c] mb-8" />
+              <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
+                Fill out the application. Once you submit, you&apos;ll book your free
+                20-minute discovery call directly. No waiting, no pitch.
+              </p>
+              <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-12">
+                Amir only takes clients he knows he can genuinely help.
+              </p>
+              <div className="space-y-5">
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                  <span className="text-[#f0ece4]/40 text-sm tracking-wide">amirsimayof@gmail.com</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                  <Link
+                    href="https://www.tiktok.com/@amir_csim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#f0ece4]/40 text-sm tracking-wide hover:text-[#f0ece4]/70 transition-colors"
+                  >
+                    @amir_csim on TikTok
+                  </Link>
+                </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
-                <Link
-                  href="https://www.tiktok.com/@amir_csim"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#f0ece4]/40 text-sm tracking-wide hover:text-[#f0ece4]/70 transition-colors"
+            </motion.div>
+
+            <motion.div
+              ref={rightRef}
+              variants={revealRight}
+              initial="hidden"
+              animate={rightInView ? "visible" : "hidden"}
+            >
+              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/25 mb-8">
+                Takes about 3 minutes
+              </p>
+              <form className="space-y-8" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <label className={labelClass}>First name</label>
+                    <input name="firstName" required className={inputClass} placeholder="First" />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Last name</label>
+                    <input name="lastName" required className={inputClass} placeholder="Last" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={labelClass}>Email</label>
+                  <input name="email" type="email" required className={inputClass} placeholder="your@email.com" />
+                </div>
+
+                <div>
+                  <label className={labelClass}>
+                    What are you trying to achieve in 12 weeks?
+                  </label>
+                  <textarea
+                    name="goal"
+                    required
+                    className={cn(inputClass, "resize-none min-h-[90px]")}
+                    placeholder="Be specific: lose 15 lbs before August, get visible abs while keeping strength..."
+                  />
+                </div>
+
+                <div>
+                  <label className={labelClass}>Biggest obstacle right now</label>
+                  <input
+                    name="biggestObstacle"
+                    className={inputClass}
+                    placeholder="No time, injured shoulder, don't know where to start..."
+                  />
+                </div>
+
+                <RadioGroup
+                  name="days"
+                  label="Training days per week"
+                  options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
+                />
+                <RadioGroup
+                  name="budget"
+                  label="Monthly investment"
+                  options={["Under $200", "$200–$400", "$400+", "Depends on value"]}
+                />
+                <RadioGroup
+                  name="prior"
+                  label="Worked with a coach before?"
+                  options={["Yes", "No", "Sort of"]}
+                />
+
+                {error && (
+                  <p className="text-red-400 text-xs tracking-wide">{error}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  @amir_csim on TikTok
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            ref={rightRef}
-            variants={revealRight}
-            initial="hidden"
-            animate={rightInView ? "visible" : "hidden"}
-          >
-            <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/25 mb-8">
-              Takes about 3 minutes
-            </p>
-            <form className="space-y-8">
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label className={labelClass}>First name</label>
-                  <input className={inputClass} placeholder="First" />
-                </div>
-                <div>
-                  <label className={labelClass}>Last name</label>
-                  <input className={inputClass} placeholder="Last" />
-                </div>
-              </div>
-
-              <div>
-                <label className={labelClass}>Email</label>
-                <input type="email" className={inputClass} placeholder="your@email.com" />
-              </div>
-
-              <div>
-                <label className={labelClass}>
-                  What are you trying to achieve in 12 weeks?
-                </label>
-                <textarea
-                  className={cn(inputClass, "resize-none min-h-[90px]")}
-                  placeholder="Be specific: lose 15 lbs before August, get visible abs while keeping strength..."
-                />
-              </div>
-
-              <div>
-                <label className={labelClass}>Biggest obstacle right now</label>
-                <input
-                  className={inputClass}
-                  placeholder="No time, injured shoulder, don't know where to start..."
-                />
-              </div>
-
-              <RadioGroup
-                name="days"
-                label="Training days per week"
-                options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
-              />
-              <RadioGroup
-                name="budget"
-                label="Monthly investment"
-                options={["Under $200", "$200–$400", "$400+", "Depends on value"]}
-              />
-              <RadioGroup
-                name="prior"
-                label="Worked with a coach before?"
-                options={["Yes", "No", "Sort of"]}
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group"
-              >
-                Submit Application
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </button>
-            </form>
-          </motion.div>
-        </div>
+                  {submitting ? "Submitting…" : "Submit Application"}
+                  {!submitting && (
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  )}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   )
