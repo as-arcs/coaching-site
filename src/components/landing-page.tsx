@@ -164,7 +164,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-8"
         >
-          — Online Fitness Coaching —
+          Online Fitness Coaching
         </motion.p>
 
         <motion.h1
@@ -325,12 +325,11 @@ function Philosophy() {
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
               <span className="font-light text-[#f0ece4]">The internet has overcomplicated things</span>
-              <span className="block font-black italic text-[#f0ece4]"> But it doesn't have to be this way</span>
+              <span className="block font-black italic text-[#f0ece4]"> But it doesn't have to be this way.</span>
             </h2>
             <div className="w-12 h-px bg-[#c9a84c] mb-8" />
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks. Lifter with a
-              rotator cuff injury and no time to spare. Your goals are achievable.
+              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or a lifter with a rotator cuff injury and no time to spare. Your goals are achievable.
             </p>
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-10">
               I only take clients I know I can genuinely help. If you apply and I don&apos;t think
@@ -386,7 +385,7 @@ const FEATURES = [
   {
     num: "02",
     title: "Evidence-Based Nutrition",
-    body: "Macro targets calibrated to your body and lifestyle. Picky eater, travel, nights out, we will make it work.",
+    body: "Macro targets calibrated to your body and lifestyle. Picky eater, travel, nights out: we'll make it work.",
   },
   {
     num: "03",
@@ -483,7 +482,7 @@ function Stats() {
 
 // ── Process ───────────────────────────────────────────────────────────
 const STEPS = [
-  { num: "01", title: "Apply", body: "Short form. Amir reviews every one personally before any money changes hands." },
+  { num: "01", title: "Apply", body: "Short form. Amir reviews every application personally before any money changes hands." },
   { num: "02", title: "Discovery Call", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
   { num: "03", title: "Your Program", body: "Custom training + nutrition delivered within 48 hours of signing." },
   { num: "04", title: "Weekly Check-ins", body: "Submit data every Sunday. Adjustments live within 24 hours." },
@@ -534,7 +533,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "I have ADHD and a rotator cuff issue and I kept burning out every time I tried to get consistent. Amir didn't just give me a plan — he gave me one I could actually stick to. Four days a week for two months straight.",
+      "I have ADHD and a rotator cuff issue and I kept burning out every time I tried to get consistent. Amir didn't just give me a plan. He gave me one I could actually stick to. Four days a week for two months straight.",
     author: "Jacob R.",
     detail: "Student & RBT",
   },
@@ -646,7 +645,7 @@ function Transformation() {
         </motion.div>
 
         <p className="text-[#f0ece4]/25 text-xs tracking-[0.2em] uppercase text-center mt-8">
-          Amir&apos;s personal transformation &mdash; the same system he runs for every client.
+          Amir&apos;s personal transformation. The same system he runs for every client.
         </p>
       </div>
     </section>
@@ -698,7 +697,7 @@ function Pricing() {
           label="Investment"
           line1="Simple pricing."
           line2="No surprises."
-          note="12-week minimum on both plans. Real change takes time — Amir is serious about delivering it."
+          note="12-week minimum on both plans. Real change takes time. Amir is serious about delivering it."
         />
         <motion.div
           ref={ref}
@@ -759,14 +758,14 @@ function Pricing() {
 function RadioGroup({ name, label, options }: { name: string; label: string; options: string[] }) {
   return (
     <div>
-      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/40 mb-3">
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/65 mb-3">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
           <label key={opt} className="cursor-pointer select-none">
             <input type="radio" name={name} value={opt} className="sr-only peer" />
-            <span className="inline-block border border-white/[0.12] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/50 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/25 hover:text-[#f0ece4]/70">
+            <span className="inline-block border border-white/[0.12] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/70 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/25 hover:text-[#f0ece4]/85">
               {opt}
             </span>
           </label>
@@ -789,11 +788,11 @@ function CalEmbed() {
       const Cal = (window as Window & { Cal?: (...args: unknown[]) => void }).Cal
       if (!Cal) return
       Cal("init", "coaching", { origin: "https://cal.com" })
-      ;(Cal as unknown as Record<string, (...args: unknown[]) => void>)["ns.coaching"]?.("inline", {
-        elementOrSelector: "#cal-inline",
-        calLink: "amir-cohen-simayof",
-        config: { layout: "month_view" },
-      })
+        ; (Cal as unknown as Record<string, (...args: unknown[]) => void>)["ns.coaching"]?.("inline", {
+          elementOrSelector: "#cal-inline",
+          calLink: "amir-cohen-simayof",
+          config: { layout: "month_view" },
+        })
       Cal("inline", {
         elementOrSelector: "#cal-inline",
         calLink: "amir-cohen-simayof",
@@ -819,8 +818,8 @@ function Apply() {
   const [error, setError] = useState("")
 
   const inputClass =
-    "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/25 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
-  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/40 mb-3"
+    "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/40 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
+  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/65 mb-3"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -835,7 +834,6 @@ function Apply() {
       goal: data.get("goal") as string,
       biggestObstacle: data.get("biggestObstacle") as string,
       trainingDays: data.get("days") as string,
-      budget: data.get("budget") as string,
       priorCoaching: data.get("prior") as string,
     }
 
@@ -875,7 +873,7 @@ function Apply() {
 
         <div className="relative z-10">
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-8">
-            — Apply Now —
+            Apply Now
           </p>
           <h2
             className="font-display leading-tight"
@@ -901,7 +899,7 @@ function Apply() {
           >
             <div className="w-12 h-px bg-[#c9a84c] mx-auto mb-10" />
             <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-6">
-              — Application Received —
+              Application Received
             </p>
             <h3
               className="font-display font-black text-[#f0ece4] mb-6"
@@ -910,8 +908,7 @@ function Apply() {
               You&apos;re in.
             </h3>
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Pick a time below for your free 20-minute discovery call. No pressure, no pitch —
-              just a real conversation about where you&apos;re at and where you want to go.
+              Pick a time below for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
             <p className="text-[#f0ece4]/35 text-sm leading-relaxed mb-12">
               Want to hit the ground running?{" "}
@@ -940,7 +937,7 @@ function Apply() {
               <div className="space-y-5">
                 <div className="flex items-center gap-4">
                   <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
-                  <span className="text-[#f0ece4]/40 text-sm tracking-wide">amirsimayof@gmail.com</span>
+                  <span className="text-[#f0ece4]/60 text-sm tracking-wide">amirsimayof@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
@@ -948,7 +945,7 @@ function Apply() {
                     href="https://www.tiktok.com/@amir_csim"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#f0ece4]/40 text-sm tracking-wide hover:text-[#f0ece4]/70 transition-colors"
+                    className="text-[#f0ece4]/60 text-sm tracking-wide hover:text-[#f0ece4]/85 transition-colors"
                   >
                     @amir_csim on TikTok
                   </Link>
@@ -962,7 +959,7 @@ function Apply() {
               initial="hidden"
               animate={rightInView ? "visible" : "hidden"}
             >
-              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/25 mb-8">
+              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/45 mb-8">
                 Takes about 3 minutes
               </p>
               <form className="space-y-8" onSubmit={handleSubmit}>
@@ -1008,12 +1005,7 @@ function Apply() {
                   label="Training days per week"
                   options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
                 />
-                <RadioGroup
-                  name="budget"
-                  label="Monthly investment"
-                  options={["Under $200", "$200–$400", "$400+", "Depends on value"]}
-                />
-                <RadioGroup
+<RadioGroup
                   name="prior"
                   label="Worked with a coach before?"
                   options={["Yes", "No", "Sort of"]}
