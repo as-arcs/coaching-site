@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server"
 import { google } from "googleapis"
+import { notifyNewApplication } from "@/lib/slack"
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!
 const SHEET_RANGE = "Sheet1!A:I"
 
-function getAuth() {
+function getSheetsAuth() {
   return new google.auth.JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
     key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n"),
@@ -21,7 +22,7 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "Missing required fields." }, { status: 400 })
     }
 
-    const auth = getAuth()
+    const auth = getSheetsAuth()
     const sheets = google.sheets({ version: "v4", auth })
 
     await sheets.spreadsheets.values.append({
@@ -44,6 +45,10 @@ export async function POST(request: NextRequest) {
         ],
       },
     })
+
+    // Fire-and-forget — Slack failure must not block the response
+    notifyNewApplication({ firstName, lastName, email, goal, trainingDays, biggestObstacle, priorCoaching })
+      .catch((err) => console.error("[slack]", err))
 
     return Response.json({ success: true })
   } catch (err) {

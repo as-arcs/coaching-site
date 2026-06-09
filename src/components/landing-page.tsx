@@ -775,35 +775,7 @@ function RadioGroup({ name, label, options }: { name: string; label: string; opt
   )
 }
 
-function CalEmbed() {
-  useEffect(() => {
-    const existing = document.getElementById("cal-embed-script")
-    if (existing) return
-
-    const script = document.createElement("script")
-    script.id = "cal-embed-script"
-    script.src = "https://app.cal.com/embed/embed.js"
-    script.async = true
-    script.onload = () => {
-      const Cal = (window as Window & { Cal?: (...args: unknown[]) => void }).Cal
-      if (!Cal) return
-      Cal("init", "coaching", { origin: "https://cal.com" })
-        ; (Cal as unknown as Record<string, (...args: unknown[]) => void>)["ns.coaching"]?.("inline", {
-          elementOrSelector: "#cal-inline",
-          calLink: "amir-cohen-simayof",
-          config: { layout: "month_view" },
-        })
-      Cal("inline", {
-        elementOrSelector: "#cal-inline",
-        calLink: "amir-cohen-simayof",
-        config: { layout: "month_view" },
-      })
-    }
-    document.head.appendChild(script)
-  }, [])
-
-  return <div id="cal-inline" style={{ width: "100%", minHeight: "600px" }} />
-}
+const CAL_URL = "https://cal.com/amir-cohen-simayof-vxjysx/20min"
 
 function Apply() {
   const splashRef = useRef(null)
@@ -816,6 +788,8 @@ function Apply() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
+
+  const openBooking = () => window.open(CAL_URL, "_blank")
 
   const inputClass =
     "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/40 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
@@ -908,14 +882,24 @@ function Apply() {
               You&apos;re in.
             </h3>
             <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Pick a time below for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
+              Pick a time for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
-            <p className="text-[#f0ece4]/35 text-sm leading-relaxed mb-12">
+            <p className="text-[#f0ece4]/35 text-sm leading-relaxed mb-10">
               Want to hit the ground running?{" "}
-              <span className="text-[#c9a84c]">Fill out the intake form</span> before the call
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfgVzHgqmrUM9OfzvWBh5SloIcnlAaR4ah0iavs95BsWwxcoA/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/80 transition-colors"
+              >Fill out the intake form</a> before the call
               and Amir can skip the basics and get straight to your plan.
             </p>
-            <CalEmbed />
+            <button
+              onClick={openBooking}
+              className="inline-flex items-center gap-3 border border-[#c9a84c] px-8 py-4 text-[#c9a84c] text-sm tracking-[0.15em] uppercase hover:bg-[#c9a84c] hover:text-[#080808] transition-all duration-300 cursor-pointer"
+            >
+              Book Your Discovery Call <ArrowRight size={16} />
+            </button>
           </motion.div>
         ) : (
           /* ── Application form ── */
