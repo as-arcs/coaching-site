@@ -1,3 +1,29 @@
+interface ClientData {
+  email: string
+  plan: string
+}
+
+export async function notifyNewClient(data: ClientData): Promise<void> {
+  const planLabel = data.plan === "premium" ? "Premium ($497/mo)" : "Standard ($297/mo)"
+  const lines = [
+    `💳 New paying client: *${data.email}*`,
+    `Plan: ${planLabel}`,
+  ]
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5000)
+  try {
+    await fetch(process.env.SLACK_WEBHOOK_URL!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: lines.join("\n") }),
+      signal: controller.signal,
+    })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 interface ApplicationData {
   firstName: string
   lastName: string
