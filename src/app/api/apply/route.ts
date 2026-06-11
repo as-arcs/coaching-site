@@ -1,9 +1,22 @@
 import { NextRequest } from "next/server"
+import { z } from "zod"
 import { google } from "googleapis"
 import { notifyNewApplication } from "@/lib/slack"
+import { rateLimit } from "@/lib/rate-limit"
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!
 const SHEET_RANGE = "Sheet1!A:I"
+
+const ApplySchema = z.object({
+  firstName:       z.string().min(1).max(100),
+  lastName:        z.string().min(1).max(100),
+  email:           z.string().email().max(254),
+  goal:            z.string().min(1).max(2000),
+  trainingDays:    z.string().max(50).optional(),
+  biggestObstacle: z.string().max(500).optional(),
+  budget:          z.string().max(100).optional(),
+  priorCoaching:   z.string().max(100).optional(),
+})
 
 function getSheetsAuth() {
   return new google.auth.JWT({
@@ -14,13 +27,19 @@ function getSheetsAuth() {
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const { firstName, lastName, email, goal, trainingDays, biggestObstacle, budget, priorCoaching } =
-      await request.json()
+  const ip = request.headers.get("x-forwarded-for") ?? "127.0.0.1"
+  if (!rateLimit(ip, "apply", 5, 60_000).allowed) {
+    return Response.json({ error: "Too many requests." }, { status: 429 })
+  }
 
-    if (!firstName || !lastName || !email || !goal) {
-      return Response.json({ error: "Missing required fields." }, { status: 400 })
+  try {
+    const parsed = ApplySchema.safeParse(await request.json())
+    if (!parsed.success) {
+      return Response.json({ error: "Invalid input." }, { status: 400 })
     }
+
+    const { firstName, lastName, email, goal, trainingDays, biggestObstacle, budget, priorCoaching } =
+      parsed.data
 
     const auth = getSheetsAuth()
     const sheets = google.sheets({ version: "v4", auth })
@@ -46,7 +65,6 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Fire-and-forget — Slack failure must not block the response
     notifyNewApplication({ firstName, lastName, email, goal, trainingDays, biggestObstacle, priorCoaching })
       .catch((err) => console.error("[slack]", err))
 
