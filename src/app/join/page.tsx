@@ -13,11 +13,11 @@ const PLANS = {
     note: "per month · billed monthly · 12-week minimum",
     features: [
       "Custom training program",
-      "Macro-based nutrition plan",
+      "Nutrition guidance",
       "Weekly check-ins & adjustments",
       "WhatsApp access to Amir",
       "Progress tracking system",
-      "Full health & injury screening",
+      "Fitness background review",
     ],
   },
   premium: {
@@ -29,8 +29,8 @@ const PLANS = {
       "Bi-weekly video check-ins",
       "Priority 12hr response time",
       "Monthly strategy call",
-      "Supplement guidance",
-      "Lifestyle & recovery coaching",
+      "General supplement education",
+      "Lifestyle & recovery support",
     ],
   },
 }

@@ -77,7 +77,7 @@ function Nav() {
             <Link
               key={href}
               href={href}
-              className="text-[10px] tracking-widest uppercase text-[#f0ece4]/50 hover:text-[#f0ece4] transition-colors duration-200"
+              className="text-[10px] tracking-widest uppercase text-[#f0ece4]/65 hover:text-[#f0ece4] transition-colors duration-200"
             >
               {label}
             </Link>
@@ -191,7 +191,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
-          className="text-[#f0ece4]/55 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
+          className="text-[#f0ece4]/70 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
         >
           1-on-1 coaching built around your schedule, your body, and your life.{" "}
           Not someone else&apos;s template.
@@ -205,18 +205,27 @@ function Hero() {
         >
           <Link
             href="#apply"
-            className="inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+            className="cta-glow inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
           >
             Apply for Coaching
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             href="#about"
-            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/50 hover:text-[#f0ece4] transition-colors duration-200"
+            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/65 hover:text-[#f0ece4] transition-colors duration-200"
           >
             See how it works
           </Link>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/40 mt-6"
+        >
+          Reviewing applications for July
+        </motion.p>
       </div>
 
       <motion.div
@@ -241,7 +250,7 @@ const MARQUEE_BASE = [
   "Custom Program",
   "Weekly Check-ins",
   "24hr Access",
-  "Evidence-Based",
+  "Research-Backed",
   "No Templates",
   "Built For Your Life",
 ]
@@ -253,7 +262,7 @@ function Marquee() {
       <div className="marquee-track flex gap-12 whitespace-nowrap">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-12 flex-shrink-0">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/30">{item}</span>
+            <span className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/60">{item}</span>
             <span className="w-1 h-1 rounded-full bg-[#c9a84c]/50 flex-shrink-0" />
           </span>
         ))}
@@ -294,7 +303,7 @@ function SectionHeader({
         <span className="block font-black italic">{line2}</span>
       </h2>
       {note && (
-        <p className="text-[#f0ece4]/45 text-lg mt-6 max-w-lg leading-relaxed">{note}</p>
+        <p className="text-[#f0ece4]/60 text-lg mt-6 max-w-lg leading-relaxed">{note}</p>
       )}
     </motion.div>
   )
@@ -328,10 +337,10 @@ function Philosophy() {
               <span className="block font-black italic text-[#f0ece4]"> But it doesn't have to be this way.</span>
             </h2>
             <div className="w-12 h-px bg-[#c9a84c] mb-8" />
-            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
-              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or a lifter with a rotator cuff injury and no time to spare. Your goals are achievable.
+            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
+              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or someone who's tried and stopped more times than they can count. Your goals are achievable.
             </p>
-            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-10">
+            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-10">
               I only take clients I know I can genuinely help. If you apply and I don&apos;t think
               the timing is right, I&apos;ll tell you.
             </p>
@@ -362,7 +371,7 @@ function Philosophy() {
                 <p className="font-display text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-1">
                   Amir Cohen-Simayof
                 </p>
-                <p className="text-[#f0ece4]/40 text-xs tracking-wide">
+                <p className="text-[#f0ece4]/70 text-xs tracking-wide">
                   Online Fitness Coach · @amir_csim
                 </p>
               </div>
@@ -384,8 +393,8 @@ const FEATURES = [
   },
   {
     num: "02",
-    title: "Evidence-Based Nutrition",
-    body: "Macro targets calibrated to your body and lifestyle. Picky eater, travel, nights out: we'll make it work.",
+    title: "Nutrition Guidance",
+    body: "General nutrition support tailored to your lifestyle and goals. Picky eater, travel, nights out: we'll work around it.",
   },
   {
     num: "03",
@@ -421,7 +430,7 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
         {feature.num}
       </span>
       <h3 className="text-[#f0ece4] font-medium text-lg leading-snug">{feature.title}</h3>
-      <p className="text-[#f0ece4]/50 leading-relaxed">{feature.body}</p>
+      <p className="text-[#f0ece4]/65 leading-relaxed">{feature.body}</p>
     </motion.div>
   )
 }
@@ -471,7 +480,7 @@ function Stats() {
               >
                 {s.value}
               </p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/35">{s.label}</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/65">{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -514,7 +523,7 @@ function Process() {
                 {s.num}
               </p>
               <h3 className="text-[#f0ece4] font-semibold mb-3">{s.title}</h3>
-              <p className="text-[#f0ece4]/45 text-sm leading-relaxed">{s.body}</p>
+              <p className="text-[#f0ece4]/60 text-sm leading-relaxed">{s.body}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -582,14 +591,99 @@ function Testimonials() {
                 <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
                 <div>
                   <p className="text-[#f0ece4] text-sm font-medium">{t.author}</p>
-                  <p className="text-[#f0ece4]/35 text-xs tracking-wide mt-0.5">{t.detail}</p>
+                  <p className="text-[#f0ece4]/65 text-xs tracking-wide mt-0.5">{t.detail}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+        <p className="text-[#f0ece4]/20 text-xs tracking-wide text-center mt-10 max-w-2xl mx-auto leading-relaxed">
+          Testimonials are from real clients. Individual results vary based on effort, adherence, starting point, and other personal factors. Results shown are not a guarantee of specific outcomes.
+        </p>
       </div>
     </section>
+  )
+}
+
+// ── Mid-Page CTA ──────────────────────────────────────────────────────
+function MidPageCTA() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.3 })
+
+  return (
+    <section className="bg-[#080808] border-t border-[#c9a84c]/20">
+      <motion.div
+        ref={ref}
+        variants={reveal}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10"
+      >
+        <div>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-4">
+            Reviewing applications for July
+          </p>
+          <h2
+            className="font-display leading-tight"
+            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
+          >
+            <span className="font-light text-[#f0ece4]">Seen enough?</span>
+            <span className="font-black italic text-[#f0ece4]"> Let&apos;s talk.</span>
+          </h2>
+        </div>
+        <Link
+          href="#apply"
+          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+        >
+          Apply for Coaching
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </motion.div>
+    </section>
+  )
+}
+
+// ── Sticky Apply CTA ──────────────────────────────────────────────────
+function StickyApplyCTA() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const applyEl = document.getElementById("apply")
+
+    const check = () => {
+      const pastHero = window.scrollY > window.innerHeight * 0.8
+      const applyInView = applyEl
+        ? applyEl.getBoundingClientRect().top < window.innerHeight && applyEl.getBoundingClientRect().bottom > 0
+        : false
+      setVisible(pastHero && !applyInView)
+    }
+
+    window.addEventListener("scroll", check, { passive: true })
+    return () => window.removeEventListener("scroll", check)
+  }, [])
+
+  return (
+    <motion.div
+      initial={false}
+      animate={{ y: visible ? 0 : 80, opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.35, ease: EASE }}
+      className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none"
+    >
+      <div className="bg-[#080808]/95 backdrop-blur-md border-t border-white/[0.07] px-6 py-4 pointer-events-auto">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/50 hidden sm:block">
+            Reviewing applications for July
+          </p>
+          <Link
+            href="#apply"
+            className="inline-flex items-center gap-2 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#c9a84c]/90 transition-colors duration-200 group ml-auto"
+          >
+            Apply Now
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
@@ -618,7 +712,7 @@ function Transformation() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/40 mb-2">Before</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/70 mb-2">Before</p>
                 <p className="font-display text-2xl font-light text-[#f0ece4]/60 leading-tight">
                   Not there yet.
                 </p>
@@ -645,7 +739,7 @@ function Transformation() {
         </motion.div>
 
         <p className="text-[#f0ece4]/25 text-xs tracking-[0.2em] uppercase text-center mt-8">
-          Amir&apos;s personal transformation. The same system he runs for every client.
+          Amir&apos;s personal transformation. Individual results vary based on effort, consistency, and starting point.
         </p>
       </div>
     </section>
@@ -660,11 +754,11 @@ const PLANS = [
     note: "per month · 12-week minimum",
     features: [
       "Custom training program",
-      "Macro-based nutrition plan",
+      "Nutrition guidance",
       "Weekly check-ins & adjustments",
       "WhatsApp access to Amir",
       "Progress tracking system",
-      "Full health & injury screening",
+      "Fitness background review",
     ],
     cta: "Apply for Standard",
     featured: false,
@@ -678,8 +772,8 @@ const PLANS = [
       "Bi-weekly video check-ins",
       "Priority 12hr response time",
       "Monthly strategy call",
-      "Supplement guidance",
-      "Lifestyle & recovery coaching",
+      "General supplement education",
+      "Lifestyle & recovery support",
     ],
     cta: "Apply for Premium",
     featured: true,
@@ -726,7 +820,7 @@ function Pricing() {
                   {plan.price}
                 </span>
               </div>
-              <p className="text-[#f0ece4]/35 text-xs tracking-wide mb-8">{plan.note}</p>
+              <p className="text-[#f0ece4]/65 text-xs tracking-wide mb-8">{plan.note}</p>
               <ul className="space-y-3 mb-10 flex-1">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-center gap-3 text-sm text-[#f0ece4]/65">
@@ -758,14 +852,14 @@ function Pricing() {
 function RadioGroup({ name, label, options }: { name: string; label: string; options: string[] }) {
   return (
     <div>
-      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/65 mb-3">
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/85 mb-3">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
           <label key={opt} className="cursor-pointer select-none">
             <input type="radio" name={name} value={opt} className="sr-only peer" />
-            <span className="inline-block border border-white/[0.12] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/70 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/25 hover:text-[#f0ece4]/85">
+            <span className="inline-block border border-white/[0.22] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/85 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/35 hover:text-[#f0ece4]/85">
               {opt}
             </span>
           </label>
@@ -788,12 +882,13 @@ function Apply() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
+  const [agreed, setAgreed] = useState(false)
 
   const openBooking = () => window.open(CAL_URL, "_blank")
 
   const inputClass =
-    "w-full bg-transparent border-b border-white/[0.12] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/40 focus:outline-none focus:border-[#c9a84c]/60 transition-colors duration-200"
-  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/65 mb-3"
+    "w-full bg-transparent border-b border-white/[0.22] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/70 focus:outline-none focus:border-[#c9a84c]/80 transition-colors duration-200"
+  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/85 mb-3"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -840,7 +935,7 @@ function Apply() {
         <p
           aria-hidden="true"
           className="font-display font-black text-[#f0ece4] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
-          style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.028 }}
+          style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.05 }}
         >
           APPLY
         </p>
@@ -856,7 +951,7 @@ function Apply() {
             <span className="font-light text-[#f0ece4]">Let&apos;s see if</span>
             <span className="block font-black italic text-[#f0ece4]">we&apos;re a fit.</span>
           </h2>
-          <p className="text-[#f0ece4]/40 text-base max-w-xs mx-auto leading-relaxed mt-6">
+          <p className="text-[#f0ece4]/70 text-base max-w-xs mx-auto leading-relaxed mt-6">
             Takes about 3 minutes. Amir personally reviews every application.
           </p>
         </div>
@@ -881,10 +976,10 @@ function Apply() {
             >
               You&apos;re in.
             </h3>
-            <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
+            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
               Pick a time for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
-            <p className="text-[#f0ece4]/35 text-sm leading-relaxed mb-10">
+            <p className="text-[#f0ece4]/65 text-sm leading-relaxed mb-10">
               Want to hit the ground running?{" "}
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfgVzHgqmrUM9OfzvWBh5SloIcnlAaR4ah0iavs95BsWwxcoA/viewform"
@@ -911,11 +1006,11 @@ function Apply() {
               animate={leftInView ? "visible" : "hidden"}
             >
               <div className="w-12 h-px bg-[#c9a84c] mb-8" />
-              <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-4">
+              <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
                 Fill out the application. Once you submit, you&apos;ll book your free
                 20-minute discovery call directly. No waiting, no pitch.
               </p>
-              <p className="text-[#f0ece4]/55 text-lg leading-relaxed mb-12">
+              <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-12">
                 Amir only takes clients he knows he can genuinely help.
               </p>
               <div className="space-y-5">
@@ -943,7 +1038,7 @@ function Apply() {
               initial="hidden"
               animate={rightInView ? "visible" : "hidden"}
             >
-              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/45 mb-8">
+              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/75 mb-8">
                 Takes about 3 minutes
               </p>
               <form className="space-y-8" onSubmit={handleSubmit}>
@@ -995,13 +1090,33 @@ function Apply() {
                   options={["Yes", "No", "Sort of"]}
                 />
 
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="mt-1 flex-shrink-0 accent-[#c9a84c]"
+                    required
+                  />
+                  <span className="text-xs text-[#f0ece4]/50 leading-relaxed group-hover:text-[#f0ece4]/65 transition-colors">
+                    I have read and agree to the{" "}
+                    <Link href="/terms" target="_blank" className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/70">
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy" target="_blank" className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/70">
+                      Privacy Policy
+                    </Link>. I confirm I am 18 or older and have medical clearance to begin an exercise program.
+                  </span>
+                </label>
+
                 {error && (
                   <p className="text-red-400 text-xs tracking-wide">{error}</p>
                 )}
 
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !agreed}
                   className="w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? "Submitting…" : "Submit Application"}
@@ -1028,7 +1143,7 @@ function Footer() {
             <p className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#f0ece4] mb-4">
               The Standard
             </p>
-            <p className="text-[#f0ece4]/35 text-sm leading-relaxed max-w-xs mb-6">
+            <p className="text-[#f0ece4]/65 text-sm leading-relaxed max-w-xs mb-6">
               Evidence-based 1-on-1 online fitness coaching for busy people who are serious about
               results.
             </p>
@@ -1036,7 +1151,7 @@ function Footer() {
               href="https://www.tiktok.com/@amir_csim"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#f0ece4]/35 hover:text-[#f0ece4]/70 transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-[#f0ece4]/65 hover:text-[#f0ece4]/70 transition-colors duration-200"
             >
               <TikTokIcon />
               <span className="text-xs tracking-widest">@amir_csim</span>
@@ -1056,7 +1171,7 @@ function Footer() {
                 <Link
                   key={href}
                   href={href}
-                  className="block text-sm text-[#f0ece4]/40 hover:text-[#f0ece4]/70 transition-colors duration-200"
+                  className="block text-sm text-[#f0ece4]/70 hover:text-[#f0ece4]/70 transition-colors duration-200"
                 >
                   {label}
                 </Link>
@@ -1066,20 +1181,30 @@ function Footer() {
 
           <div>
             <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/25 mb-5">Contact</p>
-            <div className="space-y-3 text-sm text-[#f0ece4]/40">
+            <div className="space-y-3 text-sm text-[#f0ece4]/70">
               <p>amirsimayof@gmail.com</p>
               <p className="leading-relaxed">Built for athletes with real lives.</p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/[0.07] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#f0ece4]/20 text-xs tracking-wide">
-            © {new Date().getFullYear()} The Standard. All rights reserved.
+        <div className="border-t border-white/[0.07] pt-8 space-y-6">
+          <p className="text-[#f0ece4]/15 text-xs leading-relaxed max-w-3xl">
+            The Standard is not a medical practice. Coaching and nutritional guidance provided is for general wellness and informational purposes only, and is not a substitute for advice from a licensed physician, registered dietitian, or other qualified healthcare professional. Consult your doctor before beginning any exercise or nutrition program.
           </p>
-          <p className="text-[#f0ece4]/20 text-xs tracking-wide italic font-display">
-            You&apos;re not a generic plan.
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-[#f0ece4]/20 text-xs tracking-wide">
+              © {new Date().getFullYear()} The Standard. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" className="text-[#f0ece4]/20 text-xs tracking-wide hover:text-[#f0ece4]/40 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-[#f0ece4]/20 text-xs tracking-wide hover:text-[#f0ece4]/40 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -1098,10 +1223,12 @@ export function LandingPage() {
       <Stats />
       <Process />
       <Testimonials />
+      <MidPageCTA />
       <Transformation />
       <Pricing />
       <Apply />
       <Footer />
+      <StickyApplyCTA />
     </div>
   )
 }

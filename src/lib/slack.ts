@@ -24,6 +24,36 @@ export async function notifyNewClient(data: ClientData): Promise<void> {
   }
 }
 
+interface OnboardingData {
+  firstName: string
+  lastName: string
+  email: string
+  plan: string
+  startDate: string
+}
+
+export async function notifyOnboardingComplete(data: OnboardingData): Promise<void> {
+  const planLabel = data.plan === "premium" ? "Premium ($497/mo)" : "Standard ($297/mo)"
+  const lines = [
+    `✅ *Onboarding agreement signed: ${data.firstName} ${data.lastName}*`,
+    `Email: ${data.email}`,
+    `Plan: ${planLabel} · Start: ${data.startDate}`,
+  ]
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5000)
+  try {
+    await fetch(process.env.SLACK_WEBHOOK_URL!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: lines.join("\n") }),
+      signal: controller.signal,
+    })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 interface ApplicationData {
   firstName: string
   lastName: string
