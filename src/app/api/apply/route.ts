@@ -5,7 +5,7 @@ import { notifyNewApplication } from "@/lib/slack"
 import { rateLimit } from "@/lib/rate-limit"
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!
-const SHEET_RANGE = "Sheet1!A:I"
+const SHEET_RANGE = "Application Form!A:I"
 
 const ApplySchema = z.object({
   firstName:       z.string().min(1).max(100),
