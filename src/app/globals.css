@@ -124,11 +124,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #080808;
+    background-color: #110e0a;
   }
   html {
     @apply font-sans;
-    background-color: #080808;
+    background-color: #110e0a;
   }
 }
 

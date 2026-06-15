@@ -63,7 +63,7 @@ function Nav() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-[#080808]/90 backdrop-blur-md border-b border-white/[0.07]"
+          ? "bg-[#110e0a]/90 backdrop-blur-md border-b border-white/[0.07]"
           : "bg-transparent"
       )}
     >
@@ -124,7 +124,7 @@ function Nav() {
         initial={false}
         animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
         transition={{ duration: 0.3, ease: EASE }}
-        className="md:hidden overflow-hidden bg-[#080808] border-b border-white/[0.07]"
+        className="md:hidden overflow-hidden bg-[#110e0a] border-b border-white/[0.07]"
       >
         <div className="px-6 pb-6 pt-2 space-y-1">
           {([...NAV_LINKS, ["#apply", "Apply"]] as [string, string][]).map(([href, label]) => (
@@ -147,14 +147,14 @@ function Nav() {
 // ── Hero ──────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#110e0a]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ backgroundImage: "url('/images/hero/hero.jpg')", backgroundPosition: "center top" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/60 via-[#080808]/40 to-[#080808]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-transparent to-[#080808]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#110e0a]/60 via-[#110e0a]/40 to-[#110e0a]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#110e0a]/80 via-transparent to-[#110e0a]/80" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -205,7 +205,7 @@ function Hero() {
         >
           <Link
             href="#apply"
-            className="cta-glow inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+            className="cta-glow inline-flex items-center gap-3 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
           >
             Apply for Coaching
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -258,7 +258,7 @@ const MARQUEE_BASE = [
 function Marquee() {
   const items = [...MARQUEE_BASE, ...MARQUEE_BASE]
   return (
-    <div className="border-y border-white/[0.07] bg-[#0a0a0a] py-4 overflow-hidden">
+    <div className="border-y border-white/[0.07] bg-[#130f0b] py-4 overflow-hidden">
       <div className="marquee-track flex gap-12 whitespace-nowrap">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-12 flex-shrink-0">
@@ -317,7 +317,7 @@ function Philosophy() {
   const rightInView = useInView(rightRef, { once: true, amount: 0.2 })
 
   return (
-    <section id="about" className="bg-[#080808] py-32 md:py-40">
+    <section id="about" className="bg-[#110e0a] py-32 md:py-40">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <motion.div
@@ -366,7 +366,7 @@ function Philosophy() {
                 style={{ backgroundImage: "url('/images/philosophy.png')" }}
               />
               <div className="absolute inset-0 bg-[#1a1410]/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#110e0a]/90 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="font-display text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-1">
                   Amir Cohen-Simayof
@@ -437,7 +437,7 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
 
 function Included() {
   return (
-    <section className="bg-[#080808] py-24 border-t border-white/[0.07]">
+    <section className="bg-[#110e0a] py-24 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="What You Get" line1="Everything you need." line2="Nothing you don't." />
         <div className="divide-y divide-white/[0.07]">
@@ -463,7 +463,7 @@ function Stats() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section className="bg-[#0a0a0a] py-24 border-y border-white/[0.07]">
+    <section className="bg-[#130f0b] py-24 border-y border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           ref={ref}
@@ -473,7 +473,7 @@ function Stats() {
           className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.07]"
         >
           {STATS.map((s) => (
-            <motion.div key={s.label} variants={reveal} className="bg-[#0a0a0a] p-10 md:p-14 text-center">
+            <motion.div key={s.label} variants={reveal} className="bg-[#130f0b] p-10 md:p-14 text-center">
               <p
                 className="font-display font-black text-[#f0ece4] leading-none mb-3"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
@@ -503,7 +503,7 @@ function Process() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="process" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+    <section id="process" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Process" line1="Application to results." line2="Five steps." />
         <motion.div
@@ -517,7 +517,7 @@ function Process() {
             <motion.div
               key={s.num}
               variants={reveal}
-              className="bg-[#080808] p-8 group hover:bg-white/[0.02] transition-colors duration-300"
+              className="bg-[#110e0a] p-8 group hover:bg-white/[0.02] transition-colors duration-300"
             >
               <p className="font-display text-4xl font-light text-[#f0ece4]/10 group-hover:text-[#c9a84c]/30 transition-colors duration-300 mb-6">
                 {s.num}
@@ -565,7 +565,7 @@ function Testimonials() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="results" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+    <section id="results" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="Results" line1="Real people." line2="Real schedules." />
         <motion.div
@@ -579,7 +579,7 @@ function Testimonials() {
             <motion.div
               key={i}
               variants={reveal}
-              className="bg-[#080808] p-10 md:p-12 hover:bg-white/[0.02] transition-colors duration-300"
+              className="bg-[#110e0a] p-10 md:p-12 hover:bg-white/[0.02] transition-colors duration-300"
             >
               <p className="font-display text-5xl text-[#c9a84c]/30 font-black leading-none mb-6">
                 &ldquo;
@@ -611,7 +611,7 @@ function MidPageCTA() {
   const inView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="bg-[#080808] border-t border-[#c9a84c]/20">
+    <section className="bg-[#110e0a] border-t border-[#c9a84c]/20">
       <motion.div
         ref={ref}
         variants={reveal}
@@ -633,7 +633,7 @@ function MidPageCTA() {
         </div>
         <Link
           href="#apply"
-          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
         >
           Apply for Coaching
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -669,14 +669,14 @@ function StickyApplyCTA() {
       transition={{ duration: 0.35, ease: EASE }}
       className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none"
     >
-      <div className="bg-[#080808]/95 backdrop-blur-md border-t border-white/[0.07] px-6 py-4 pointer-events-auto">
+      <div className="bg-[#110e0a]/95 backdrop-blur-md border-t border-white/[0.07] px-6 py-4 pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
           <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/50 hidden sm:block">
             Reviewing applications for July
           </p>
           <Link
             href="#apply"
-            className="inline-flex items-center gap-2 bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#c9a84c]/90 transition-colors duration-200 group ml-auto"
+            className="inline-flex items-center gap-2 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#c9a84c]/90 transition-colors duration-200 group ml-auto"
           >
             Apply Now
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
@@ -693,7 +693,7 @@ function Transformation() {
   const inView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section className="bg-[#080808] py-32 border-t border-white/[0.07]">
+    <section className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Proof" line1="My Personal Transformation" line2="What that looks like." />
         <motion.div
@@ -704,13 +704,13 @@ function Transformation() {
           className="grid md:grid-cols-2 gap-px bg-white/[0.07]"
         >
           {/* Before */}
-          <motion.div variants={revealLeft} className="relative bg-[#0a0a0a]">
+          <motion.div variants={revealLeft} className="relative bg-[#130f0b]">
             <div className="aspect-[3/4] relative overflow-hidden">
               <div
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/before.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#130f0b]/90 via-[#130f0b]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/70 mb-2">Before</p>
                 <p className="font-display text-2xl font-light text-[#f0ece4]/60 leading-tight">
@@ -721,13 +721,13 @@ function Transformation() {
           </motion.div>
 
           {/* After */}
-          <motion.div variants={revealRight} className="relative bg-[#0a0a0a]">
+          <motion.div variants={revealRight} className="relative bg-[#130f0b]">
             <div className="aspect-[3/4] relative overflow-hidden">
               <div
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/after.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#130f0b]/90 via-[#130f0b]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-2">After</p>
                 <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
@@ -785,7 +785,7 @@ function Pricing() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="pricing" className="bg-[#080808] py-32 border-t border-white/[0.07]">
+    <section id="pricing" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           label="Investment"
@@ -804,7 +804,7 @@ function Pricing() {
             <motion.div
               key={plan.name}
               variants={reveal}
-              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#0f0f0f]" : "bg-[#080808]")}
+              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#1a1410]" : "bg-[#110e0a]")}
             >
               {plan.featured && (
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-6">
@@ -834,7 +834,7 @@ function Pricing() {
                 className={cn(
                   "text-center text-xs tracking-[0.2em] uppercase py-4 transition-colors duration-200",
                   plan.featured
-                    ? "bg-[#c9a84c] text-[#080808] hover:bg-[#c9a84c]/90"
+                    ? "bg-[#c9a84c] text-[#110e0a] hover:bg-[#c9a84c]/90"
                     : "border border-white/20 text-[#f0ece4]/70 hover:border-white/40 hover:text-[#f0ece4]"
                 )}
               >
@@ -923,7 +923,7 @@ function Apply() {
   }
 
   return (
-    <section id="apply" className="bg-[#080808] border-t-2 border-[#c9a84c]/50">
+    <section id="apply" className="bg-[#110e0a] border-t-2 border-[#c9a84c]/50">
       {/* Chapter opener */}
       <motion.div
         ref={splashRef}
@@ -991,7 +991,7 @@ function Apply() {
             </p>
             <button
               onClick={openBooking}
-              className="inline-flex items-center gap-3 border border-[#c9a84c] px-8 py-4 text-[#c9a84c] text-sm tracking-[0.15em] uppercase hover:bg-[#c9a84c] hover:text-[#080808] transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-3 border border-[#c9a84c] px-8 py-4 text-[#c9a84c] text-sm tracking-[0.15em] uppercase hover:bg-[#c9a84c] hover:text-[#110e0a] transition-all duration-300 cursor-pointer"
             >
               Book Your Discovery Call <ArrowRight size={16} />
             </button>
@@ -1117,7 +1117,7 @@ function Apply() {
                 <button
                   type="submit"
                   disabled={submitting || !agreed}
-                  className="w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? "Submitting…" : "Submit Application"}
                   {!submitting && (
@@ -1136,7 +1136,7 @@ function Apply() {
 // ── Footer ────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-[#080808] border-t border-white/[0.07] py-16">
+    <footer className="bg-[#110e0a] border-t border-white/[0.07] py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10 mb-16">
           <div className="md:col-span-2">
@@ -1214,7 +1214,7 @@ function Footer() {
 // ── Main Export ───────────────────────────────────────────────────────
 export function LandingPage() {
   return (
-    <div className="bg-[#080808] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#110e0a] text-[#f0ece4] min-h-screen">
       <Nav />
       <Hero />
       <Marquee />
