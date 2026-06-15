@@ -101,6 +101,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
   const [sectionsSeen, setSectionsSeen] = useState<Set<string>>(new Set())
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [encouragementFor, setEncouragementFor] = useState<string | null>(null)
+  const [completionDismissed, setCompletionDismissed] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -118,7 +119,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
     ? (QUESTIONS.find(q => q.id === encouragementFor) ?? null)
     : activeQuestion
 
-  // Sync local inputs when a new question becomes active
+  // Sync local inputs when a new question becomes active or encouragement ends
   useEffect(() => {
     if (!activeQuestion || encouragementFor) return
     if (activeQuestion.type === "name") {
@@ -128,7 +129,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
       setInputValue(answers[activeQuestion.field as FieldKey] || "")
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeQuestion?.id])
+  }, [activeQuestion?.id, encouragementFor])
 
   // Observe section entries
   useEffect(() => {
@@ -160,6 +161,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
   function handleTextSubmit() {
     if (!activeQuestion || !inputValue.trim()) return
     onAnswer({ [activeQuestion.field as FieldKey]: inputValue.trim() })
+    setInputValue("")
     triggerEncouragement(activeQuestion.id)
   }
 
@@ -194,7 +196,8 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
   }
 
   const answeredCount = QUESTIONS.filter(q => isAnswered(q, answers)).length
-  const isVisible = !!(cardQuestion)
+  const allAnswered = answeredCount === QUESTIONS.length
+  const showCompletion = allAnswered && !encouragementFor && !completionDismissed
 
   return (
     <>
@@ -209,7 +212,43 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
 
       {/* Floating card */}
       <AnimatePresence>
-        {isVisible && cardQuestion && (
+        {showCompletion ? (
+          <motion.div
+            key="complete"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 14 }}
+            transition={{ duration: 0.35, ease: EASE }}
+            className="fixed z-50 bottom-20 left-1/2 -translate-x-1/2 w-[calc(100vw-3rem)] md:left-auto md:translate-x-0 md:right-6 md:w-72"
+          >
+            <div className="bg-[#1a1410] rounded-[2rem] border border-[#c9a84c]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
+              <div className="flex items-start justify-between mb-3">
+                <p className="text-[9px] tracking-[0.3em] uppercase text-[#c9a84c]">All set</p>
+                <button
+                  onClick={() => setCompletionDismissed(true)}
+                  className="text-[#f0ece4]/25 hover:text-[#f0ece4]/50 transition-colors -mt-0.5 -mr-0.5"
+                  aria-label="Dismiss"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              <p className="text-[#f0ece4] text-sm font-medium leading-snug mb-4">
+                Your application is pre-filled. Ready to submit?
+              </p>
+              <button
+                onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })}
+                className="w-full bg-[#c9a84c] text-[#110e0a] text-[11px] tracking-[0.18em] uppercase font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#d4b060] transition-colors"
+              >
+                Apply Now <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+              <div className="flex gap-1 mt-4 pt-3.5 border-t border-white/[0.06]">
+                {QUESTIONS.map(q => (
+                  <div key={q.id} className="h-[2px] flex-1 bg-[#c9a84c] rounded-full" />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ) : cardQuestion ? (
           <motion.div
             key={cardQuestion.id}
             initial={{ opacity: 0, y: 14 }}
@@ -218,10 +257,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
             transition={{ duration: 0.3, ease: EASE }}
             className="fixed z-50 bottom-20 left-1/2 -translate-x-1/2 w-[calc(100vw-3rem)] md:left-auto md:translate-x-0 md:right-6 md:w-72"
           >
-            <div
-              className="bg-[#1a1410] border border-white/[0.08] shadow-2xl shadow-black/70 p-5"
-              style={{ borderLeft: "2px solid #c9a84c" }}
-            >
+            <div className="bg-[#1a1410] rounded-[2rem] border border-[#c9a84c]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
               {/* Header */}
               <div className="flex items-start justify-between mb-3">
                 <p className="text-[9px] tracking-[0.3em] uppercase text-[#c9a84c]">Quick question</p>
@@ -313,7 +349,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                           <button
                             key={opt}
                             onClick={() => handleRadioSelect(opt)}
-                            className="border border-white/[0.2] px-3 py-1.5 text-xs tracking-wide text-[#f0ece4]/75 hover:border-[#c9a84c]/60 hover:text-[#c9a84c] transition-colors duration-200"
+                            className="border border-white/[0.2] rounded-full px-4 py-1.5 text-xs tracking-wide text-[#f0ece4]/75 hover:border-[#c9a84c]/60 hover:text-[#c9a84c] transition-colors duration-200"
                           >
                             {opt}
                           </button>
@@ -360,7 +396,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                   <div
                     key={q.id}
                     className={cn(
-                      "h-[2px] flex-1 transition-all duration-500",
+                      "h-[2px] flex-1 rounded-full transition-all duration-500",
                       isAnswered(q, answers) ? "bg-[#c9a84c]" : "bg-white/[0.1]"
                     )}
                   />
@@ -368,7 +404,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
               </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   )
