@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight, ArrowDown, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ScrollQuiz, type QuizAnswers } from "@/components/scroll-quiz"
 
 // ── Animation Variants ────────────────────────────────────────────────
 type Ease4 = [number, number, number, number]
@@ -611,7 +612,7 @@ function MidPageCTA() {
   const inView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="bg-[#110e0a] border-t border-[#c9a84c]/20">
+    <section id="mid-cta" className="bg-[#110e0a] border-t border-[#c9a84c]/20">
       <motion.div
         ref={ref}
         variants={reveal}
@@ -693,7 +694,7 @@ function Transformation() {
   const inView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
+    <section id="transformation" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Proof" line1="My Personal Transformation" line2="What that looks like." />
         <motion.div
@@ -849,7 +850,11 @@ function Pricing() {
 }
 
 // ── Apply ─────────────────────────────────────────────────────────────
-function RadioGroup({ name, label, options }: { name: string; label: string; options: string[] }) {
+function RadioGroup({
+  name, label, options, value, onChange,
+}: {
+  name: string; label: string; options: string[]; value?: string; onChange?: (v: string) => void
+}) {
   return (
     <div>
       <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/85 mb-3">
@@ -858,7 +863,14 @@ function RadioGroup({ name, label, options }: { name: string; label: string; opt
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
           <label key={opt} className="cursor-pointer select-none">
-            <input type="radio" name={name} value={opt} className="sr-only peer" />
+            <input
+              type="radio"
+              name={name}
+              value={opt}
+              checked={value === opt}
+              onChange={() => onChange?.(opt)}
+              className="sr-only peer"
+            />
             <span className="inline-block border border-white/[0.22] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/85 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/35 hover:text-[#f0ece4]/85">
               {opt}
             </span>
@@ -871,7 +883,17 @@ function RadioGroup({ name, label, options }: { name: string; label: string; opt
 
 const CAL_URL = "https://cal.com/amir-cohen-simayof-vxjysx/20min"
 
-function Apply() {
+interface FormState {
+  firstName: string
+  lastName: string
+  email: string
+  goal: string
+  biggestObstacle: string
+  days: string
+  prior: string
+}
+
+function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
   const splashRef = useRef(null)
   const leftRef = useRef(null)
   const rightRef = useRef(null)
@@ -883,6 +905,28 @@ function Apply() {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
   const [agreed, setAgreed] = useState(false)
+  const [form, setForm] = useState<FormState>({
+    firstName: quizAnswers.firstName,
+    lastName: quizAnswers.lastName,
+    email: quizAnswers.email,
+    goal: quizAnswers.goal,
+    biggestObstacle: quizAnswers.biggestObstacle,
+    days: quizAnswers.trainingDays,
+    prior: quizAnswers.priorCoaching,
+  })
+
+  // Merge incoming quiz answers into form without overwriting manual edits
+  useEffect(() => {
+    setForm(prev => ({
+      firstName: prev.firstName || quizAnswers.firstName,
+      lastName: prev.lastName || quizAnswers.lastName,
+      email: prev.email || quizAnswers.email,
+      goal: prev.goal || quizAnswers.goal,
+      biggestObstacle: prev.biggestObstacle || quizAnswers.biggestObstacle,
+      days: prev.days || quizAnswers.trainingDays,
+      prior: prev.prior || quizAnswers.priorCoaching,
+    }))
+  }, [quizAnswers])
 
   const openBooking = () => window.open(CAL_URL, "_blank")
 
@@ -895,15 +939,14 @@ function Apply() {
     setError("")
     setSubmitting(true)
 
-    const data = new FormData(e.currentTarget)
     const body = {
-      firstName: data.get("firstName") as string,
-      lastName: data.get("lastName") as string,
-      email: data.get("email") as string,
-      goal: data.get("goal") as string,
-      biggestObstacle: data.get("biggestObstacle") as string,
-      trainingDays: data.get("days") as string,
-      priorCoaching: data.get("prior") as string,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      goal: form.goal,
+      biggestObstacle: form.biggestObstacle,
+      trainingDays: form.days,
+      priorCoaching: form.prior,
     }
 
     try {
@@ -1045,17 +1088,39 @@ function Apply() {
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className={labelClass}>First name</label>
-                    <input name="firstName" required className={inputClass} placeholder="First" />
+                    <input
+                      name="firstName"
+                      required
+                      value={form.firstName}
+                      onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
+                      className={inputClass}
+                      placeholder="First"
+                    />
                   </div>
                   <div>
                     <label className={labelClass}>Last name</label>
-                    <input name="lastName" required className={inputClass} placeholder="Last" />
+                    <input
+                      name="lastName"
+                      required
+                      value={form.lastName}
+                      onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
+                      className={inputClass}
+                      placeholder="Last"
+                    />
                   </div>
                 </div>
 
                 <div>
                   <label className={labelClass}>Email</label>
-                  <input name="email" type="email" required className={inputClass} placeholder="your@email.com" />
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    className={inputClass}
+                    placeholder="your@email.com"
+                  />
                 </div>
 
                 <div>
@@ -1065,6 +1130,8 @@ function Apply() {
                   <textarea
                     name="goal"
                     required
+                    value={form.goal}
+                    onChange={e => setForm(f => ({ ...f, goal: e.target.value }))}
                     className={cn(inputClass, "resize-none min-h-[90px]")}
                     placeholder="Be specific: lose 15 lbs before August, get visible abs while keeping strength..."
                   />
@@ -1074,6 +1141,8 @@ function Apply() {
                   <label className={labelClass}>Biggest obstacle right now</label>
                   <input
                     name="biggestObstacle"
+                    value={form.biggestObstacle}
+                    onChange={e => setForm(f => ({ ...f, biggestObstacle: e.target.value }))}
                     className={inputClass}
                     placeholder="No time, injured shoulder, don't know where to start..."
                   />
@@ -1083,11 +1152,15 @@ function Apply() {
                   name="days"
                   label="Training days per week"
                   options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
+                  value={form.days}
+                  onChange={v => setForm(f => ({ ...f, days: v }))}
                 />
-<RadioGroup
+                <RadioGroup
                   name="prior"
                   label="Worked with a coach before?"
                   options={["Yes", "No", "Sort of"]}
+                  value={form.prior}
+                  onChange={v => setForm(f => ({ ...f, prior: v }))}
                 />
 
                 <label className="flex items-start gap-3 cursor-pointer group">
@@ -1212,7 +1285,23 @@ function Footer() {
 }
 
 // ── Main Export ───────────────────────────────────────────────────────
+const EMPTY_QUIZ: QuizAnswers = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  goal: "",
+  biggestObstacle: "",
+  trainingDays: "",
+  priorCoaching: "",
+}
+
 export function LandingPage() {
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>(EMPTY_QUIZ)
+
+  function handleQuizAnswer(updates: Partial<QuizAnswers>) {
+    setQuizAnswers(prev => ({ ...prev, ...updates }))
+  }
+
   return (
     <div className="bg-[#110e0a] text-[#f0ece4] min-h-screen">
       <Nav />
@@ -1226,9 +1315,10 @@ export function LandingPage() {
       <MidPageCTA />
       <Transformation />
       <Pricing />
-      <Apply />
+      <Apply quizAnswers={quizAnswers} />
       <Footer />
       <StickyApplyCTA />
+      <ScrollQuiz answers={quizAnswers} onAnswer={handleQuizAnswer} />
     </div>
   )
 }
