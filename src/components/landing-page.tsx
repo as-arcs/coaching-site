@@ -68,8 +68,8 @@ function Nav() {
           : "bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#1A1410]">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <Link href="/" className="font-display text-lg tracking-[0.2em] uppercase font-bold text-[#1A1410]">
           The Standard
         </Link>
 
@@ -78,7 +78,7 @@ function Nav() {
             <Link
               key={href}
               href={href}
-              className="text-[10px] tracking-widest uppercase text-[#1A1410]/65 hover:text-[#1A1410] transition-colors duration-200"
+              className="text-sm tracking-widest uppercase text-[#1A1410]/85 hover:text-[#1A1410] transition-colors duration-200"
             >
               {label}
             </Link>
@@ -87,7 +87,7 @@ function Nav() {
 
         <Link
           href="#apply"
-          className="hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[#D4A017] border border-[#D4A017]/40 px-4 py-2 hover:bg-[#D4A017]/10 transition-colors duration-200"
+          className="cta-glow hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase font-semibold bg-[#D4A017] text-[#1A1410] px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200"
         >
           Apply
           <ArrowRight className="h-3 w-3" />
@@ -164,6 +164,7 @@ function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-8"
+          style={{ textShadow: '0 1px 6px rgba(0,0,0,0.95), 0 0 8px rgba(212,160,23,1), 0 0 28px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.45)' }}
         >
           Online Fitness Coaching
         </motion.p>
@@ -213,7 +214,8 @@ function Hero() {
           </Link>
           <Link
             href="#about"
-            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/85 hover:text-[#f0ece4] transition-colors duration-200"
+            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4] hover:text-[#f0ece4] transition-colors duration-200"
+            style={{ textShadow: '0 1px 10px rgba(0,0,0,0.9)' }}
           >
             See how it works
           </Link>
@@ -223,7 +225,8 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.3 }}
-          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/60 mt-6"
+          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/85 mt-6"
+          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
         >
           Reviewing applications for July
         </motion.p>
@@ -239,7 +242,7 @@ function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="h-4 w-4 text-[#f0ece4]/45" />
+          <ArrowDown className="h-4 w-4 text-[#f0ece4]/65" />
         </motion.div>
       </motion.div>
     </section>
@@ -312,7 +315,7 @@ function SectionHeader({
         <span className="block font-black italic">{line2}</span>
       </h2>
       {note && (
-        <p className="text-lg mt-6 max-w-lg leading-relaxed text-[#1A1410]/60">{note}</p>
+        <p className="text-lg mt-6 max-w-lg leading-relaxed text-[#1A1410]/75">{note}</p>
       )}
     </motion.div>
   )
@@ -346,10 +349,10 @@ function Philosophy() {
               <span className="block font-black italic text-[#1A1410]"> But it doesn&apos;t have to be this way.</span>
             </h2>
             <div className="w-12 h-px bg-[#D4A017] mb-8" />
-            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
               Doesn&apos;t matter if you&apos;re pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or someone who&apos;s tried and stopped more times than they can count. Your goals are achievable.
             </p>
-            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-10">
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-10">
               I only take clients I know I can genuinely help. If you apply and I don&apos;t think
               the timing is right, I&apos;ll tell you.
             </p>
@@ -439,7 +442,7 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
         {feature.num}
       </span>
       <h3 className="text-[#1A1410] font-medium text-lg leading-snug">{feature.title}</h3>
-      <p className="text-[#1A1410]/65 leading-relaxed">{feature.body}</p>
+      <p className="text-[#1A1410]/78 leading-relaxed">{feature.body}</p>
     </motion.div>
   )
 }
@@ -459,44 +462,6 @@ function Included() {
   )
 }
 
-// ── Stats ─────────────────────────────────────────────────────────────
-const STATS = [
-  { value: "100%", label: "Custom-built programs" },
-  { value: "24hr", label: "Check-in response time" },
-  { value: "12wk", label: "Minimum commitment" },
-  { value: "0", label: "Templates ever used" },
-]
-
-function Stats() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.2 })
-
-  return (
-    <section className="bg-[#F0EAE0] py-24 border-y border-[#1A1410]/[0.07]">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          ref={ref}
-          variants={stagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1A1410]/[0.07]"
-        >
-          {STATS.map((s) => (
-            <motion.div key={s.label} variants={reveal} className="bg-[#F0EAE0] p-10 md:p-14 text-center">
-              <p
-                className="font-display font-black text-[#1A1410] leading-none mb-3"
-                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
-              >
-                {s.value}
-              </p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#1A1410]/65">{s.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
 
 // ── Process ───────────────────────────────────────────────────────────
 const STEPS = [
@@ -532,7 +497,7 @@ function Process() {
                 {s.num}
               </p>
               <h3 className="text-[#1A1410] font-semibold mb-3">{s.title}</h3>
-              <p className="text-[#1A1410]/70 text-sm leading-relaxed">{s.body}</p>
+              <p className="text-[#1A1410]/82 text-sm leading-relaxed">{s.body}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -593,7 +558,7 @@ function Testimonials() {
               <p className="font-display text-5xl text-[#D4A017]/65 font-black leading-none mb-6">
                 &ldquo;
               </p>
-              <blockquote className="text-[#1A1410]/80 text-lg leading-relaxed mb-8">
+              <blockquote className="text-[#1A1410]/90 text-lg leading-relaxed mb-8">
                 {t.quote}
               </blockquote>
               <div className="flex items-center gap-4">
@@ -680,7 +645,7 @@ function StickyApplyCTA() {
     >
       <div className="bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#1A1410]/[0.07] px-6 py-4 pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/50 hidden sm:block">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/70 hidden sm:block">
             Reviewing applications for July
           </p>
           <Link
@@ -721,8 +686,8 @@ function Transformation() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/90 via-[#141210]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/70 mb-2">Before</p>
-                <p className="font-display text-2xl font-light text-[#f0ece4]/60 leading-tight">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/85 mb-2">Before</p>
+                <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
                   Not there yet.
                 </p>
               </div>
@@ -1026,7 +991,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
             >
               You&apos;re in.
             </h3>
-            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
               Pick a time for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
             <p className="text-[#1A1410]/65 text-sm leading-relaxed mb-10">
@@ -1056,7 +1021,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               animate={leftInView ? "visible" : "hidden"}
             >
               <div className="w-12 h-px bg-[#D4A017] mb-8" />
-              <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
+              <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
                 Fill out the application. Once you submit, you&apos;ll book your free
                 20-minute discovery call directly. No waiting, no pitch.
               </p>
@@ -1317,9 +1282,6 @@ export function LandingPage() {
       <Philosophy />
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Included />
-      <SectionSeam from="#EAE1D4" to="#F0EAE0" />
-      <Stats />
-      <SectionSeam from="#F0EAE0" to="#EAE1D4" />
       <Process />
       <Testimonials />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
