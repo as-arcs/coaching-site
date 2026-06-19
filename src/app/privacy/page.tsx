@@ -6,11 +6,11 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[#080808] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#0E0C0A] text-[#f0ece4] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-24">
         <Link
           href="/"
-          className="text-[10px] tracking-[0.25em] uppercase text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors mb-12 inline-block"
+          className="text-[10px] tracking-[0.25em] uppercase text-[#D4A017] hover:text-[#D4A017]/70 transition-colors mb-12 inline-block"
         >
           ← The Standard
         </Link>
@@ -87,7 +87,7 @@ export default function PrivacyPage() {
                 "Schedule discovery calls and ongoing sessions via Cal.com",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
                 "Slack — internal operations only, not client-facing",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
@@ -141,14 +141,14 @@ export default function PrivacyPage() {
                 "Withdraw consent to future marketing communications",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
             </ul>
             <p className="mt-4">
               To exercise any of these rights, contact us at{" "}
-              <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+              <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                 amirsimayof@gmail.com
               </a>.
             </p>
@@ -168,14 +168,14 @@ export default function PrivacyPage() {
                 "The right to non-discrimination for exercising your CCPA rights",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
             </ul>
             <p className="mt-4">
               To submit a CCPA request, contact{" "}
-              <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+              <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                 amirsimayof@gmail.com
               </a>.
             </p>
@@ -212,7 +212,7 @@ export default function PrivacyPage() {
             <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">11. Contact</h2>
             <p>
               Questions about this Privacy Policy? Reach out at{" "}
-              <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+              <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                 amirsimayof@gmail.com
               </a>.
             </p>

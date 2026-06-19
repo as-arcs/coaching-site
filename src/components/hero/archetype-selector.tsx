@@ -11,7 +11,7 @@ const E = "oklch(0.98 0.01 85 / 0.22)"   // panel edge highlight
 
 function glow(on: boolean) {
   return on
-    ? "drop-shadow(0 0 28px oklch(0.75 0.11 78 / 0.78)) drop-shadow(0 0 8px oklch(0.75 0.11 78 / 0.42))"
+    ? "drop-shadow(0 0 28px oklch(0.72 0.14 72 / 0.78)) drop-shadow(0 0 8px oklch(0.72 0.14 72 / 0.42))"
     : "none"
 }
 
@@ -33,7 +33,7 @@ function MaleFigure({ selected }: { selected: boolean }) {
       <rect x="39" y="25" width="42" height="14" rx="5" fill={D} />
       {/* visor inner tint — gold when selected */}
       <rect x="41" y="27" width="38" height="10" rx="3"
-        fill={selected ? "oklch(0.75 0.11 78 / 0.28)" : "oklch(0.75 0.11 78 / 0.07)"} />
+        fill={selected ? "oklch(0.72 0.14 72 / 0.28)" : "oklch(0.72 0.14 72 / 0.07)"} />
 
       {/* NECK */}
       <rect x="53" y="55" width="14" height="16" rx="4" fill={F} />
@@ -130,7 +130,7 @@ function FemaleFigure({ selected }: { selected: boolean }) {
       {/* visor — narrower */}
       <rect x="42" y="23" width="36" height="12" rx="5" fill={D} />
       <rect x="44" y="25" width="32" height="8" rx="3"
-        fill={selected ? "oklch(0.75 0.11 78 / 0.28)" : "oklch(0.75 0.11 78 / 0.07)"} />
+        fill={selected ? "oklch(0.72 0.14 72 / 0.28)" : "oklch(0.72 0.14 72 / 0.07)"} />
 
       {/* NECK */}
       <rect x="54" y="50" width="12" height="14" rx="4" fill={F} />

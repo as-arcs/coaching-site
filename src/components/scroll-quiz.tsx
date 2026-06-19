@@ -204,7 +204,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
       {/* Top progress bar */}
       <div className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-white/[0.06] pointer-events-none">
         <motion.div
-          className="h-full bg-[#c9a84c]"
+          className="h-full bg-[#D4A017]"
           animate={{ width: `${(answeredCount / QUESTIONS.length) * 100}%` }}
           transition={{ duration: 0.6, ease: EASE }}
         />
@@ -221,9 +221,9 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
             transition={{ duration: 0.35, ease: EASE }}
             className="fixed z-50 bottom-20 left-1/2 -translate-x-1/2 w-[calc(100vw-3rem)] md:left-auto md:translate-x-0 md:right-6 md:w-72"
           >
-            <div className="bg-[#1a1410] rounded-[2rem] border border-[#c9a84c]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
+            <div className="bg-[#1C1915] rounded-[2rem] border border-[#D4A017]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
               <div className="flex items-start justify-between mb-3">
-                <p className="text-[9px] tracking-[0.3em] uppercase text-[#c9a84c]">All set</p>
+                <p className="text-[9px] tracking-[0.3em] uppercase text-[#D4A017]">All set</p>
                 <button
                   onClick={() => setCompletionDismissed(true)}
                   className="text-[#f0ece4]/25 hover:text-[#f0ece4]/50 transition-colors -mt-0.5 -mr-0.5"
@@ -237,13 +237,13 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
               </p>
               <button
                 onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })}
-                className="w-full bg-[#c9a84c] text-[#110e0a] text-[11px] tracking-[0.18em] uppercase font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#d4b060] transition-colors"
+                className="w-full bg-[#D4A017] text-[#0E0C0A] text-[11px] tracking-[0.18em] uppercase font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#B8860F] transition-colors"
               >
                 Apply Now <ArrowRight className="h-3.5 w-3.5" />
               </button>
               <div className="flex gap-1 mt-4 pt-3.5 border-t border-white/[0.06]">
                 {QUESTIONS.map(q => (
-                  <div key={q.id} className="h-[2px] flex-1 bg-[#c9a84c] rounded-full" />
+                  <div key={q.id} className="h-[2px] flex-1 bg-[#D4A017] rounded-full" />
                 ))}
               </div>
             </div>
@@ -257,10 +257,10 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
             transition={{ duration: 0.3, ease: EASE }}
             className="fixed z-50 bottom-20 left-1/2 -translate-x-1/2 w-[calc(100vw-3rem)] md:left-auto md:translate-x-0 md:right-6 md:w-72"
           >
-            <div className="bg-[#1a1410] rounded-[2rem] border border-[#c9a84c]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
+            <div className="bg-[#1C1915] rounded-[2rem] border border-[#D4A017]/20 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_0_1px_rgba(201,168,76,0.08)] p-6 overflow-hidden">
               {/* Header */}
               <div className="flex items-start justify-between mb-3">
-                <p className="text-[9px] tracking-[0.3em] uppercase text-[#c9a84c]">Quick question</p>
+                <p className="text-[9px] tracking-[0.3em] uppercase text-[#D4A017]">Quick question</p>
                 {!encouragementFor && (
                   <button
                     onClick={handleDismiss}
@@ -310,12 +310,12 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                           placeholder={cardQuestion.placeholder}
                           rows={2}
                           autoFocus
-                          className="flex-1 bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#c9a84c]/60 transition-colors resize-none"
+                          className="flex-1 bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#D4A017]/60 transition-colors resize-none"
                         />
                         <button
                           onClick={handleTextSubmit}
                           disabled={!inputValue.trim()}
-                          className="pb-2 text-[#c9a84c] disabled:opacity-25 transition-opacity flex-shrink-0"
+                          className="pb-2 text-[#D4A017] disabled:opacity-25 transition-opacity flex-shrink-0"
                         >
                           <ArrowRight className="h-4 w-4" />
                         </button>
@@ -331,12 +331,12 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                           onKeyDown={e => { if (e.key === "Enter") handleTextSubmit() }}
                           placeholder={cardQuestion.placeholder}
                           autoFocus
-                          className="flex-1 bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#c9a84c]/60 transition-colors"
+                          className="flex-1 bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#D4A017]/60 transition-colors"
                         />
                         <button
                           onClick={handleTextSubmit}
                           disabled={!inputValue.trim()}
-                          className="pb-2 text-[#c9a84c] disabled:opacity-25 transition-opacity flex-shrink-0"
+                          className="pb-2 text-[#D4A017] disabled:opacity-25 transition-opacity flex-shrink-0"
                         >
                           <ArrowRight className="h-4 w-4" />
                         </button>
@@ -349,7 +349,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                           <button
                             key={opt}
                             onClick={() => handleRadioSelect(opt)}
-                            className="border border-white/[0.2] rounded-full px-4 py-1.5 text-xs tracking-wide text-[#f0ece4]/75 hover:border-[#c9a84c]/60 hover:text-[#c9a84c] transition-colors duration-200"
+                            className="border border-white/[0.2] rounded-full px-4 py-1.5 text-xs tracking-wide text-[#f0ece4]/75 hover:border-[#D4A017]/60 hover:text-[#D4A017] transition-colors duration-200"
                           >
                             {opt}
                           </button>
@@ -366,7 +366,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                             onChange={e => setFirstName(e.target.value)}
                             placeholder="First"
                             autoFocus
-                            className="bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#c9a84c]/60 transition-colors"
+                            className="bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#D4A017]/60 transition-colors"
                           />
                           <input
                             type="text"
@@ -374,13 +374,13 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                             onChange={e => setLastName(e.target.value)}
                             onKeyDown={e => { if (e.key === "Enter") handleNameSubmit() }}
                             placeholder="Last"
-                            className="bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#c9a84c]/60 transition-colors"
+                            className="bg-transparent border-b border-white/[0.2] py-2 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/35 focus:outline-none focus:border-[#D4A017]/60 transition-colors"
                           />
                         </div>
                         <button
                           onClick={handleNameSubmit}
                           disabled={!firstName.trim() || !lastName.trim()}
-                          className="flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[#c9a84c] disabled:opacity-25 transition-opacity"
+                          className="flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[#D4A017] disabled:opacity-25 transition-opacity"
                         >
                           Continue <ArrowRight className="h-3 w-3" />
                         </button>
@@ -397,7 +397,7 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                     key={q.id}
                     className={cn(
                       "h-[2px] flex-1 rounded-full transition-all duration-500",
-                      isAnswered(q, answers) ? "bg-[#c9a84c]" : "bg-white/[0.1]"
+                      isAnswered(q, answers) ? "bg-[#D4A017]" : "bg-white/[0.1]"
                     )}
                   />
                 ))}

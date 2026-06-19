@@ -6,11 +6,11 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="bg-[#080808] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#0E0C0A] text-[#f0ece4] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-24">
         <Link
           href="/"
-          className="text-[10px] tracking-[0.25em] uppercase text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors mb-12 inline-block"
+          className="text-[10px] tracking-[0.25em] uppercase text-[#D4A017] hover:text-[#D4A017]/70 transition-colors mb-12 inline-block"
         >
           ← The Standard
         </Link>
@@ -54,7 +54,7 @@ export default function TermsPage() {
                 "You will promptly notify the Coach of any material changes to your health status during the engagement.",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c]/60 text-xs mt-0.5 flex-shrink-0 font-mono">
+                  <span className="text-[#D4A017]/60 text-xs mt-0.5 flex-shrink-0 font-mono">
                     ({String.fromCharCode(97 + i)})
                   </span>
                   {item}
@@ -88,7 +88,7 @@ export default function TermsPage() {
                 "Additional services as specified in your selected plan",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
@@ -143,7 +143,7 @@ export default function TermsPage() {
                 <p>
                   Following completion of your 12-week minimum commitment, you may cancel at
                   any time by providing written notice to{" "}
-                  <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+                  <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                     amirsimayof@gmail.com
                   </a>. Cancellation takes effect at the end of the current billing cycle. No
                   partial-month refunds are issued.
@@ -188,7 +188,7 @@ export default function TermsPage() {
                 "Conduct that the Coach reasonably determines makes continuation of services harmful or impractical",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
+                  <span className="text-[#D4A017] mt-1.5 block w-1 h-1 rounded-full flex-shrink-0 bg-current" />
                   {item}
                 </li>
               ))}
@@ -211,7 +211,7 @@ export default function TermsPage() {
                 "Provide timely weekly check-in data to enable accurate program adjustments.",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="text-[#c9a84c]/60 text-xs mt-0.5 flex-shrink-0 font-mono">
+                  <span className="text-[#D4A017]/60 text-xs mt-0.5 flex-shrink-0 font-mono">
                     ({String.fromCharCode(97 + i)})
                   </span>
                   {item}
@@ -248,7 +248,7 @@ export default function TermsPage() {
                 <p className="text-[#f0ece4]/90 font-medium mb-1">12.1 Informal Resolution</p>
                 <p>
                   Before initiating any formal dispute, you agree to contact the Coach at{" "}
-                  <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+                  <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                     amirsimayof@gmail.com
                   </a>{" "}
                   and attempt to resolve the dispute informally for a period of 30 days.
@@ -303,7 +303,7 @@ export default function TermsPage() {
             <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">Contact</h2>
             <p>
               Questions about these Terms? Reach out at{" "}
-              <a href="mailto:amirsimayof@gmail.com" className="text-[#c9a84c] hover:text-[#c9a84c]/70 transition-colors">
+              <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
                 amirsimayof@gmail.com
               </a>.
             </p>

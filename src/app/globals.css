@@ -50,6 +50,8 @@
 }
 
 :root {
+  --brand-accent: #D4A017;
+  --brand-accent-secondary: #B8860F;
   --background: oklch(0.05 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -124,11 +126,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #110e0a;
+    background-color: #FAF7F2;
   }
   html {
     @apply font-sans;
-    background-color: #110e0a;
+    background-color: #FAF7F2;
   }
 }
 
@@ -147,8 +149,8 @@
 }
 
 @keyframes cta-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
-  50%       { box-shadow: 0 0 22px 6px rgba(201, 168, 76, 0.28); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+  50%       { box-shadow: 0 0 18px 6px rgba(212, 160, 23, 0.28); }
 }
 
 .cta-glow {

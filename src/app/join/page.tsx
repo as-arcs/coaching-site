@@ -63,15 +63,15 @@ function JoinContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] text-[#f0ece4] flex flex-col items-center justify-center px-6 py-24">
+    <div className="min-h-screen bg-[#0E0C0A] text-[#f0ece4] flex flex-col items-center justify-center px-6 py-24">
       <div className="w-full max-w-md">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-6 text-center">
+        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-6 text-center">
           The Standard · Coaching
         </p>
 
         <div className="border border-white/[0.1] p-10">
           {planKey === "premium" && (
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-4">
               Most Popular
             </p>
           )}
@@ -89,7 +89,7 @@ function JoinContent() {
           <ul className="space-y-3 mb-10">
             {plan.features.map((f) => (
               <li key={f} className="flex items-center gap-3 text-sm text-[#f0ece4]/65">
-                <Check className="h-3.5 w-3.5 text-[#c9a84c] flex-shrink-0" />
+                <Check className="h-3.5 w-3.5 text-[#D4A017] flex-shrink-0" />
                 {f}
               </li>
             ))}
@@ -103,8 +103,8 @@ function JoinContent() {
             onClick={handleCheckout}
             disabled={loading}
             className={cn(
-              "w-full bg-[#c9a84c] text-[#080808] text-xs tracking-[0.2em] uppercase font-semibold py-5 transition-colors duration-200 flex items-center justify-center gap-3 group",
-              loading ? "opacity-60 cursor-not-allowed" : "hover:bg-[#c9a84c]/90 cursor-pointer"
+              "w-full bg-[#D4A017] text-[#0E0C0A] text-xs tracking-[0.2em] uppercase font-semibold py-5 transition-colors duration-200 flex items-center justify-center gap-3 group",
+              loading ? "opacity-60 cursor-not-allowed" : "hover:bg-[#D4A017]/90 cursor-pointer"
             )}
           >
             {loading ? "Redirecting…" : "Pay Now"}

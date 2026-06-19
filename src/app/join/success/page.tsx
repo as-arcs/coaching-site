@@ -3,11 +3,11 @@ import { ArrowRight } from "lucide-react"
 
 export default function SuccessPage() {
   return (
-    <div className="min-h-screen bg-[#080808] text-[#f0ece4] flex flex-col items-center justify-center px-6 py-24">
+    <div className="min-h-screen bg-[#0E0C0A] text-[#f0ece4] flex flex-col items-center justify-center px-6 py-24">
       <div className="w-full max-w-md text-center">
-        <div className="w-12 h-px bg-[#c9a84c] mx-auto mb-10" />
+        <div className="w-12 h-px bg-[#D4A017] mx-auto mb-10" />
 
-        <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-6">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#D4A017] mb-6">
           Payment Confirmed
         </p>
 
@@ -29,7 +29,7 @@ export default function SuccessPage() {
         <div className="space-y-3">
           <a
             href="mailto:amirsimayof@gmail.com"
-            className="inline-flex items-center gap-3 border border-[#c9a84c] px-8 py-4 text-[#c9a84c] text-xs tracking-[0.15em] uppercase hover:bg-[#c9a84c] hover:text-[#080808] transition-all duration-300"
+            className="inline-flex items-center gap-3 border border-[#D4A017] px-8 py-4 text-[#D4A017] text-xs tracking-[0.15em] uppercase hover:bg-[#D4A017] hover:text-[#0E0C0A] transition-all duration-300"
           >
             Email Amir <ArrowRight size={14} />
           </a>

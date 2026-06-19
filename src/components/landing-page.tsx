@@ -64,12 +64,12 @@ function Nav() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-[#110e0a]/90 backdrop-blur-md border-b border-white/[0.07]"
+          ? "bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#1A1410]/[0.07]"
           : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#f0ece4]">
+        <Link href="/" className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#1A1410]">
           The Standard
         </Link>
 
@@ -78,7 +78,7 @@ function Nav() {
             <Link
               key={href}
               href={href}
-              className="text-[10px] tracking-widest uppercase text-[#f0ece4]/65 hover:text-[#f0ece4] transition-colors duration-200"
+              className="text-[10px] tracking-widest uppercase text-[#1A1410]/65 hover:text-[#1A1410] transition-colors duration-200"
             >
               {label}
             </Link>
@@ -87,14 +87,14 @@ function Nav() {
 
         <Link
           href="#apply"
-          className="hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[#c9a84c] border border-[#c9a84c]/40 px-4 py-2 hover:bg-[#c9a84c]/10 transition-colors duration-200"
+          className="hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[#D4A017] border border-[#D4A017]/40 px-4 py-2 hover:bg-[#D4A017]/10 transition-colors duration-200"
         >
           Apply
           <ArrowRight className="h-3 w-3" />
         </Link>
 
         <button
-          className="md:hidden text-[#f0ece4] p-1"
+          className="md:hidden text-[#1A1410] p-1"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
@@ -125,7 +125,7 @@ function Nav() {
         initial={false}
         animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
         transition={{ duration: 0.3, ease: EASE }}
-        className="md:hidden overflow-hidden bg-[#110e0a] border-b border-white/[0.07]"
+        className="md:hidden overflow-hidden bg-[#FAF7F2] border-b border-[#1A1410]/[0.07]"
       >
         <div className="px-6 pb-6 pt-2 space-y-1">
           {([...NAV_LINKS, ["#apply", "Apply"]] as [string, string][]).map(([href, label]) => (
@@ -133,7 +133,7 @@ function Nav() {
               key={href}
               href={href}
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-between py-3 text-sm tracking-widest uppercase text-[#f0ece4]/60 hover:text-[#f0ece4] border-b border-white/[0.05] last:border-0 transition-colors duration-200"
+              className="flex items-center justify-between py-3 text-sm tracking-widest uppercase text-[#1A1410]/60 hover:text-[#1A1410] border-b border-[#1A1410]/[0.05] last:border-0 transition-colors duration-200"
             >
               {label}
               <ArrowRight className="h-3 w-3 opacity-30" />
@@ -148,14 +148,14 @@ function Nav() {
 // ── Hero ──────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#110e0a]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#FAF7F2]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ backgroundImage: "url('/images/hero/hero.jpg')", backgroundPosition: "center top" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#110e0a]/60 via-[#110e0a]/40 to-[#110e0a]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#110e0a]/80 via-transparent to-[#110e0a]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1410]/50 via-[#1A1410]/25 to-[#FAF7F2]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1410]/50 via-transparent to-[#1A1410]/50" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -163,7 +163,7 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-8"
+          className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-8"
         >
           Online Fitness Coaching
         </motion.p>
@@ -206,7 +206,7 @@ function Hero() {
         >
           <Link
             href="#apply"
-            className="cta-glow inline-flex items-center gap-3 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+            className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
           >
             Apply for Coaching
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -259,16 +259,23 @@ const MARQUEE_BASE = [
 function Marquee() {
   const items = [...MARQUEE_BASE, ...MARQUEE_BASE]
   return (
-    <div className="border-y border-white/[0.07] bg-[#130f0b] py-4 overflow-hidden">
+    <div className="border-y border-[#1A1410]/[0.07] bg-[#F0EAE0] py-4 overflow-hidden">
       <div className="marquee-track flex gap-12 whitespace-nowrap">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-12 flex-shrink-0">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/60">{item}</span>
-            <span className="w-1 h-1 rounded-full bg-[#c9a84c]/50 flex-shrink-0" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-[#1A1410]/60">{item}</span>
+            <span className="w-1 h-1 rounded-full bg-[#D4A017]/50 flex-shrink-0" />
           </span>
         ))}
       </div>
     </div>
+  )
+}
+
+// ── Section Seam ──────────────────────────────────────────────────────
+function SectionSeam({ from, to }: { from: string; to: string }) {
+  return (
+    <div style={{ background: `linear-gradient(to bottom, ${from}, ${to})`, height: "140px" }} />
   )
 }
 
@@ -283,6 +290,7 @@ function SectionHeader({
   line1: string
   line2: string
   note?: string
+  light?: boolean
 }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
@@ -295,16 +303,16 @@ function SectionHeader({
       animate={inView ? "visible" : "hidden"}
       className="mb-16 md:mb-24"
     >
-      <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-4">{label}</p>
+      <p className="text-[10px] tracking-[0.3em] uppercase mb-4 text-[#D4A017]">{label}</p>
       <h2
-        className="font-display text-[#f0ece4] leading-tight"
+        className="font-display leading-tight text-[#1A1410]"
         style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
       >
         <span className="font-light">{line1}</span>
         <span className="block font-black italic">{line2}</span>
       </h2>
       {note && (
-        <p className="text-[#f0ece4]/60 text-lg mt-6 max-w-lg leading-relaxed">{note}</p>
+        <p className="text-lg mt-6 max-w-lg leading-relaxed text-[#1A1410]/60">{note}</p>
       )}
     </motion.div>
   )
@@ -318,7 +326,7 @@ function Philosophy() {
   const rightInView = useInView(rightRef, { once: true, amount: 0.2 })
 
   return (
-    <section id="about" className="bg-[#110e0a] py-32 md:py-40">
+    <section id="about" className="bg-[#FAF7F2] py-32 md:py-40">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <motion.div
@@ -327,27 +335,27 @@ function Philosophy() {
             initial="hidden"
             animate={leftInView ? "visible" : "hidden"}
           >
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-8">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-8">
               The Philosophy
             </p>
             <h2
               className="font-display leading-tight mb-6"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
-              <span className="font-light text-[#f0ece4]">The internet has overcomplicated things</span>
-              <span className="block font-black italic text-[#f0ece4]"> But it doesn't have to be this way.</span>
+              <span className="font-light text-[#1A1410]">The internet has overcomplicated things</span>
+              <span className="block font-black italic text-[#1A1410]"> But it doesn&apos;t have to be this way.</span>
             </h2>
-            <div className="w-12 h-px bg-[#c9a84c] mb-8" />
-            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
-              Doesn't matter if you're pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or someone who's tried and stopped more times than they can count. Your goals are achievable.
+            <div className="w-12 h-px bg-[#D4A017] mb-8" />
+            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
+              Doesn&apos;t matter if you&apos;re pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or someone who&apos;s tried and stopped more times than they can count. Your goals are achievable.
             </p>
-            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-10">
+            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-10">
               I only take clients I know I can genuinely help. If you apply and I don&apos;t think
               the timing is right, I&apos;ll tell you.
             </p>
             <Link
               href="#apply"
-              className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#c9a84c] border-b border-[#c9a84c]/40 pb-1 hover:border-[#c9a84c] transition-colors duration-200 group"
+              className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#D4A017] border-b border-[#D4A017]/40 pb-1 hover:border-[#D4A017] transition-colors duration-200 group"
             >
               Apply Now
               <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
@@ -361,15 +369,15 @@ function Philosophy() {
             animate={rightInView ? "visible" : "hidden"}
             className="relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden border border-white/[0.07]">
+            <div className="relative aspect-[3/4] overflow-hidden border border-[#1A1410]/[0.07]">
               <div
                 className="absolute inset-0 bg-cover bg-top"
                 style={{ backgroundImage: "url('/images/philosophy.png')" }}
               />
-              <div className="absolute inset-0 bg-[#1a1410]/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#110e0a]/90 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-[#1C1915]/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1410]/80 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="font-display text-xs tracking-[0.2em] uppercase text-[#c9a84c] mb-1">
+                <p className="font-display text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-1">
                   Amir Cohen-Simayof
                 </p>
                 <p className="text-[#f0ece4]/70 text-xs tracking-wide">
@@ -377,7 +385,7 @@ function Philosophy() {
                 </p>
               </div>
             </div>
-            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#c9a84c]/20 -z-10" />
+            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#D4A017]/20 -z-10" />
           </motion.div>
         </div>
       </div>
@@ -425,23 +433,23 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       transition={{ delay: index * 0.05 }}
-      className="py-8 md:py-10 grid md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 items-start group hover:bg-white/[0.02] transition-colors duration-300 cursor-default"
+      className="py-8 md:py-10 grid md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 items-start group hover:bg-[#1A1410]/[0.03] transition-colors duration-300 cursor-default"
     >
-      <span className="font-display text-3xl font-light text-[#f0ece4]/15 group-hover:text-[#c9a84c]/40 transition-colors duration-300">
+      <span className="font-display text-3xl font-light text-[#1A1410]/10 group-hover:text-[#D4A017]/40 transition-colors duration-300">
         {feature.num}
       </span>
-      <h3 className="text-[#f0ece4] font-medium text-lg leading-snug">{feature.title}</h3>
-      <p className="text-[#f0ece4]/65 leading-relaxed">{feature.body}</p>
+      <h3 className="text-[#1A1410] font-medium text-lg leading-snug">{feature.title}</h3>
+      <p className="text-[#1A1410]/65 leading-relaxed">{feature.body}</p>
     </motion.div>
   )
 }
 
 function Included() {
   return (
-    <section className="bg-[#110e0a] py-24 border-t border-white/[0.07]">
+    <section className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="What You Get" line1="Everything you need." line2="Nothing you don't." />
-        <div className="divide-y divide-white/[0.07]">
+        <div className="divide-y divide-[#1A1410]/[0.08]">
           {FEATURES.map((f, i) => (
             <FeatureRow key={f.num} feature={f} index={i} />
           ))}
@@ -464,24 +472,24 @@ function Stats() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section className="bg-[#130f0b] py-24 border-y border-white/[0.07]">
+    <section className="bg-[#F0EAE0] py-24 border-y border-[#1A1410]/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           ref={ref}
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.07]"
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#1A1410]/[0.07]"
         >
           {STATS.map((s) => (
-            <motion.div key={s.label} variants={reveal} className="bg-[#130f0b] p-10 md:p-14 text-center">
+            <motion.div key={s.label} variants={reveal} className="bg-[#F0EAE0] p-10 md:p-14 text-center">
               <p
-                className="font-display font-black text-[#f0ece4] leading-none mb-3"
+                className="font-display font-black text-[#1A1410] leading-none mb-3"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
               >
                 {s.value}
               </p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/65">{s.label}</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#1A1410]/65">{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -504,7 +512,7 @@ function Process() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="process" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
+    <section id="process" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Process" line1="Application to results." line2="Five steps." />
         <motion.div
@@ -512,19 +520,19 @@ function Process() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-5 gap-px bg-white/[0.07]"
+          className="grid md:grid-cols-5 gap-px bg-[#1A1410]/[0.06]"
         >
           {STEPS.map((s) => (
             <motion.div
               key={s.num}
               variants={reveal}
-              className="bg-[#110e0a] p-8 group hover:bg-white/[0.02] transition-colors duration-300"
+              className="bg-[#EAE1D4] p-8 group hover:bg-[#1A1410]/[0.03] transition-colors duration-300"
             >
-              <p className="font-display text-4xl font-light text-[#f0ece4]/10 group-hover:text-[#c9a84c]/30 transition-colors duration-300 mb-6">
+              <p className="font-display text-4xl font-light text-[#1A1410]/10 group-hover:text-[#D4A017]/50 transition-colors duration-300 mb-6">
                 {s.num}
               </p>
-              <h3 className="text-[#f0ece4] font-semibold mb-3">{s.title}</h3>
-              <p className="text-[#f0ece4]/60 text-sm leading-relaxed">{s.body}</p>
+              <h3 className="text-[#1A1410] font-semibold mb-3">{s.title}</h3>
+              <p className="text-[#1A1410]/60 text-sm leading-relaxed">{s.body}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -566,7 +574,7 @@ function Testimonials() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="results" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
+    <section id="results" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="Results" line1="Real people." line2="Real schedules." />
         <motion.div
@@ -574,31 +582,31 @@ function Testimonials() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-px bg-white/[0.07]"
+          className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.06]"
         >
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={i}
               variants={reveal}
-              className="bg-[#110e0a] p-10 md:p-12 hover:bg-white/[0.02] transition-colors duration-300"
+              className="bg-[#DFD3C0] p-10 md:p-12 hover:bg-[#1A1410]/[0.03] transition-colors duration-300"
             >
-              <p className="font-display text-5xl text-[#c9a84c]/30 font-black leading-none mb-6">
+              <p className="font-display text-5xl text-[#D4A017]/40 font-black leading-none mb-6">
                 &ldquo;
               </p>
-              <blockquote className="text-[#f0ece4]/80 text-lg leading-relaxed mb-8">
+              <blockquote className="text-[#1A1410]/80 text-lg leading-relaxed mb-8">
                 {t.quote}
               </blockquote>
               <div className="flex items-center gap-4">
-                <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                <div className="w-8 h-px bg-[#D4A017]/60 flex-shrink-0" />
                 <div>
-                  <p className="text-[#f0ece4] text-sm font-medium">{t.author}</p>
-                  <p className="text-[#f0ece4]/65 text-xs tracking-wide mt-0.5">{t.detail}</p>
+                  <p className="text-[#1A1410] text-sm font-medium">{t.author}</p>
+                  <p className="text-[#1A1410]/55 text-xs tracking-wide mt-0.5">{t.detail}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-        <p className="text-[#f0ece4]/20 text-xs tracking-wide text-center mt-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[#1A1410]/30 text-xs tracking-wide text-center mt-10 max-w-2xl mx-auto leading-relaxed">
           Testimonials are from real clients. Individual results vary based on effort, adherence, starting point, and other personal factors. Results shown are not a guarantee of specific outcomes.
         </p>
       </div>
@@ -612,7 +620,7 @@ function MidPageCTA() {
   const inView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section id="mid-cta" className="bg-[#110e0a] border-t border-[#c9a84c]/20">
+    <section id="mid-cta" className="bg-[#FAF7F2] border-t border-[#D4A017]/20">
       <motion.div
         ref={ref}
         variants={reveal}
@@ -621,20 +629,20 @@ function MidPageCTA() {
         className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10"
       >
         <div>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-4">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-4">
             Reviewing applications for July
           </p>
           <h2
             className="font-display leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
-            <span className="font-light text-[#f0ece4]">Seen enough?</span>
-            <span className="font-black italic text-[#f0ece4]"> Let&apos;s talk.</span>
+            <span className="font-light text-[#1A1410]">Seen enough?</span>
+            <span className="font-black italic text-[#1A1410]"> Let&apos;s talk.</span>
           </h2>
         </div>
         <Link
           href="#apply"
-          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 group"
+          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
         >
           Apply for Coaching
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -670,14 +678,14 @@ function StickyApplyCTA() {
       transition={{ duration: 0.35, ease: EASE }}
       className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none"
     >
-      <div className="bg-[#110e0a]/95 backdrop-blur-md border-t border-white/[0.07] px-6 py-4 pointer-events-auto">
+      <div className="bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#1A1410]/[0.07] px-6 py-4 pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/50 hidden sm:block">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/50 hidden sm:block">
             Reviewing applications for July
           </p>
           <Link
             href="#apply"
-            className="inline-flex items-center gap-2 bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#c9a84c]/90 transition-colors duration-200 group ml-auto"
+            className="inline-flex items-center gap-2 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200 group ml-auto"
           >
             Apply Now
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
@@ -694,7 +702,7 @@ function Transformation() {
   const inView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section id="transformation" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
+    <section id="transformation" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Proof" line1="My Personal Transformation" line2="What that looks like." />
         <motion.div
@@ -702,16 +710,16 @@ function Transformation() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-px bg-white/[0.07]"
+          className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.06]"
         >
           {/* Before */}
-          <motion.div variants={revealLeft} className="relative bg-[#130f0b]">
+          <motion.div variants={revealLeft} className="relative bg-[#141210]">
             <div className="aspect-[3/4] relative overflow-hidden">
               <div
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/before.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#130f0b]/90 via-[#130f0b]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/90 via-[#141210]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/70 mb-2">Before</p>
                 <p className="font-display text-2xl font-light text-[#f0ece4]/60 leading-tight">
@@ -722,15 +730,15 @@ function Transformation() {
           </motion.div>
 
           {/* After */}
-          <motion.div variants={revealRight} className="relative bg-[#130f0b]">
+          <motion.div variants={revealRight} className="relative bg-[#141210]">
             <div className="aspect-[3/4] relative overflow-hidden">
               <div
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/after.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#130f0b]/90 via-[#130f0b]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/90 via-[#141210]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-2">After</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">After</p>
                 <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
                   The Standard.
                 </p>
@@ -739,7 +747,7 @@ function Transformation() {
           </motion.div>
         </motion.div>
 
-        <p className="text-[#f0ece4]/25 text-xs tracking-[0.2em] uppercase text-center mt-8">
+        <p className="text-[#1A1410]/35 text-xs tracking-[0.2em] uppercase text-center mt-8">
           Amir&apos;s personal transformation. Individual results vary based on effort, consistency, and starting point.
         </p>
       </div>
@@ -786,7 +794,7 @@ function Pricing() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="pricing" className="bg-[#110e0a] py-32 border-t border-white/[0.07]">
+    <section id="pricing" className="bg-[#FAF7F2] py-32 border-t border-[#1A1410]/[0.07]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           label="Investment"
@@ -799,33 +807,33 @@ function Pricing() {
           variants={stagger}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-px bg-white/[0.07] max-w-3xl"
+          className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.07] max-w-3xl"
         >
           {PLANS.map((plan) => (
             <motion.div
               key={plan.name}
               variants={reveal}
-              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#1a1410]" : "bg-[#110e0a]")}
+              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#E6DDD0]" : "bg-[#FAF7F2]")}
             >
               {plan.featured && (
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#c9a84c] mb-6">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-6">
                   Most Popular
                 </p>
               )}
-              <h3 className="text-[#f0ece4] text-xl font-semibold mb-2">{plan.name}</h3>
+              <h3 className="text-[#1A1410] text-xl font-semibold mb-2">{plan.name}</h3>
               <div className="flex items-baseline gap-2 mb-1">
                 <span
-                  className="font-display font-black text-[#f0ece4]"
+                  className="font-display font-black text-[#1A1410]"
                   style={{ fontSize: "clamp(2.5rem, 4vw, 3rem)" }}
                 >
                   {plan.price}
                 </span>
               </div>
-              <p className="text-[#f0ece4]/65 text-xs tracking-wide mb-8">{plan.note}</p>
+              <p className="text-[#1A1410]/65 text-xs tracking-wide mb-8">{plan.note}</p>
               <ul className="space-y-3 mb-10 flex-1">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-[#f0ece4]/65">
-                    <Check className="h-3.5 w-3.5 text-[#c9a84c] flex-shrink-0" />
+                  <li key={f} className="flex items-center gap-3 text-sm text-[#1A1410]/65">
+                    <Check className="h-3.5 w-3.5 text-[#D4A017] flex-shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -835,8 +843,8 @@ function Pricing() {
                 className={cn(
                   "text-center text-xs tracking-[0.2em] uppercase py-4 transition-colors duration-200",
                   plan.featured
-                    ? "bg-[#c9a84c] text-[#110e0a] hover:bg-[#c9a84c]/90"
-                    : "border border-white/20 text-[#f0ece4]/70 hover:border-white/40 hover:text-[#f0ece4]"
+                    ? "bg-[#D4A017] text-[#1A1410] hover:bg-[#D4A017]/90"
+                    : "border border-[#1A1410]/20 text-[#1A1410]/70 hover:border-[#1A1410]/40 hover:text-[#1A1410]"
                 )}
               >
                 {plan.cta}
@@ -857,7 +865,7 @@ function RadioGroup({
 }) {
   return (
     <div>
-      <label className="block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/85 mb-3">
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#1A1410]/85 mb-3">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -871,7 +879,7 @@ function RadioGroup({
               onChange={() => onChange?.(opt)}
               className="sr-only peer"
             />
-            <span className="inline-block border border-white/[0.22] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/85 transition-colors duration-200 peer-checked:border-[#c9a84c] peer-checked:text-[#c9a84c] hover:border-white/35 hover:text-[#f0ece4]/85">
+            <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410]/85 transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017] hover:border-[#1A1410]/35 hover:text-[#1A1410]/85">
               {opt}
             </span>
           </label>
@@ -915,7 +923,6 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
     prior: quizAnswers.priorCoaching,
   })
 
-  // Merge incoming quiz answers into form without overwriting manual edits
   useEffect(() => {
     setForm(prev => ({
       firstName: prev.firstName || quizAnswers.firstName,
@@ -931,8 +938,8 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
   const openBooking = () => window.open(CAL_URL, "_blank")
 
   const inputClass =
-    "w-full bg-transparent border-b border-white/[0.22] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/70 focus:outline-none focus:border-[#c9a84c]/80 transition-colors duration-200"
-  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#f0ece4]/85 mb-3"
+    "w-full bg-transparent border-b border-[#1A1410]/[0.22] py-3 text-[#1A1410] text-sm placeholder:text-[#1A1410]/50 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
+  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#1A1410]/85 mb-3"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -966,35 +973,35 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
   }
 
   return (
-    <section id="apply" className="bg-[#110e0a] border-t-2 border-[#c9a84c]/50">
+    <section id="apply" className="bg-[#FAF7F2] border-t-2 border-[#D4A017]/50">
       {/* Chapter opener */}
       <motion.div
         ref={splashRef}
         variants={reveal}
         initial="hidden"
         animate={splashInView ? "visible" : "hidden"}
-        className="text-center pt-24 pb-20 px-6 border-b border-white/[0.07] relative overflow-hidden"
+        className="text-center pt-24 pb-20 px-6 border-b border-[#1A1410]/[0.07] relative overflow-hidden"
       >
         <p
           aria-hidden="true"
-          className="font-display font-black text-[#f0ece4] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
-          style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.05 }}
+          className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
+          style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.04 }}
         >
           APPLY
         </p>
 
         <div className="relative z-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-8">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#D4A017] mb-8">
             Apply Now
           </p>
           <h2
             className="font-display leading-tight"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
           >
-            <span className="font-light text-[#f0ece4]">Let&apos;s see if</span>
-            <span className="block font-black italic text-[#f0ece4]">we&apos;re a fit.</span>
+            <span className="font-light text-[#1A1410]">Let&apos;s see if</span>
+            <span className="block font-black italic text-[#1A1410]">we&apos;re a fit.</span>
           </h2>
-          <p className="text-[#f0ece4]/70 text-base max-w-xs mx-auto leading-relaxed mt-6">
+          <p className="text-[#1A1410]/70 text-base max-w-xs mx-auto leading-relaxed mt-6">
             Takes about 3 minutes. Amir personally reviews every application.
           </p>
         </div>
@@ -1009,32 +1016,32 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
             animate="visible"
             className="max-w-2xl mx-auto text-center"
           >
-            <div className="w-12 h-px bg-[#c9a84c] mx-auto mb-10" />
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#c9a84c] mb-6">
+            <div className="w-12 h-px bg-[#D4A017] mx-auto mb-10" />
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#D4A017] mb-6">
               Application Received
             </p>
             <h3
-              className="font-display font-black text-[#f0ece4] mb-6"
+              className="font-display font-black text-[#1A1410] mb-6"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
             >
               You&apos;re in.
             </h3>
-            <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
+            <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
               Pick a time for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
-            <p className="text-[#f0ece4]/65 text-sm leading-relaxed mb-10">
+            <p className="text-[#1A1410]/65 text-sm leading-relaxed mb-10">
               Want to hit the ground running?{" "}
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfgVzHgqmrUM9OfzvWBh5SloIcnlAaR4ah0iavs95BsWwxcoA/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/80 transition-colors"
+                className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/80 transition-colors"
               >Fill out the intake form</a> before the call
               and Amir can skip the basics and get straight to your plan.
             </p>
             <button
               onClick={openBooking}
-              className="inline-flex items-center gap-3 border border-[#c9a84c] px-8 py-4 text-[#c9a84c] text-sm tracking-[0.15em] uppercase hover:bg-[#c9a84c] hover:text-[#110e0a] transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-3 border border-[#D4A017] px-8 py-4 text-[#D4A017] text-sm tracking-[0.15em] uppercase hover:bg-[#D4A017] hover:text-[#1A1410] transition-all duration-300 cursor-pointer"
             >
               Book Your Discovery Call <ArrowRight size={16} />
             </button>
@@ -1048,26 +1055,26 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               initial="hidden"
               animate={leftInView ? "visible" : "hidden"}
             >
-              <div className="w-12 h-px bg-[#c9a84c] mb-8" />
-              <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-4">
+              <div className="w-12 h-px bg-[#D4A017] mb-8" />
+              <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
                 Fill out the application. Once you submit, you&apos;ll book your free
                 20-minute discovery call directly. No waiting, no pitch.
               </p>
-              <p className="text-[#f0ece4]/70 text-lg leading-relaxed mb-12">
+              <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-12">
                 Amir only takes clients he knows he can genuinely help.
               </p>
               <div className="space-y-5">
                 <div className="flex items-center gap-4">
-                  <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
-                  <span className="text-[#f0ece4]/60 text-sm tracking-wide">amirsimayof@gmail.com</span>
+                  <div className="w-8 h-px bg-[#D4A017]/40 flex-shrink-0" />
+                  <span className="text-[#1A1410]/60 text-sm tracking-wide">amirsimayof@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-8 h-px bg-[#c9a84c]/40 flex-shrink-0" />
+                  <div className="w-8 h-px bg-[#D4A017]/40 flex-shrink-0" />
                   <Link
                     href="https://www.tiktok.com/@amir_csim"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#f0ece4]/60 text-sm tracking-wide hover:text-[#f0ece4]/85 transition-colors"
+                    className="text-[#1A1410]/60 text-sm tracking-wide hover:text-[#1A1410]/85 transition-colors"
                   >
                     @amir_csim on TikTok
                   </Link>
@@ -1081,7 +1088,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               initial="hidden"
               animate={rightInView ? "visible" : "hidden"}
             >
-              <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/75 mb-8">
+              <p className="text-[10px] tracking-[0.15em] uppercase text-[#1A1410]/75 mb-8">
                 Takes about 3 minutes
               </p>
               <form className="space-y-8" onSubmit={handleSubmit}>
@@ -1168,29 +1175,29 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
                     type="checkbox"
                     checked={agreed}
                     onChange={(e) => setAgreed(e.target.checked)}
-                    className="mt-1 flex-shrink-0 accent-[#c9a84c]"
+                    className="mt-1 flex-shrink-0 accent-[#D4A017]"
                     required
                   />
-                  <span className="text-xs text-[#f0ece4]/50 leading-relaxed group-hover:text-[#f0ece4]/65 transition-colors">
+                  <span className="text-xs text-[#1A1410]/50 leading-relaxed group-hover:text-[#1A1410]/65 transition-colors">
                     I have read and agree to the{" "}
-                    <Link href="/terms" target="_blank" className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/70">
+                    <Link href="/terms" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link href="/privacy" target="_blank" className="text-[#c9a84c] underline underline-offset-2 hover:text-[#c9a84c]/70">
+                    <Link href="/privacy" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
                       Privacy Policy
                     </Link>. I confirm I am 18 or older and have medical clearance to begin an exercise program.
                   </span>
                 </label>
 
                 {error && (
-                  <p className="text-red-400 text-xs tracking-wide">{error}</p>
+                  <p className="text-red-600 text-xs tracking-wide">{error}</p>
                 )}
 
                 <button
                   type="submit"
                   disabled={submitting || !agreed}
-                  className="w-full bg-[#c9a84c] text-[#110e0a] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#c9a84c]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? "Submitting…" : "Submit Application"}
                   {!submitting && (
@@ -1209,14 +1216,14 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
 // ── Footer ────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-[#110e0a] border-t border-white/[0.07] py-16">
+    <footer className="bg-[#FAF7F2] border-t border-[#1A1410]/[0.07] py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10 mb-16">
           <div className="md:col-span-2">
-            <p className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#f0ece4] mb-4">
+            <p className="font-display text-sm tracking-[0.2em] uppercase font-bold text-[#1A1410] mb-4">
               The Standard
             </p>
-            <p className="text-[#f0ece4]/65 text-sm leading-relaxed max-w-xs mb-6">
+            <p className="text-[#1A1410]/65 text-sm leading-relaxed max-w-xs mb-6">
               Evidence-based 1-on-1 online fitness coaching for busy people who are serious about
               results.
             </p>
@@ -1224,7 +1231,7 @@ function Footer() {
               href="https://www.tiktok.com/@amir_csim"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#f0ece4]/65 hover:text-[#f0ece4]/70 transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-[#1A1410]/65 hover:text-[#1A1410]/80 transition-colors duration-200"
             >
               <TikTokIcon />
               <span className="text-xs tracking-widest">@amir_csim</span>
@@ -1232,7 +1239,7 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/25 mb-5">Navigate</p>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/25 mb-5">Navigate</p>
             <nav className="space-y-3">
               {[
                 ["#about", "About"],
@@ -1244,7 +1251,7 @@ function Footer() {
                 <Link
                   key={href}
                   href={href}
-                  className="block text-sm text-[#f0ece4]/70 hover:text-[#f0ece4]/70 transition-colors duration-200"
+                  className="block text-sm text-[#1A1410]/70 hover:text-[#1A1410]/90 transition-colors duration-200"
                 >
                   {label}
                 </Link>
@@ -1253,27 +1260,27 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/25 mb-5">Contact</p>
-            <div className="space-y-3 text-sm text-[#f0ece4]/70">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/25 mb-5">Contact</p>
+            <div className="space-y-3 text-sm text-[#1A1410]/70">
               <p>amirsimayof@gmail.com</p>
               <p className="leading-relaxed">Built for athletes with real lives.</p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/[0.07] pt-8 space-y-6">
-          <p className="text-[#f0ece4]/15 text-xs leading-relaxed max-w-3xl">
+        <div className="border-t border-[#1A1410]/[0.07] pt-8 space-y-6">
+          <p className="text-[#1A1410]/30 text-xs leading-relaxed max-w-3xl">
             The Standard is not a medical practice. Coaching and nutritional guidance provided is for general wellness and informational purposes only, and is not a substitute for advice from a licensed physician, registered dietitian, or other qualified healthcare professional. Consult your doctor before beginning any exercise or nutrition program.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[#f0ece4]/20 text-xs tracking-wide">
+            <p className="text-[#1A1410]/20 text-xs tracking-wide">
               © {new Date().getFullYear()} The Standard. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-[#f0ece4]/20 text-xs tracking-wide hover:text-[#f0ece4]/40 transition-colors">
+              <Link href="/privacy" className="text-[#1A1410]/20 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-[#f0ece4]/20 text-xs tracking-wide hover:text-[#f0ece4]/40 transition-colors">
+              <Link href="/terms" className="text-[#1A1410]/20 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
                 Terms of Service
               </Link>
             </div>
@@ -1303,17 +1310,23 @@ export function LandingPage() {
   }
 
   return (
-    <div className="bg-[#110e0a] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <Nav />
       <Hero />
       <Marquee />
       <Philosophy />
+      <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Included />
+      <SectionSeam from="#EAE1D4" to="#F0EAE0" />
       <Stats />
+      <SectionSeam from="#F0EAE0" to="#EAE1D4" />
       <Process />
       <Testimonials />
+      <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <MidPageCTA />
+      <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Transformation />
+      <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <Pricing />
       <Apply quizAnswers={quizAnswers} />
       <Footer />
