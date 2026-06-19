@@ -154,7 +154,7 @@ function Hero() {
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ backgroundImage: "url('/images/hero/hero.jpg')", backgroundPosition: "center top" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1410]/50 via-[#1A1410]/25 to-[#FAF7F2]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1410]/50 via-[#1A1410]/35 to-[#FAF7F2]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1410]/50 via-transparent to-[#1A1410]/50" />
       </div>
 
@@ -192,7 +192,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
-          className="text-[#f0ece4]/70 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
+          className="text-[#f0ece4]/90 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
         >
           1-on-1 coaching built around your schedule, your body, and your life.{" "}
           Not someone else&apos;s template.
@@ -213,7 +213,7 @@ function Hero() {
           </Link>
           <Link
             href="#about"
-            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/65 hover:text-[#f0ece4] transition-colors duration-200"
+            className="text-xs tracking-[0.2em] uppercase text-[#f0ece4]/85 hover:text-[#f0ece4] transition-colors duration-200"
           >
             See how it works
           </Link>
@@ -223,7 +223,7 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.3 }}
-          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/40 mt-6"
+          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/60 mt-6"
         >
           Reviewing applications for July
         </motion.p>
@@ -239,7 +239,7 @@ function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="h-4 w-4 text-[#f0ece4]/25" />
+          <ArrowDown className="h-4 w-4 text-[#f0ece4]/45" />
         </motion.div>
       </motion.div>
     </section>
@@ -435,7 +435,7 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
       transition={{ delay: index * 0.05 }}
       className="py-8 md:py-10 grid md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 items-start group hover:bg-[#1A1410]/[0.03] transition-colors duration-300 cursor-default"
     >
-      <span className="font-display text-3xl font-light text-[#1A1410]/10 group-hover:text-[#D4A017]/40 transition-colors duration-300">
+      <span className="font-display text-3xl font-light text-[#1A1410]/18 group-hover:text-[#D4A017]/40 transition-colors duration-300">
         {feature.num}
       </span>
       <h3 className="text-[#1A1410] font-medium text-lg leading-snug">{feature.title}</h3>
@@ -528,11 +528,11 @@ function Process() {
               variants={reveal}
               className="bg-[#EAE1D4] p-8 group hover:bg-[#1A1410]/[0.03] transition-colors duration-300"
             >
-              <p className="font-display text-4xl font-light text-[#1A1410]/10 group-hover:text-[#D4A017]/50 transition-colors duration-300 mb-6">
+              <p className="font-display text-4xl font-light text-[#1A1410]/18 group-hover:text-[#D4A017]/50 transition-colors duration-300 mb-6">
                 {s.num}
               </p>
               <h3 className="text-[#1A1410] font-semibold mb-3">{s.title}</h3>
-              <p className="text-[#1A1410]/60 text-sm leading-relaxed">{s.body}</p>
+              <p className="text-[#1A1410]/70 text-sm leading-relaxed">{s.body}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -590,7 +590,7 @@ function Testimonials() {
               variants={reveal}
               className="bg-[#DFD3C0] p-10 md:p-12 hover:bg-[#1A1410]/[0.03] transition-colors duration-300"
             >
-              <p className="font-display text-5xl text-[#D4A017]/40 font-black leading-none mb-6">
+              <p className="font-display text-5xl text-[#D4A017]/65 font-black leading-none mb-6">
                 &ldquo;
               </p>
               <blockquote className="text-[#1A1410]/80 text-lg leading-relaxed mb-8">
@@ -600,13 +600,13 @@ function Testimonials() {
                 <div className="w-8 h-px bg-[#D4A017]/60 flex-shrink-0" />
                 <div>
                   <p className="text-[#1A1410] text-sm font-medium">{t.author}</p>
-                  <p className="text-[#1A1410]/55 text-xs tracking-wide mt-0.5">{t.detail}</p>
+                  <p className="text-[#1A1410]/70 text-xs tracking-wide mt-0.5">{t.detail}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-        <p className="text-[#1A1410]/30 text-xs tracking-wide text-center mt-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[#1A1410]/50 text-xs tracking-wide text-center mt-10 max-w-2xl mx-auto leading-relaxed">
           Testimonials are from real clients. Individual results vary based on effort, adherence, starting point, and other personal factors. Results shown are not a guarantee of specific outcomes.
         </p>
       </div>
@@ -747,7 +747,7 @@ function Transformation() {
           </motion.div>
         </motion.div>
 
-        <p className="text-[#1A1410]/35 text-xs tracking-[0.2em] uppercase text-center mt-8">
+        <p className="text-[#1A1410]/55 text-xs tracking-[0.2em] uppercase text-center mt-8">
           Amir&apos;s personal transformation. Individual results vary based on effort, consistency, and starting point.
         </p>
       </div>
@@ -844,7 +844,7 @@ function Pricing() {
                   "text-center text-xs tracking-[0.2em] uppercase py-4 transition-colors duration-200",
                   plan.featured
                     ? "bg-[#D4A017] text-[#1A1410] hover:bg-[#D4A017]/90"
-                    : "border border-[#1A1410]/20 text-[#1A1410]/70 hover:border-[#1A1410]/40 hover:text-[#1A1410]"
+                    : "border border-[#1A1410]/40 text-[#1A1410] hover:border-[#1A1410]/70 hover:bg-[#1A1410]/5"
                 )}
               >
                 {plan.cta}
@@ -865,7 +865,7 @@ function RadioGroup({
 }) {
   return (
     <div>
-      <label className="block text-xs tracking-[0.15em] uppercase text-[#1A1410]/85 mb-3">
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#1A1410] mb-3">
         {label}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -879,7 +879,7 @@ function RadioGroup({
               onChange={() => onChange?.(opt)}
               className="sr-only peer"
             />
-            <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410]/85 transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017] hover:border-[#1A1410]/35 hover:text-[#1A1410]/85">
+            <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410] transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017] hover:border-[#1A1410]/35 hover:text-[#1A1410]">
               {opt}
             </span>
           </label>
@@ -939,7 +939,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
 
   const inputClass =
     "w-full bg-transparent border-b border-[#1A1410]/[0.22] py-3 text-[#1A1410] text-sm placeholder:text-[#1A1410]/50 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
-  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#1A1410]/85 mb-3"
+  const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#1A1410] mb-3"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -1178,7 +1178,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
                     className="mt-1 flex-shrink-0 accent-[#D4A017]"
                     required
                   />
-                  <span className="text-xs text-[#1A1410]/50 leading-relaxed group-hover:text-[#1A1410]/65 transition-colors">
+                  <span className="text-xs text-[#1A1410]/65 leading-relaxed group-hover:text-[#1A1410]/80 transition-colors">
                     I have read and agree to the{" "}
                     <Link href="/terms" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
                       Terms of Service
@@ -1239,7 +1239,7 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/25 mb-5">Navigate</p>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/45 mb-5">Navigate</p>
             <nav className="space-y-3">
               {[
                 ["#about", "About"],
@@ -1260,7 +1260,7 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/25 mb-5">Contact</p>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/45 mb-5">Contact</p>
             <div className="space-y-3 text-sm text-[#1A1410]/70">
               <p>amirsimayof@gmail.com</p>
               <p className="leading-relaxed">Built for athletes with real lives.</p>
@@ -1269,18 +1269,18 @@ function Footer() {
         </div>
 
         <div className="border-t border-[#1A1410]/[0.07] pt-8 space-y-6">
-          <p className="text-[#1A1410]/30 text-xs leading-relaxed max-w-3xl">
+          <p className="text-[#1A1410]/50 text-xs leading-relaxed max-w-3xl">
             The Standard is not a medical practice. Coaching and nutritional guidance provided is for general wellness and informational purposes only, and is not a substitute for advice from a licensed physician, registered dietitian, or other qualified healthcare professional. Consult your doctor before beginning any exercise or nutrition program.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[#1A1410]/20 text-xs tracking-wide">
+            <p className="text-[#1A1410]/35 text-xs tracking-wide">
               © {new Date().getFullYear()} The Standard. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-[#1A1410]/20 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
+              <Link href="/privacy" className="text-[#1A1410]/35 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-[#1A1410]/20 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
+              <Link href="/terms" className="text-[#1A1410]/35 text-xs tracking-wide hover:text-[#1A1410]/40 transition-colors">
                 Terms of Service
               </Link>
             </div>
