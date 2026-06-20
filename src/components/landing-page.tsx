@@ -163,7 +163,7 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-8"
+          className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8"
           style={{ textShadow: '0 1px 6px rgba(0,0,0,0.95), 0 0 8px rgba(212,160,23,1), 0 0 28px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.45)' }}
         >
           Online Fitness Coaching
@@ -306,7 +306,7 @@ function SectionHeader({
       animate={inView ? "visible" : "hidden"}
       className="mb-16 md:mb-24"
     >
-      <p className="text-[10px] tracking-[0.3em] uppercase mb-4 text-[#D4A017]">{label}</p>
+      <p className="text-sm font-semibold tracking-[0.25em] uppercase mb-4 text-[#D4A017]">{label}</p>
       <h2
         className="font-display leading-tight text-[#1A1410]"
         style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
@@ -338,7 +338,7 @@ function Philosophy() {
             initial="hidden"
             animate={leftInView ? "visible" : "hidden"}
           >
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-8">
+            <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8">
               The Philosophy
             </p>
             <h2
@@ -539,7 +539,14 @@ function Testimonials() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="results" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
+    <section id="results" className="relative overflow-hidden bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
+      <p
+        aria-hidden="true"
+        className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
+        style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.04 }}
+      >
+        RESULTS
+      </p>
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="Results" line1="Real people." line2="Real schedules." />
         <motion.div
@@ -594,7 +601,7 @@ function MidPageCTA() {
         className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10"
       >
         <div>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-4">
+          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-4">
             Reviewing applications for July
           </p>
           <h2
@@ -684,7 +691,7 @@ function Transformation() {
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/before.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/90 via-[#141210]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/85 mb-2">Before</p>
                 <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
@@ -701,7 +708,7 @@ function Transformation() {
                 className="absolute inset-0 bg-cover bg-top bg-no-repeat"
                 style={{ backgroundImage: "url('/images/after.png')" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/90 via-[#141210]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">After</p>
                 <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
@@ -759,7 +766,14 @@ function Pricing() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="pricing" className="bg-[#FAF7F2] py-32 border-t border-[#1A1410]/[0.07]">
+    <section id="pricing" className="relative overflow-hidden bg-[#FAF7F2] py-32 border-t border-[#1A1410]/[0.07]">
+      <p
+        aria-hidden="true"
+        className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
+        style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.04 }}
+      >
+        INVEST
+      </p>
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           label="Investment"
@@ -956,7 +970,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
         </p>
 
         <div className="relative z-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#D4A017] mb-8">
+          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8">
             Apply Now
           </p>
           <h2
