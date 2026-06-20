@@ -339,22 +339,33 @@ function Philosophy() {
             animate={leftInView ? "visible" : "hidden"}
           >
             <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8">
-              The Philosophy
+              My Story
             </p>
             <h2
               className="font-display leading-tight mb-6"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
-              <span className="font-light text-[#1A1410]">The internet has overcomplicated things</span>
-              <span className="block font-black italic text-[#1A1410]"> But it doesn&apos;t have to be this way.</span>
+              <span className="font-light text-[#1A1410]">I wore a swimming shirt</span>
+              <span className="block font-black italic text-[#1A1410]">to every pool party.</span>
             </h2>
             <div className="w-12 h-px bg-[#D4A017] mb-8" />
             <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
-              Doesn&apos;t matter if you&apos;re pre-med cramming for the MCAT, a young professional pulling 50-hour weeks, or someone who&apos;s tried and stopped more times than they can count. Your goals are achievable.
+              Not because I wanted to. But because the alternative was people seeing my stomach, and I had spent enough years in my doctor&apos;s office hearing about my weight that I already knew what they would think too.
+            </p>
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+              I was never in control. My doctor said I was approaching obesity at eleven.
+            </p>
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+              At 12 came the restrictions. It was just sweets at first, but then everything else followed. I just wanted to stop hating my reflection, and the only option I had was eating less.
+            </p>
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+              Calisthenics at 15. Weightlifting at 17. And somewhere in there, studying CS and math at Northeastern and learning how to break systems down until you understand what&apos;s actually driving them, I started applying the same mentality to my body. Not the stuff that "sounds right." The actual mechanisms. Why muscle grows. How a deficit compounds over weeks. What it means when progress stalls and your instinct is to eat less again.
+            </p>
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+              I figured it out. And I&apos;m not carrying any of that weight anymore, not the physical kind or the mental.
             </p>
             <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-10">
-              I only take clients I know I can genuinely help. If you apply and I don&apos;t think
-              the timing is right, I&apos;ll tell you.
+              My goal is to help anyone who has faced the exact same misconceptions and consequences like I had. I want you to someone who doesn&apos;t need a coach. The 12 weeks are for building the framework. Learning to read your own body well enough that you can make decisions without me. If you come back after this, it should be because you want to, not because you&apos;re lost without me.
             </p>
             <Link
               href="#apply"
@@ -1293,16 +1304,16 @@ export function LandingPage() {
       <Nav />
       <Hero />
       <Marquee />
-      <Philosophy />
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Included />
-      <Process />
       <Testimonials />
+      <Process />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
-      <MidPageCTA />
+      <Philosophy />
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Transformation />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
+      <MidPageCTA />
       <Pricing />
       <Apply quizAnswers={quizAnswers} />
       <Footer />
