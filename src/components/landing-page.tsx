@@ -148,7 +148,7 @@ function Nav() {
 // ── Hero ──────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#FAF7F2]">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#FAF7F2]">
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-no-repeat"
@@ -158,17 +158,24 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A1410]/50 via-transparent to-[#1A1410]/50" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      {/* Spacer matching fixed nav height */}
+      <div className="h-20 flex-shrink-0" />
+
+      {/* Label centered in the empty space between nav and headline */}
+      <div className="relative z-10 flex-1 flex items-center justify-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8"
+          className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017]"
           style={{ textShadow: '0 1px 6px rgba(0,0,0,0.95), 0 0 8px rgba(212,160,23,1), 0 0 28px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.45)' }}
         >
           Online Fitness Coaching
         </motion.p>
+      </div>
 
+      {/* Headline + CTAs anchored to the bottom */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pb-24 w-full">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,15 +184,15 @@ function Hero() {
         >
           <span
             className="block font-light text-[#f0ece4]/90"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
-            You&apos;re not
+            The plan was wrong.
           </span>
           <span
             className="block font-black italic text-[#f0ece4]"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
-            a generic plan.
+            Not you.
           </span>
         </motion.h1>
 
@@ -195,7 +202,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
           className="text-[#f0ece4]/90 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
         >
-          1-on-1 coaching built around your schedule, your body, and your life.{" "}
+          1-on-1 coaching built around how you actually live — your schedule, your body, your habits.{" "}
           Not someone else&apos;s template.
         </motion.p>
 
@@ -365,7 +372,7 @@ function Philosophy() {
               I figured it out. And I&apos;m not carrying any of that weight anymore, not the physical kind or the mental.
             </p>
             <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-10">
-              My goal is to help anyone who has faced the exact same misconceptions and consequences like I had. I want you to someone who doesn&apos;t need a coach. The 12 weeks are for building the framework. Learning to read your own body well enough that you can make decisions without me. If you come back after this, it should be because you want to, not because you&apos;re lost without me.
+              My goal is to make sure no one has to figure this out the way I did. I want you to be someone who doesn&apos;t need a coach. The 12 weeks are for building the framework. Learning to read your own body well enough that you can make decisions without me. If you come back after this, it should be because you want to, not because you&apos;re lost without me.
             </p>
             <Link
               href="#apply"
@@ -381,7 +388,7 @@ function Philosophy() {
             variants={revealRight}
             initial="hidden"
             animate={rightInView ? "visible" : "hidden"}
-            className="relative"
+            className="relative flex flex-col gap-6"
           >
             <div className="relative aspect-[3/4] overflow-hidden border border-[#1A1410]/[0.07]">
               <div
@@ -399,7 +406,18 @@ function Philosophy() {
                 </p>
               </div>
             </div>
-            <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#D4A017]/20 -z-10" />
+
+            {/* Intro video — drop in YouTube URL or /videos/intro.mp4 when ready */}
+            <div className="border border-[#1A1410]/[0.07] overflow-hidden bg-[#1A1410]">
+              <video
+                src="/videos/intro.mp4"
+                poster="/images/intro-poster.jpg"
+                controls
+                playsInline
+                className="w-full block"
+                aria-label="Introduction from Amir Cohen-Simayof"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -619,8 +637,8 @@ function MidPageCTA() {
             className="font-display leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
-            <span className="font-light text-[#1A1410]">Seen enough?</span>
-            <span className="font-black italic text-[#1A1410]"> Let&apos;s talk.</span>
+            <span className="font-light text-[#1A1410]">July is</span>
+            <span className="font-black italic text-[#1A1410]"> almost full.</span>
           </h2>
         </div>
         <Link
@@ -708,6 +726,7 @@ function Transformation() {
                 <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
                   Not there yet.
                 </p>
+                <p className="text-[#f0ece4]/50 text-xs tracking-wide mt-2">Age 20.</p>
               </div>
             </div>
           </motion.div>
@@ -725,6 +744,7 @@ function Transformation() {
                 <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
                   The Standard.
                 </p>
+                <p className="text-[#f0ece4]/50 text-xs tracking-wide mt-2">21.</p>
               </div>
             </div>
           </motion.div>
@@ -733,6 +753,51 @@ function Transformation() {
         <p className="text-[#1A1410]/55 text-xs tracking-[0.2em] uppercase text-center mt-8">
           Amir&apos;s personal transformation. Individual results vary based on effort, consistency, and starting point.
         </p>
+
+        {/* Client Results */}
+        <div className="mt-20">
+          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-10">
+            Client Results
+          </p>
+          <div className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.06]">
+            {/* Client Before */}
+            <div className="relative bg-[#141210]">
+              <div className="aspect-[3/4] relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[#141210]"
+                  style={{ backgroundImage: "url('/images/clients/akiva-before.jpg')" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/85 mb-2">Before</p>
+                  <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
+                    Week 1.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Client After */}
+            <div className="relative bg-[#141210]">
+              <div className="aspect-[3/4] relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[#141210]"
+                  style={{ backgroundImage: "url('/images/clients/akiva-after.jpg')" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">4 Weeks</p>
+                  <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
+                    Akiva P.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-[#1A1410]/55 text-xs tracking-[0.2em] uppercase text-center mt-8">
+            Real client. Individual results vary based on effort, consistency, and starting point.
+          </p>
+        </div>
       </div>
     </section>
   )
@@ -790,7 +855,7 @@ function Pricing() {
           label="Investment"
           line1="Simple pricing."
           line2="No surprises."
-          note="12-week minimum on both plans. Real change takes time. Amir is serious about delivering it."
+          note="12-week minimum on both plans. Real change takes time. Most in-person trainers charge $60 to $100 per session. Three sessions a week is $800 a month or more. This is daily access for less."
         />
         <motion.div
           ref={ref}
@@ -839,6 +904,70 @@ function Pricing() {
               >
                 {plan.cta}
               </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="max-w-3xl mt-10 px-1">
+          <p className="text-[#1A1410]/60 text-sm leading-relaxed">
+            <span className="font-semibold text-[#1A1410]/80">Week 4 checkpoint.</span>{" "}
+            Check in every Sunday, follow the plan — if you&apos;re not making measurable progress by week 4,
+            I rebuild it from the ground up. And if we still can&apos;t get it working for you,
+            you&apos;re free to walk. You won&apos;t be billed for months that aren&apos;t delivering.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────
+const FAQ_ITEMS = [
+  {
+    q: "You're 21. Why would I pay you instead of a certified trainer with years of experience?",
+    a: "Fair. I won't pretend I've been doing this for 20 years. What I can tell you is that I've spent years building a genuine relationship with my own body — figuring out how physical and mental health drive each other, not just chasing a number on a scale. That obsession is what makes me good at this. Akiva saw visible changes in 3 weeks. Jacob hasn't missed a training week in two months. I only take clients I know I can help.",
+  },
+  {
+    q: "I've tried coaching before and it didn't stick.",
+    a: "We're not fixing your workout. We're fixing your lifestyle. Bland food and rigid schedules don't stick because they were never built for your life. This is. Work with me. Get results.",
+  },
+  {
+    q: "What if I apply and it's not the right fit?",
+    a: "The discovery call is free and there's no commitment before it. You apply, Amir reviews it, and you have a 20-minute conversation. You decide from there. No pitch.",
+  },
+  {
+    q: "I don't know if I have the time right now.",
+    a: "That's the point. The program is built around the schedule you actually have. Clients train 3 to 5 days a week, 30 to 60 minutes. Train where you are. When you can.",
+  },
+  {
+    q: "Do I need a gym membership?",
+    a: "No. We figure out together what you're working with — full gym, home setup, bodyweight only — and build your program around it. You're not adapting to a plan; we're building the plan around you.",
+  },
+  {
+    q: "What happens after the 12 weeks are up?",
+    a: "You'll know how to eat, train, and adjust without me. That's the whole point. If you want to keep working together, we can — most clients do. But the goal is that you don't need me after this. You leave with a framework that runs on its own.",
+  },
+]
+
+function FAQ() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
+  return (
+    <section className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader label="Before You Apply" line1="Common questions." line2="Real answers." />
+        <motion.div
+          ref={ref}
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="max-w-2xl divide-y divide-[#1A1410]/[0.08]"
+        >
+          {FAQ_ITEMS.map((item, i) => (
+            <motion.div key={i} variants={reveal} className="py-8">
+              <p className="text-[#1A1410] font-medium text-lg mb-3">{item.q}</p>
+              <p className="text-[#1A1410]/75 leading-relaxed">{item.a}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -1304,7 +1433,6 @@ export function LandingPage() {
       <Nav />
       <Hero />
       <Marquee />
-      <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Included />
       <Testimonials />
       <Process />
@@ -1315,6 +1443,9 @@ export function LandingPage() {
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <MidPageCTA />
       <Pricing />
+      <SectionSeam from="#FAF7F2" to="#EAE1D4" />
+      <FAQ />
+      <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <Apply quizAnswers={quizAnswers} />
       <Footer />
       <StickyApplyCTA />
