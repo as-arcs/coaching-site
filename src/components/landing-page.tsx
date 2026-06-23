@@ -186,13 +186,13 @@ function Hero() {
             className="block font-light text-[#f0ece4]/90"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
-            The plan was wrong.
+            You&apos;ve got what it takes.
           </span>
           <span
             className="block font-black italic text-[#f0ece4]"
             style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
           >
-            Not you.
+            Let&apos;s build it right.
           </span>
         </motion.h1>
 
