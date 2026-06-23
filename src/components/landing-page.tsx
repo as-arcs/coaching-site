@@ -202,7 +202,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
           className="text-[#f0ece4]/90 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
         >
-          1-on-1 coaching built around how you actually live — your schedule, your body, your habits.{" "}
+          1-on-1 coaching built around how you actually live, your schedule, your body, your habits.{" "}
           Not someone else&apos;s template.
         </motion.p>
 
@@ -703,7 +703,7 @@ function Transformation() {
   const inView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section id="transformation" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
+    <section id="transformation" className="bg-[#EAE1D4] py-20 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Proof" line1="My Personal Transformation" line2="What that looks like." />
         <motion.div
@@ -726,7 +726,6 @@ function Transformation() {
                 <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
                   Not there yet.
                 </p>
-                <p className="text-[#f0ece4]/50 text-xs tracking-wide mt-2">Age 20.</p>
               </div>
             </div>
           </motion.div>
@@ -744,7 +743,6 @@ function Transformation() {
                 <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
                   The Standard.
                 </p>
-                <p className="text-[#f0ece4]/50 text-xs tracking-wide mt-2">21.</p>
               </div>
             </div>
           </motion.div>
@@ -753,51 +751,6 @@ function Transformation() {
         <p className="text-[#1A1410]/55 text-xs tracking-[0.2em] uppercase text-center mt-8">
           Amir&apos;s personal transformation. Individual results vary based on effort, consistency, and starting point.
         </p>
-
-        {/* Client Results */}
-        <div className="mt-20">
-          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-10">
-            Client Results
-          </p>
-          <div className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.06]">
-            {/* Client Before */}
-            <div className="relative bg-[#141210]">
-              <div className="aspect-[3/4] relative overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[#141210]"
-                  style={{ backgroundImage: "url('/images/clients/akiva-before.jpg')" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#f0ece4]/85 mb-2">Before</p>
-                  <p className="font-display text-2xl font-light text-[#f0ece4]/75 leading-tight">
-                    Week 1.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Client After */}
-            <div className="relative bg-[#141210]">
-              <div className="aspect-[3/4] relative overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[#141210]"
-                  style={{ backgroundImage: "url('/images/clients/akiva-after.jpg')" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#141210]/55 via-[#141210]/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">4 Weeks</p>
-                  <p className="font-display text-2xl font-black italic text-[#f0ece4] leading-tight">
-                    Akiva P.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="text-[#1A1410]/55 text-xs tracking-[0.2em] uppercase text-center mt-8">
-            Real client. Individual results vary based on effort, consistency, and starting point.
-          </p>
-        </div>
       </div>
     </section>
   )
@@ -911,7 +864,7 @@ function Pricing() {
         <div className="max-w-3xl mt-10 px-1">
           <p className="text-[#1A1410]/60 text-sm leading-relaxed">
             <span className="font-semibold text-[#1A1410]/80">Week 4 checkpoint.</span>{" "}
-            Check in every Sunday, follow the plan — if you&apos;re not making measurable progress by week 4,
+            Check in every Sunday, follow the plan. If you&apos;re not making measurable progress by week 4,
             I rebuild it from the ground up. And if we still can&apos;t get it working for you,
             you&apos;re free to walk. You won&apos;t be billed for months that aren&apos;t delivering.
           </p>
@@ -925,7 +878,7 @@ function Pricing() {
 const FAQ_ITEMS = [
   {
     q: "You're 21. Why would I pay you instead of a certified trainer with years of experience?",
-    a: "Fair. I won't pretend I've been doing this for 20 years. What I can tell you is that I've spent years building a genuine relationship with my own body — figuring out how physical and mental health drive each other, not just chasing a number on a scale. That obsession is what makes me good at this. Akiva saw visible changes in 3 weeks. Jacob hasn't missed a training week in two months. I only take clients I know I can help.",
+    a: "Fair. I won't pretend I've been doing this for 20 years. What I can tell you is that I've spent years building a genuine relationship with my own body, figuring out how physical and mental health drive each other, not just chasing a number on a scale. That obsession is what makes me good at this. Akiva saw visible changes in 3 weeks. Jacob hasn't missed a training week in two months. I only take clients I know I can help.",
   },
   {
     q: "I've tried coaching before and it didn't stick.",
@@ -933,19 +886,19 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if I apply and it's not the right fit?",
-    a: "The discovery call is free and there's no commitment before it. You apply, Amir reviews it, and you have a 20-minute conversation. You decide from there. No pitch.",
+    a: "The discovery call is free and there's no commitment before it. You apply, Amir reviews it, and you have a 20 minute conversation. You decide from there. No pitch.",
   },
   {
     q: "I don't know if I have the time right now.",
-    a: "That's the point. The program is built around the schedule you actually have. Clients train 3 to 5 days a week, 30 to 60 minutes. Train where you are. When you can.",
+    a: "That's the point. The program is built around the schedule you actually have. Clients train 3–5 days a week, 30–60 minutes. Train where you are. When you can.",
   },
   {
     q: "Do I need a gym membership?",
-    a: "No. We figure out together what you're working with — full gym, home setup, bodyweight only — and build your program around it. You're not adapting to a plan; we're building the plan around you.",
+    a: "No. We figure out together what you're working with, full gym, home setup, bodyweight only, and build your program around it. You're not adapting to a plan; we're building the plan around you.",
   },
   {
     q: "What happens after the 12 weeks are up?",
-    a: "You'll know how to eat, train, and adjust without me. That's the whole point. If you want to keep working together, we can — most clients do. But the goal is that you don't need me after this. You leave with a framework that runs on its own.",
+    a: "You'll know how to eat, train, and adjust without me. That's the whole point. If you want to keep working together, we can. Most clients do. But the goal is that you don't need me after this. You leave with a framework that runs on its own.",
   },
 ]
 

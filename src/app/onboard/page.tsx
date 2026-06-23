@@ -22,7 +22,7 @@ const ACKNOWLEDGMENTS = [
   },
   {
     id: "accurate-disclosure",
-    text: "I confirm that all information I have provided — including any injuries, health conditions, or physical limitations — is accurate and complete to the best of my knowledge. I agree to notify my coach promptly if my health status changes.",
+    text: "I confirm that all information I have provided, including any injuries, health conditions, or physical limitations, is accurate and complete to the best of my knowledge. I agree to notify my coach promptly if my health status changes.",
   },
   {
     id: "assumption-of-risk",
@@ -195,7 +195,7 @@ function OnboardContent() {
           <div>
             <label className={labelClass}>
               Known injuries, conditions, or physical limitations{" "}
-              <span className="text-[#f0ece4]/30 normal-case tracking-normal">(optional — be specific)</span>
+              <span className="text-[#f0ece4]/30 normal-case tracking-normal">(optional, be specific)</span>
             </label>
             <textarea
               value={knownConditions}

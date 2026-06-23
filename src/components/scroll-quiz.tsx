@@ -55,7 +55,7 @@ const QUESTIONS: Question[] = [
     type: "radio",
     field: "priorCoaching",
     options: ["Yes", "No", "Sort of"],
-    encouragement: { Yes: "Good — you know the drill.", No: "Clean slate.", "Sort of": "Fair enough." },
+    encouragement: { Yes: "Good. You know the drill.", No: "Clean slate.", "Sort of": "Fair enough." },
   },
   {
     id: "name",
