@@ -161,21 +161,18 @@ function Hero() {
       {/* Spacer matching fixed nav height */}
       <div className="h-20 flex-shrink-0" />
 
-      {/* Label centered in the empty space between nav and headline */}
-      <div className="relative z-10 flex-1 flex items-center justify-center">
+      {/* All hero content centered as a group, nudged slightly above true center */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 -mt-8 pb-12 max-w-5xl mx-auto w-full">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017]"
+          className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8"
           style={{ textShadow: '0 1px 6px rgba(0,0,0,0.95), 0 0 8px rgba(212,160,23,1), 0 0 28px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.45)' }}
         >
           Online Fitness Coaching
         </motion.p>
-      </div>
 
-      {/* Headline + CTAs anchored to the bottom */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pb-24 w-full">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -184,15 +181,15 @@ function Hero() {
         >
           <span
             className="block font-light text-[#f0ece4]/90"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
           >
             You&apos;ve got what it takes.
           </span>
           <span
             className="block font-black italic text-[#f0ece4]"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
           >
-            Let&apos;s build it right.
+            Let&apos;s build your new life.
           </span>
         </motion.h1>
 
@@ -200,7 +197,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
-          className="text-[#f0ece4]/90 text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-10"
+          className="text-[#f0ece4]/90 text-lg md:text-xl max-w-lg leading-relaxed mb-10"
         >
           1-on-1 coaching built around how you actually live, your schedule, your body, your habits.{" "}
           Not someone else&apos;s template.
