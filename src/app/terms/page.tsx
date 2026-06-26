@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="bg-[#0E0C0A] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-24">
         <Link
           href="/"
@@ -15,24 +15,24 @@ export default function TermsPage() {
           ← The Standard
         </Link>
 
-        <h1 className="font-display text-3xl font-black text-[#f0ece4] mb-2">Terms of Service</h1>
-        <p className="text-[#f0ece4]/40 text-sm mb-4">Last updated: June 2026</p>
-        <p className="text-[#f0ece4]/50 text-sm border border-white/[0.07] p-4 mb-16 leading-relaxed">
+        <h1 className="font-display text-3xl font-black text-[#1A1410] mb-2">Terms of Service</h1>
+        <p className="text-[#1A1410]/40 text-sm mb-4">Last updated: June 2026</p>
+        <p className="text-[#1A1410]/50 text-sm border border-[#1A1410]/[0.07] p-4 mb-16 leading-relaxed">
           Please read these Terms carefully. By submitting an application, completing enrollment,
           or making a payment, you agree to be bound by these Terms.
         </p>
 
-        <div className="space-y-12 text-[#f0ece4]/75 leading-relaxed">
+        <div className="space-y-12 text-[#1A1410]/75 leading-relaxed">
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">1. About the Service</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">1. About the Service</h2>
             <p className="mb-4">
               The Standard is an online fitness coaching service operated by Amir Cohen-Simayof
               (&ldquo;Coach&rdquo;). We provide personalized training programs, nutrition guidance,
               weekly check-ins, and ongoing support to enrolled clients.
             </p>
-            <p className="bg-white/[0.03] border border-white/[0.07] p-4 text-[#f0ece4]/60 text-sm">
-              <strong className="text-[#f0ece4]/80">Important:</strong> The Standard is not a
+            <p className="bg-[#1A1410]/[0.03] border border-[#1A1410]/[0.07] p-4 text-[#1A1410]/60 text-sm">
+              <strong className="text-[#1A1410]/80">Important:</strong> The Standard is not a
               medical practice. Amir Cohen-Simayof is not a licensed physician, registered
               dietitian, or licensed personal trainer. Nothing provided through this service
               constitutes medical advice, dietetic advice, or clinical treatment. All guidance
@@ -41,7 +41,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">2. Eligibility</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">2. Eligibility</h2>
             <p className="mb-4">
               You must be at least 18 years of age to enroll. By enrolling, you represent and
               warrant that:
@@ -64,7 +64,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">3. Assumption of Risk</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">3. Assumption of Risk</h2>
             <p>
               You acknowledge that participation in any exercise program carries inherent
               physical risk, including but not limited to muscle soreness, injury, or adverse
@@ -75,7 +75,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">4. Services</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">4. Services</h2>
             <p className="mb-4">
               Upon enrollment and payment, you will receive:
             </p>
@@ -100,10 +100,10 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">5. Payment Terms</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">5. Payment Terms</h2>
             <div className="space-y-4">
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">5.1 Fees</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">5.1 Fees</p>
                 <p>
                   Coaching fees are charged on a monthly basis at the rate corresponding to
                   your selected plan ($297/month for Standard; $497/month for Premium), billed
@@ -111,7 +111,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">5.2 Minimum Commitment</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">5.2 Minimum Commitment</p>
                 <p>
                   All plans carry a 12-week (approximately 3-month) minimum commitment. You
                   agree to maintain your subscription for a minimum of 12 weeks from your
@@ -119,14 +119,14 @@ export default function TermsPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">5.3 Billing</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">5.3 Billing</p>
                 <p>
                   Payments are processed automatically each month via Stripe. You authorize
                   recurring charges to your payment method for the duration of your engagement.
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">5.4 Failed Payments</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">5.4 Failed Payments</p>
                 <p>
                   If a payment fails, access to coaching services may be suspended until
                   payment is resolved. You remain responsible for all outstanding amounts.
@@ -136,10 +136,10 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">6. Cancellation</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">6. Cancellation</h2>
             <div className="space-y-4">
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">6.1 After the Minimum Commitment</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">6.1 After the Minimum Commitment</p>
                 <p>
                   Following completion of your 12-week minimum commitment, you may cancel at
                   any time by providing written notice to{" "}
@@ -150,7 +150,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">6.2 During the Minimum Commitment</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">6.2 During the Minimum Commitment</p>
                 <p>
                   Cancellation during the 12-week minimum commitment period is not permitted
                   except in cases of documented medical necessity (with physician documentation)
@@ -161,7 +161,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">7. Refund Policy</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">7. Refund Policy</h2>
             <p className="mb-4">
               No refunds will be issued once a training program or nutrition guidance has been
               delivered to a client. If you choose not to use the program after delivery, fees
@@ -175,7 +175,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">8. Termination by Coach</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">8. Termination by Coach</h2>
             <p className="mb-4">
               The Coach reserves the right to terminate a coaching engagement immediately for
               cause, including but not limited to:
@@ -201,7 +201,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">9. Client Obligations</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">9. Client Obligations</h2>
             <p className="mb-4">You agree to:</p>
             <ul className="space-y-3 pl-4">
               {[
@@ -221,7 +221,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">10. Intellectual Property</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">10. Intellectual Property</h2>
             <p>
               All training programs, nutrition guidance documents, and related materials created
               by the Coach are the intellectual property of Amir Cohen-Simayof. Upon payment,
@@ -231,7 +231,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">11. Limitation of Liability</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">11. Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by applicable law, the Coach&apos;s total liability
               to you for any claim arising out of or related to these Terms or the services
@@ -242,10 +242,10 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">12. Dispute Resolution</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">12. Dispute Resolution</h2>
             <div className="space-y-4">
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">12.1 Informal Resolution</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">12.1 Informal Resolution</p>
                 <p>
                   Before initiating any formal dispute, you agree to contact the Coach at{" "}
                   <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
@@ -255,7 +255,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">12.2 Arbitration</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">12.2 Arbitration</p>
                 <p>
                   If the dispute is not resolved informally, it will be submitted to binding
                   arbitration administered by the American Arbitration Association (AAA) under
@@ -264,7 +264,7 @@ export default function TermsPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">12.3 Class Action Waiver</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">12.3 Class Action Waiver</p>
                 <p>
                   You agree to resolve disputes individually and waive any right to participate
                   in a class action lawsuit or class-wide arbitration.
@@ -274,7 +274,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">13. Governing Law</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">13. Governing Law</h2>
             <p>
               These Terms are governed by the laws of the Commonwealth of Massachusetts,
               without regard to its conflict of law provisions.
@@ -282,7 +282,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">14. Modifications</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">14. Modifications</h2>
             <p>
               The Coach reserves the right to update these Terms at any time. Material changes
               will be communicated to active clients via email with at least 14 days&apos; notice.
@@ -291,7 +291,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">15. Entire Agreement</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">15. Entire Agreement</h2>
             <p>
               These Terms, together with the Privacy Policy, constitute the entire agreement
               between you and the Coach with respect to the coaching services and supersede
@@ -300,7 +300,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">Contact</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">Contact</h2>
             <p>
               Questions about these Terms? Reach out at{" "}
               <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
@@ -311,10 +311,10 @@ export default function TermsPage() {
 
         </div>
 
-        <div className="border-t border-white/[0.07] mt-16 pt-8">
+        <div className="border-t border-[#1A1410]/[0.07] mt-16 pt-8">
           <Link
             href="/privacy"
-            className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/30 hover:text-[#f0ece4]/60 transition-colors"
+            className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/30 hover:text-[#1A1410]/60 transition-colors"
           >
             View Privacy Policy →
           </Link>

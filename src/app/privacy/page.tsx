@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[#0E0C0A] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-24">
         <Link
           href="/"
@@ -15,13 +15,13 @@ export default function PrivacyPage() {
           ← The Standard
         </Link>
 
-        <h1 className="font-display text-3xl font-black text-[#f0ece4] mb-2">Privacy Policy</h1>
-        <p className="text-[#f0ece4]/40 text-sm mb-16">Last updated: June 2026</p>
+        <h1 className="font-display text-3xl font-black text-[#1A1410] mb-2">Privacy Policy</h1>
+        <p className="text-[#1A1410]/40 text-sm mb-16">Last updated: June 2026</p>
 
-        <div className="space-y-12 text-[#f0ece4]/75 leading-relaxed">
+        <div className="space-y-12 text-[#1A1410]/75 leading-relaxed">
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">1. Overview</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">1. Overview</h2>
             <p>
               This Privacy Policy explains how The Standard, operated by Amir Cohen-Simayof
               (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), collects, uses, and protects the personal
@@ -34,17 +34,17 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">2. Information We Collect</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">2. Information We Collect</h2>
             <div className="space-y-4">
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">Application data</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">Application data</p>
                 <p>
                   When you submit a coaching application, we collect your name, email address,
                   fitness goals, self-reported training history, and responses to application questions.
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">Intake form data</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">Intake form data</p>
                 <p>
                   If you complete the intake form, we collect additional information including
                   dietary preferences, lifestyle details, sleep patterns, stress levels, and any
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">Payment data</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">Payment data</p>
                 <p>
                   Payment is processed by Stripe, Inc. We do not store your credit card number
                   or full payment details. We retain records of your plan selection, billing amount,
@@ -60,14 +60,14 @@ export default function PrivacyPage() {
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">Communications</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">Communications</p>
                 <p>
                   We retain records of coaching-related communications conducted via WhatsApp,
                   email, or video calls to the extent necessary to deliver services.
                 </p>
               </div>
               <div>
-                <p className="text-[#f0ece4]/90 font-medium mb-1">Usage data</p>
+                <p className="text-[#1A1410]/90 font-medium mb-1">Usage data</p>
                 <p>
                   Standard website analytics (page visits, device type) may be collected through
                   hosting infrastructure. We do not use third-party advertising trackers.
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">3. How We Use Your Information</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">3. How We Use Your Information</h2>
             <p className="mb-4">We use your information solely to:</p>
             <ul className="space-y-2 pl-4">
               {[
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">4. Third-Party Services</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">4. Third-Party Services</h2>
             <p className="mb-4">
               To operate our coaching business, we use the following services, each governed by
               their own privacy policies:
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">5. Data Retention</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">5. Data Retention</h2>
             <p>
               We retain your personal data for the duration of your coaching engagement and for
               one year following its conclusion. After that period, your data will be deleted
@@ -131,7 +131,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">6. Your Rights</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">6. Your Rights</h2>
             <p className="mb-4">You have the right to:</p>
             <ul className="space-y-2 pl-4">
               {[
@@ -155,7 +155,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">7. California Residents (CCPA)</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">7. California Residents (CCPA)</h2>
             <p className="mb-4">
               If you are a California resident, you have additional rights under the California
               Consumer Privacy Act (CCPA), including:
@@ -182,7 +182,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">8. Age Restriction</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">8. Age Restriction</h2>
             <p>
               Our services are available to individuals 18 years of age or older. We do not
               knowingly collect personal information from anyone under 18. If we become aware
@@ -191,7 +191,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">9. Data Security</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">9. Data Security</h2>
             <p>
               We take reasonable precautions to protect your personal information. However, no
               method of transmission over the internet is completely secure. We cannot guarantee
@@ -200,7 +200,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">10. Changes to This Policy</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">10. Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. Material changes will be
               communicated to active clients via email with at least 14 days&apos; notice before
@@ -209,7 +209,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-[#f0ece4] font-semibold text-lg mb-4">11. Contact</h2>
+            <h2 className="text-[#1A1410] font-semibold text-lg mb-4">11. Contact</h2>
             <p>
               Questions about this Privacy Policy? Reach out at{" "}
               <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors">
@@ -220,10 +220,10 @@ export default function PrivacyPage() {
 
         </div>
 
-        <div className="border-t border-white/[0.07] mt-16 pt-8">
+        <div className="border-t border-[#1A1410]/[0.07] mt-16 pt-8">
           <Link
             href="/terms"
-            className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/30 hover:text-[#f0ece4]/60 transition-colors"
+            className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/30 hover:text-[#1A1410]/60 transition-colors"
           >
             View Terms of Service →
           </Link>
