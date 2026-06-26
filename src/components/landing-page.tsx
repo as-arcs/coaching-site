@@ -875,7 +875,7 @@ function Pricing() {
 const FAQ_ITEMS = [
   {
     q: "You're 21. Why would I pay you instead of a certified trainer with years of experience?",
-    a: "I won't pretend I've been doing this for 20 years. What I can tell you is that I've spent years building a genuine relationship with my own body, figuring out how physical and mental health drive each other, not just chasing a number on a scale. That obsession is what makes me good at this, and my clients can attest to my knowledge.I only take clients I know I can help.",
+    a: "I won't pretend I've been doing this for 20 years. What I can tell you is that I've spent years building a genuine relationship with my own body, figuring out how physical and mental health drive each other, not just chasing a number on a scale. That obsession is what makes me good at this, and my clients can attest to my knowledge. I only take clients I know I can help.",
   },
   {
     q: "I've tried coaching before and it didn't stick.",
