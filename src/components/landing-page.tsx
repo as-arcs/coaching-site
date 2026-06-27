@@ -325,6 +325,44 @@ function SectionHeader({
   )
 }
 
+// ── Intro Video ───────────────────────────────────────────────────────
+function IntroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [playing, setPlaying] = useState(false)
+
+  function handlePlay() {
+    videoRef.current?.play()
+    setPlaying(true)
+  }
+
+  return (
+    <div className="relative border border-[#1A1410]/[0.07] overflow-hidden bg-[#1A1410] group cursor-pointer"
+      onClick={!playing ? handlePlay : undefined}
+    >
+      <video
+        ref={videoRef}
+        src="/videos/intro.mp4"
+        poster="/images/intro-poster.jpg"
+        controls={playing}
+        playsInline
+        className="w-full block"
+        aria-label="Introduction from Amir Cohen-Simayof"
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+      />
+      {!playing && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-20 h-20 rounded-full bg-[#D4A017] flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
+            <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#1A1410] ml-1" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Philosophy ────────────────────────────────────────────────────────
 function Philosophy() {
   const leftRef = useRef(null)
@@ -385,36 +423,9 @@ function Philosophy() {
             variants={revealRight}
             initial="hidden"
             animate={rightInView ? "visible" : "hidden"}
-            className="relative flex flex-col gap-6"
+            className="relative flex flex-col"
           >
-            <div className="relative aspect-[3/4] overflow-hidden border border-[#1A1410]/[0.07]">
-              <div
-                className="absolute inset-0 bg-cover bg-top"
-                style={{ backgroundImage: "url('/images/philosophy.png')" }}
-              />
-              <div className="absolute inset-0 bg-[#1C1915]/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1410]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="font-display text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-1">
-                  Amir Cohen-Simayof
-                </p>
-                <p className="text-[#f0ece4]/70 text-xs tracking-wide">
-                  Online Fitness Coach · @amir_csim
-                </p>
-              </div>
-            </div>
-
-            {/* Intro video — drop in YouTube URL or /videos/intro.mp4 when ready */}
-            <div className="border border-[#1A1410]/[0.07] overflow-hidden bg-[#1A1410]">
-              <video
-                src="/videos/intro.mp4"
-                poster="/images/intro-poster.jpg"
-                controls
-                playsInline
-                className="w-full block"
-                aria-label="Introduction from Amir Cohen-Simayof"
-              />
-            </div>
+            <IntroVideo />
           </motion.div>
         </div>
       </div>
