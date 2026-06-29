@@ -783,7 +783,7 @@ const PLANS = [
   },
   {
     name: "Premium",
-    price: "$497",
+    price: "$397",
     note: "per month · 12-week minimum",
     features: [
       "Everything in Standard",

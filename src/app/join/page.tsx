@@ -22,7 +22,7 @@ const PLANS = {
   },
   premium: {
     name: "Premium",
-    price: "$497",
+    price: "$397",
     note: "per month · billed monthly · 12-week minimum",
     features: [
       "Everything in Standard",

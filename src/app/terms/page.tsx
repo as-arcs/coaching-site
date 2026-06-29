@@ -106,7 +106,7 @@ export default function TermsPage() {
                 <p className="text-[#1A1410]/90 font-medium mb-1">5.1 Fees</p>
                 <p>
                   Coaching fees are charged on a monthly basis at the rate corresponding to
-                  your selected plan ($297/month for Standard; $497/month for Premium), billed
+                  your selected plan ($297/month for Standard; $397/month for Premium), billed
                   on the same date each month.
                 </p>
               </div>

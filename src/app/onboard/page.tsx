@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 const PLANS = {
   standard: "Standard — $297/month",
-  premium: "Premium — $497/month",
+  premium: "Premium — $397/month",
 }
 
 const ACKNOWLEDGMENTS = [
