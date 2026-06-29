@@ -502,7 +502,7 @@ function Included() {
 
 // ── Process ───────────────────────────────────────────────────────────
 const STEPS = [
-  { num: "01", title: "Apply", body: "Short form. Amir reviews every application personally before any money changes hands." },
+  { num: "01", title: "Apply", body: "Short form. I review every application personally before any money changes hands." },
   { num: "02", title: "Discovery Call", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
   { num: "03", title: "Your Program", body: "Custom training + nutrition delivered within 48 hours of signing." },
   { num: "04", title: "Weekly Check-ins", body: "Submit data every Sunday. Adjustments live within 24 hours." },
@@ -774,7 +774,7 @@ const PLANS = [
       "Custom training program",
       "Nutrition guidance",
       "Weekly check-ins & adjustments",
-      "WhatsApp access to Amir",
+      "Direct WhatsApp access to me",
       "Progress tracking system",
       "Fitness background review",
     ],
@@ -894,7 +894,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if I apply and it's not the right fit?",
-    a: "The discovery call is free and there's no commitment before it. You apply, Amir reviews it, and you have a 20 minute conversation. You decide from there. No pitch.",
+    a: "The discovery call is free and there's no commitment before it. You apply, I review it, and you have a 20 minute conversation. You decide from there. No pitch.",
   },
   {
     q: "I don't know if I have the time right now.",
@@ -1082,7 +1082,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
             <span className="block font-black italic text-[#1A1410]">we&apos;re a fit.</span>
           </h2>
           <p className="text-[#1A1410]/70 text-base max-w-xs mx-auto leading-relaxed mt-6">
-            Takes about 3 minutes. Amir personally reviews every application.
+            Takes about 3 minutes. I personally review every application.
           </p>
         </div>
       </motion.div>
@@ -1117,7 +1117,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
                 rel="noopener noreferrer"
                 className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/80 transition-colors"
               >Fill out the intake form</a> before the call
-              and Amir can skip the basics and get straight to your plan.
+              and I can skip the basics and get straight to your plan.
             </p>
             <button
               onClick={openBooking}
@@ -1141,7 +1141,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
                 20-minute discovery call directly. No waiting, no pitch.
               </p>
               <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-12">
-                Amir only takes clients he knows he can genuinely help.
+                I only take clients I know I can genuinely help.
               </p>
               <div className="space-y-5">
                 <div className="flex items-center gap-4">

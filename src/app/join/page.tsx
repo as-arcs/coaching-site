@@ -15,7 +15,7 @@ const PLANS = {
       "Custom training program",
       "Nutrition guidance",
       "Weekly check-ins & adjustments",
-      "WhatsApp access to Amir",
+      "Direct WhatsApp access to me",
       "Progress tracking system",
       "Fitness background review",
     ],
