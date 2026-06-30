@@ -92,8 +92,8 @@ function OnboardContent() {
   }
 
   const inputClass =
-    "w-full bg-transparent border-b border-white/[0.22] py-3 text-[#f0ece4] text-sm placeholder:text-[#f0ece4]/40 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
-  const labelClass = "block text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/50 mb-2"
+    "w-full bg-transparent border-b border-[#1A1410]/[0.22] py-3 text-[#1A1410] text-sm placeholder:text-[#1A1410]/40 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
+  const labelClass = "block text-[10px] tracking-[0.2em] uppercase text-[#1A1410]/50 mb-2"
 
   if (submitted) {
     return (
@@ -102,13 +102,13 @@ function OnboardContent() {
           <Check className="h-4 w-4 text-[#D4A017]" />
         </div>
         <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-4">Agreement Signed</p>
-        <h2 className="font-display text-2xl font-black text-[#f0ece4] mb-4">
+        <h2 className="font-display text-2xl font-black text-[#1A1410] mb-4">
           You&apos;re locked in.
         </h2>
-        <p className="text-[#f0ece4]/60 text-sm leading-relaxed mb-8">
+        <p className="text-[#1A1410]/60 text-sm leading-relaxed mb-8">
           Your onboarding agreement has been received. Amir will be in touch within 24 hours to confirm your start date and deliver your program.
         </p>
-        <p className="text-[#f0ece4]/30 text-xs">
+        <p className="text-[#1A1410]/30 text-xs">
           Questions? Reach out at{" "}
           <a href="mailto:amirsimayof@gmail.com" className="text-[#D4A017]/60 hover:text-[#D4A017] transition-colors">
             amirsimayof@gmail.com
@@ -173,7 +173,7 @@ function OnboardContent() {
                     onChange={() => setPlan(key)}
                     className="sr-only peer"
                   />
-                  <span className="inline-block border border-white/[0.22] px-4 py-2 text-xs tracking-wide text-[#f0ece4]/70 transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017]">
+                  <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410]/70 transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017]">
                     {PLANS[key]}
                   </span>
                 </label>
@@ -188,14 +188,14 @@ function OnboardContent() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
-              className={cn(inputClass, "text-[#f0ece4]/70 [color-scheme:dark]")}
+              className={cn(inputClass, "text-[#1A1410]/70 [color-scheme:light]")}
             />
           </div>
 
           <div>
             <label className={labelClass}>
               Known injuries, conditions, or physical limitations{" "}
-              <span className="text-[#f0ece4]/30 normal-case tracking-normal">(optional, be specific)</span>
+              <span className="text-[#1A1410]/30 normal-case tracking-normal">(optional, be specific)</span>
             </label>
             <textarea
               value={knownConditions}
@@ -210,7 +210,7 @@ function OnboardContent() {
       {/* Acknowledgments */}
       <section>
         <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">Acknowledgments</p>
-        <p className="text-[#f0ece4]/40 text-xs mb-6 leading-relaxed">
+        <p className="text-[#1A1410]/40 text-xs mb-6 leading-relaxed">
           Read each statement carefully and check to confirm your understanding.
         </p>
         <div className="space-y-5">
@@ -221,13 +221,13 @@ function OnboardContent() {
                 "flex items-start gap-4 p-5 border cursor-pointer transition-colors duration-200 group",
                 checked[item.id]
                   ? "border-[#D4A017]/30 bg-[#D4A017]/[0.04]"
-                  : "border-white/[0.07] hover:border-white/[0.12]"
+                  : "border-[#1A1410]/[0.07] hover:border-[#1A1410]/[0.12]"
               )}
             >
               <div
                 className={cn(
                   "mt-0.5 w-4 h-4 flex-shrink-0 border flex items-center justify-center transition-colors duration-200",
-                  checked[item.id] ? "border-[#D4A017] bg-[#D4A017]/10" : "border-white/20"
+                  checked[item.id] ? "border-[#D4A017] bg-[#D4A017]/10" : "border-[#1A1410]/20"
                 )}
               >
                 {checked[item.id] && <Check className="h-2.5 w-2.5 text-[#D4A017]" />}
@@ -240,10 +240,10 @@ function OnboardContent() {
                 required
               />
               <div>
-                <p className="text-[10px] tracking-[0.15em] uppercase text-[#f0ece4]/30 mb-2">
+                <p className="text-[10px] tracking-[0.15em] uppercase text-[#1A1410]/30 mb-2">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <p className="text-[#f0ece4]/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-[#1A1410]/65 text-sm leading-relaxed">{item.text}</p>
               </div>
             </label>
           ))}
@@ -253,7 +253,7 @@ function OnboardContent() {
       {/* Digital signature */}
       <section>
         <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">Digital Signature</p>
-        <p className="text-[#f0ece4]/40 text-xs mb-6 leading-relaxed">
+        <p className="text-[#1A1410]/40 text-xs mb-6 leading-relaxed">
           By typing your full legal name below, you confirm that you have read, understood, and agree to all of the above, and to The Standard&apos;s{" "}
           <Link href="/terms" target="_blank" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors underline underline-offset-2">
             Terms of Service
@@ -275,7 +275,7 @@ function OnboardContent() {
         </div>
       </section>
 
-      {error && <p className="text-red-400 text-xs tracking-wide">{error}</p>}
+      {error && <p className="text-red-600 text-xs tracking-wide">{error}</p>}
 
       <button
         type="submit"
@@ -288,7 +288,7 @@ function OnboardContent() {
         )}
       </button>
 
-      <p className="text-[#f0ece4]/20 text-[10px] tracking-wide text-center leading-relaxed">
+      <p className="text-[#1A1410]/20 text-[10px] tracking-wide text-center leading-relaxed">
         Your submission is timestamped and recorded. A copy is available upon request at amirsimayof@gmail.com.
       </p>
 
@@ -298,7 +298,7 @@ function OnboardContent() {
 
 export default function OnboardPage() {
   return (
-    <div className="bg-[#0E0C0A] text-[#f0ece4] min-h-screen">
+    <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <div className="max-w-2xl mx-auto px-6 py-24">
 
         <Link
@@ -309,10 +309,10 @@ export default function OnboardPage() {
         </Link>
 
         <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-3">Client Agreement</p>
-        <h1 className="font-display text-3xl font-black text-[#f0ece4] mb-2">Onboarding Agreement</h1>
-        <p className="text-[#f0ece4]/40 text-sm mb-4">Complete before your program is delivered.</p>
+        <h1 className="font-display text-3xl font-black text-[#1A1410] mb-2">Onboarding Agreement</h1>
+        <p className="text-[#1A1410]/40 text-sm mb-4">Complete before your program is delivered.</p>
 
-        <div className="border border-white/[0.07] p-5 mb-12 text-[#f0ece4]/50 text-xs leading-relaxed">
+        <div className="border border-[#1A1410]/[0.07] p-5 mb-12 text-[#1A1410]/50 text-xs leading-relaxed">
           This agreement governs your coaching engagement with The Standard. It supplements the{" "}
           <Link href="/terms" target="_blank" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors underline underline-offset-2">
             Terms of Service
