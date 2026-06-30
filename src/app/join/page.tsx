@@ -65,13 +65,13 @@ function JoinContent() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#1a1714] flex flex-col items-center justify-center px-6 py-24">
       <div className="w-full max-w-md">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-6 text-center">
+        <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-6 text-center font-semibold">
           The Standard · Coaching
         </p>
 
         <div className="border border-[#1a1714]/[0.12] bg-white/40 p-10">
           {planKey === "premium" && (
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-4">
+            <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-4 font-semibold">
               Most Popular
             </p>
           )}
@@ -84,11 +84,11 @@ function JoinContent() {
               {plan.price}
             </span>
           </div>
-          <p className="text-[#1a1714]/40 text-xs tracking-wide mb-8">{plan.note}</p>
+          <p className="text-[#1a1714]/75 text-base tracking-wide mb-8 font-medium">{plan.note}</p>
 
-          <ul className="space-y-3 mb-10">
+          <ul className="space-y-4 mb-10">
             {plan.features.map((f) => (
-              <li key={f} className="flex items-center gap-3 text-sm text-[#1a1714]/70">
+              <li key={f} className="flex items-center gap-3 text-base text-[#1a1714] font-medium">
                 <Check className="h-3.5 w-3.5 text-[#D4A017] flex-shrink-0" />
                 {f}
               </li>
@@ -113,12 +113,12 @@ function JoinContent() {
             )}
           </button>
 
-          <p className="text-[#1a1714]/30 text-[10px] tracking-wide text-center mt-5 leading-relaxed">
+          <p className="text-[#1a1714]/70 text-sm tracking-wide text-center mt-5 leading-relaxed font-medium">
             Secured by Stripe · Cancel anytime after 12 weeks
           </p>
         </div>
 
-        <p className="text-[#1a1714]/30 text-xs text-center mt-8 leading-relaxed">
+        <p className="text-[#1a1714]/70 text-sm text-center mt-8 leading-relaxed font-medium">
           Questions? Reach out at{" "}
           <a href="mailto:amirsimayof@gmail.com" className="text-[#1a1714]/50 hover:text-[#1a1714]/70 transition-colors">
             amirsimayof@gmail.com

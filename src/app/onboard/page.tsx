@@ -92,8 +92,8 @@ function OnboardContent() {
   }
 
   const inputClass =
-    "w-full bg-transparent border-b border-[#1A1410]/[0.22] py-3 text-[#1A1410] text-sm placeholder:text-[#1A1410]/40 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
-  const labelClass = "block text-[10px] tracking-[0.2em] uppercase text-[#1A1410]/50 mb-2"
+    "w-full bg-transparent border-b border-[#1A1410]/30 py-3 text-[#1A1410] text-lg font-medium placeholder:text-[#1A1410]/35 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
+  const labelClass = "block text-sm tracking-[0.18em] uppercase text-[#1A1410] mb-2 font-semibold"
 
   if (submitted) {
     return (
@@ -123,7 +123,7 @@ function OnboardContent() {
 
       {/* Client details */}
       <section>
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-6">Your Details</p>
+        <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-6 font-semibold">Your Details</p>
         <div className="space-y-6">
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -173,7 +173,7 @@ function OnboardContent() {
                     onChange={() => setPlan(key)}
                     className="sr-only peer"
                   />
-                  <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410]/70 transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017]">
+                  <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-sm tracking-wide text-[#1A1410]/80 font-medium transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017]">
                     {PLANS[key]}
                   </span>
                 </label>
@@ -195,7 +195,7 @@ function OnboardContent() {
           <div>
             <label className={labelClass}>
               Known injuries, conditions, or physical limitations{" "}
-              <span className="text-[#1A1410]/30 normal-case tracking-normal">(optional, be specific)</span>
+              <span className="text-[#1A1410]/50 normal-case tracking-normal font-normal">(optional, be specific)</span>
             </label>
             <textarea
               value={knownConditions}
@@ -209,8 +209,8 @@ function OnboardContent() {
 
       {/* Acknowledgments */}
       <section>
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">Acknowledgments</p>
-        <p className="text-[#1A1410]/40 text-xs mb-6 leading-relaxed">
+        <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-2 font-semibold">Acknowledgments</p>
+        <p className="text-[#1A1410]/80 text-base font-medium mb-6 leading-relaxed">
           Read each statement carefully and check to confirm your understanding.
         </p>
         <div className="space-y-5">
@@ -240,10 +240,10 @@ function OnboardContent() {
                 required
               />
               <div>
-                <p className="text-[10px] tracking-[0.15em] uppercase text-[#1A1410]/30 mb-2">
+                <p className="text-xs tracking-[0.15em] uppercase text-[#1A1410]/60 mb-2 font-semibold">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <p className="text-[#1A1410]/65 text-sm leading-relaxed">{item.text}</p>
+                <p className="text-[#1A1410] text-base leading-relaxed font-medium">{item.text}</p>
               </div>
             </label>
           ))}
@@ -252,8 +252,8 @@ function OnboardContent() {
 
       {/* Digital signature */}
       <section>
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-2">Digital Signature</p>
-        <p className="text-[#1A1410]/40 text-xs mb-6 leading-relaxed">
+        <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-2 font-semibold">Digital Signature</p>
+        <p className="text-[#1A1410]/80 text-base font-medium mb-6 leading-relaxed">
           By typing your full legal name below, you confirm that you have read, understood, and agree to all of the above, and to The Standard&apos;s{" "}
           <Link href="/terms" target="_blank" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors underline underline-offset-2">
             Terms of Service
@@ -288,7 +288,7 @@ function OnboardContent() {
         )}
       </button>
 
-      <p className="text-[#1A1410]/20 text-[10px] tracking-wide text-center leading-relaxed">
+      <p className="text-[#1A1410]/60 text-xs tracking-wide text-center leading-relaxed font-medium">
         Your submission is timestamped and recorded. A copy is available upon request at amirsimayof@gmail.com.
       </p>
 
@@ -308,11 +308,11 @@ export default function OnboardPage() {
           ← The Standard
         </Link>
 
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-3">Client Agreement</p>
-        <h1 className="font-display text-3xl font-black text-[#1A1410] mb-2">Onboarding Agreement</h1>
-        <p className="text-[#1A1410]/40 text-sm mb-4">Complete before your program is delivered.</p>
+        <p className="text-xs tracking-[0.3em] uppercase text-[#D4A017] mb-3 font-semibold">Client Agreement</p>
+        <h1 className="font-display text-4xl font-black text-[#1A1410] mb-2">Onboarding Agreement</h1>
+        <p className="text-[#1A1410]/75 text-base font-medium mb-4">Complete before your program is delivered.</p>
 
-        <div className="border border-[#1A1410]/[0.07] p-5 mb-12 text-[#1A1410]/50 text-xs leading-relaxed">
+        <div className="border border-[#1A1410]/20 p-6 mb-12 text-[#1A1410]/80 text-base leading-relaxed font-medium">
           This agreement governs your coaching engagement with The Standard. It supplements the{" "}
           <Link href="/terms" target="_blank" className="text-[#D4A017] hover:text-[#D4A017]/70 transition-colors underline underline-offset-2">
             Terms of Service
