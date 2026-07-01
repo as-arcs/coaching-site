@@ -54,6 +54,35 @@ export async function notifyOnboardingComplete(data: OnboardingData): Promise<vo
   }
 }
 
+interface CheckinData {
+  email: string
+  bodyweight: number
+  adherence: number
+  energy: number
+  notes?: string
+}
+
+export async function notifyWeeklyCheckin(data: CheckinData): Promise<void> {
+  const lines = [
+    `📋 Weekly check-in — *${data.email}*`,
+    `Weight: ${data.bodyweight} lbs | Adherence: ${data.adherence}/5 | Energy: ${data.energy}/5`,
+    `Notes: ${data.notes?.trim() || "none"}`,
+  ]
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5000)
+  try {
+    await fetch(process.env.SLACK_WEBHOOK_URL!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: lines.join("\n") }),
+      signal: controller.signal,
+    })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 interface ApplicationData {
   firstName: string
   lastName: string

@@ -19,7 +19,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const plan = typeof body?.plan === "string" ? body.plan : ""
-    const email = typeof body?.email === "string" ? body.email : undefined
+    const rawEmail = typeof body?.email === "string" ? body.email.trim() : ""
+    const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail : undefined
 
     const priceId = PRICE_IDS[plan]
     if (!priceId) {

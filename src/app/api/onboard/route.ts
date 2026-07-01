@@ -3,6 +3,7 @@ import { z } from "zod"
 import { google } from "googleapis"
 import { rateLimit } from "@/lib/rate-limit"
 import { notifyOnboardingComplete } from "@/lib/slack"
+import { setupClientFolder } from "@/lib/drive"
 
 // Requires a tab named "Onboarding" in the Google Sheet
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!
@@ -64,6 +65,9 @@ export async function POST(request: NextRequest) {
 
     notifyOnboardingComplete({ firstName, lastName, email, plan, startDate })
       .catch((err) => console.error("[slack]", err))
+
+    setupClientFolder(`${firstName} ${lastName}`)
+      .catch((err) => console.error("[drive]", err))
 
     return Response.json({ success: true })
   } catch (err) {
