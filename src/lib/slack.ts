@@ -4,7 +4,7 @@ interface ClientData {
 }
 
 export async function notifyNewClient(data: ClientData): Promise<void> {
-  const planLabel = data.plan === "premium" ? "Premium ($497/mo)" : "Standard ($297/mo)"
+  const planLabel = data.plan === "premium" ? "Premium ($200/mo)" : "Standard ($130/mo)"
   const lines = [
     `💳 New paying client: *${data.email}*`,
     `Plan: ${planLabel}`,
@@ -33,7 +33,7 @@ interface OnboardingData {
 }
 
 export async function notifyOnboardingComplete(data: OnboardingData): Promise<void> {
-  const planLabel = data.plan === "premium" ? "Premium ($497/mo)" : "Standard ($297/mo)"
+  const planLabel = data.plan === "premium" ? "Premium ($200/mo)" : "Standard ($130/mo)"
   const lines = [
     `✅ *Onboarding agreement signed: ${data.firstName} ${data.lastName}*`,
     `Email: ${data.email}`,

@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, ArrowDown, Check } from "lucide-react"
+import { ArrowRight, ArrowDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ScrollQuiz, type QuizAnswers } from "@/components/scroll-quiz"
+import { trackEvent } from "@/lib/analytics"
 
 // ── Animation Variants ────────────────────────────────────────────────
 type Ease4 = [number, number, number, number]
@@ -31,6 +32,22 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 }
 
+// ── Apply CTA click handler ──────────────────────────────────────────
+// Hash-only links don't re-trigger scroll when the URL hash is unchanged
+// (e.g. clicking a second "#apply" CTA after the first already set the
+// hash) — scroll to the target explicitly instead of relying on it.
+function scrollToApply(location: string) {
+  return (e: React.MouseEvent<HTMLAnchorElement>) => {
+    trackEvent("apply_click", { location })
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    e.preventDefault()
+    document.getElementById("apply")?.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (window.location.hash !== "#apply") {
+      window.history.pushState(null, "", "#apply")
+    }
+  }
+}
+
 // ── Icons ─────────────────────────────────────────────────────────────
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={cn("h-4 w-4", className)} fill="currentColor" aria-hidden="true">
@@ -43,7 +60,7 @@ const NAV_LINKS = [
   ["#about", "About"],
   ["#process", "Process"],
   ["#results", "Results"],
-  ["#pricing", "Pricing"],
+  ["#first-session", "First Session"],
 ] as const
 
 function Nav() {
@@ -87,6 +104,7 @@ function Nav() {
 
         <Link
           href="#apply"
+          onClick={scrollToApply("nav")}
           className="cta-glow hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase font-semibold bg-[#D4A017] text-[#1A1410] px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200"
         >
           Apply
@@ -132,7 +150,10 @@ function Nav() {
             <Link
               key={href}
               href={href}
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => {
+                setMobileOpen(false)
+                if (href === "#apply") scrollToApply("nav_mobile")(e)
+              }}
               className="flex items-center justify-between py-3 text-sm tracking-widest uppercase text-[#1A1410]/60 hover:text-[#1A1410] border-b border-[#1A1410]/[0.05] last:border-0 transition-colors duration-200"
             >
               {label}
@@ -211,6 +232,7 @@ function Hero() {
         >
           <Link
             href="#apply"
+            onClick={scrollToApply("hero")}
             className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
           >
             Apply for Coaching
@@ -371,7 +393,7 @@ function Philosophy() {
   const rightInView = useInView(rightRef, { once: true, amount: 0.2 })
 
   return (
-    <section id="about" className="bg-[#FAF7F2] py-32 md:py-40">
+    <section id="about" className="bg-[#FAF7F2] py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <motion.div
@@ -411,6 +433,7 @@ function Philosophy() {
             </p>
             <Link
               href="#apply"
+              onClick={scrollToApply("philosophy")}
               className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#D4A017] border-b border-[#D4A017]/40 pb-1 hover:border-[#D4A017] transition-colors duration-200 group"
             >
               Apply Now
@@ -486,7 +509,7 @@ function FeatureRow({ feature, index }: { feature: (typeof FEATURES)[0]; index: 
 
 function Included() {
   return (
-    <section className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
+    <section className="bg-[#EAE1D4] py-20 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="What You Get" line1="Everything you need." line2="Nothing you don't." />
         <div className="divide-y divide-[#1A1410]/[0.08]">
@@ -503,7 +526,7 @@ function Included() {
 // ── Process ───────────────────────────────────────────────────────────
 const STEPS = [
   { num: "01", title: "Apply", body: "Short form. I review every application personally before any money changes hands." },
-  { num: "02", title: "Discovery Call", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
+  { num: "02", title: "First Session", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
   { num: "03", title: "Your Program", body: "Custom training + nutrition delivered within 48 hours of signing." },
   { num: "04", title: "Weekly Check-ins", body: "Submit data every Sunday. Adjustments live within 24 hours." },
   { num: "05", title: "Results", body: "Progressive recomposition with habits that hold up long after the program ends." },
@@ -514,7 +537,7 @@ function Process() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="process" className="bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
+    <section id="process" className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="The Process" line1="Application to results." line2="Five steps." />
         <motion.div
@@ -576,7 +599,7 @@ function Testimonials() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="results" className="relative overflow-hidden bg-[#EAE1D4] py-32 border-t border-[#1A1410]/[0.08]">
+    <section id="results" className="relative overflow-hidden bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
       <p
         aria-hidden="true"
         className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
@@ -651,6 +674,7 @@ function MidPageCTA() {
         </div>
         <Link
           href="#apply"
+          onClick={scrollToApply("mid_page")}
           className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
         >
           Apply for Coaching
@@ -694,6 +718,7 @@ function StickyApplyCTA() {
           </p>
           <Link
             href="#apply"
+            onClick={scrollToApply("sticky")}
             className="inline-flex items-center gap-2 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200 group ml-auto"
           >
             Apply Now
@@ -764,109 +789,58 @@ function Transformation() {
   )
 }
 
-// ── Pricing ───────────────────────────────────────────────────────────
-const PLANS = [
-  {
-    name: "Standard",
-    price: "$297",
-    note: "per month · 12-week minimum",
-    features: [
-      "Custom training program",
-      "Nutrition guidance",
-      "Weekly check-ins & adjustments",
-      "Direct WhatsApp access to me",
-      "Progress tracking system",
-      "Fitness background review",
-    ],
-    cta: "Apply for Standard",
-    featured: false,
-  },
-  {
-    name: "Premium",
-    price: "$397",
-    note: "per month · 12-week minimum",
-    features: [
-      "Everything in Standard",
-      "Bi-weekly video check-ins",
-      "Priority 12hr response time",
-      "Monthly strategy call",
-      "General supplement education",
-      "Lifestyle & recovery support",
-    ],
-    cta: "Apply for Premium",
-    featured: true,
-  },
-]
-
-function Pricing() {
+// ── First Session ─────────────────────────────────────────────────────
+function FirstSession() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
+  const tracked = useRef(false)
+
+  useEffect(() => {
+    if (inView && !tracked.current) {
+      tracked.current = true
+      trackEvent("first_session_view")
+    }
+  }, [inView])
 
   return (
-    <section id="pricing" className="relative overflow-hidden bg-[#FAF7F2] py-32 border-t border-[#1A1410]/[0.07]">
+    <section id="first-session" className="relative overflow-hidden bg-[#FAF7F2] py-24 border-t border-[#1A1410]/[0.07]">
       <p
         aria-hidden="true"
         className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
         style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.04 }}
       >
-        INVEST
+        BEGIN
       </p>
       <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-2xl mx-auto text-center mb-10 border border-[#D4A017]/30 bg-[#D4A017]/5 px-6 py-5">
+          <p className="text-[#1A1410] text-base sm:text-lg font-semibold">
+            Nothing is charged until after we talk.
+          </p>
+          <p className="text-[#1A1410]/70 text-sm mt-1">
+            Your First Session is free — 20 minutes to map out what 6 months of good health actually looks like for you. You decide from there. No pitch.
+          </p>
+        </div>
         <SectionHeader
-          label="Investment"
-          line1="Simple pricing."
-          line2="No surprises."
-          note="12-week minimum on both plans. Real change takes time. Most in-person trainers charge $60 to $100 per session. Three sessions a week is $800 a month or more. This is daily access for less."
+          label="Before You Commit"
+          line1="What does 6 months"
+          line2="of good health mean to you?"
+          note="Real change takes time — 12 weeks, minimum. If you've already sunk money into gym memberships that went unused, supplements that sat in a cabinet, or apps you deleted after a week — this is different. Daily access, a real plan, and someone checking in on you every week."
         />
         <motion.div
           ref={ref}
-          variants={stagger}
+          variants={reveal}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-px bg-[#1A1410]/[0.07] max-w-3xl"
+          className="flex flex-col items-center text-center"
         >
-          {PLANS.map((plan) => (
-            <motion.div
-              key={plan.name}
-              variants={reveal}
-              className={cn("p-10 md:p-12 flex flex-col", plan.featured ? "bg-[#E6DDD0]" : "bg-[#FAF7F2]")}
-            >
-              {plan.featured && (
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#D4A017] mb-6">
-                  Most Popular
-                </p>
-              )}
-              <h3 className="text-[#1A1410] text-xl font-semibold mb-2">{plan.name}</h3>
-              <div className="flex items-baseline gap-2 mb-1">
-                <span
-                  className="font-display font-black text-[#1A1410]"
-                  style={{ fontSize: "clamp(2.5rem, 4vw, 3rem)" }}
-                >
-                  {plan.price}
-                </span>
-              </div>
-              <p className="text-[#1A1410]/65 text-xs tracking-wide mb-8">{plan.note}</p>
-              <ul className="space-y-3 mb-10 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-[#1A1410]/65">
-                    <Check className="h-3.5 w-3.5 text-[#D4A017] flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="#apply"
-                className={cn(
-                  "text-center text-xs tracking-[0.2em] uppercase py-4 transition-colors duration-200",
-                  plan.featured
-                    ? "bg-[#D4A017] text-[#1A1410] hover:bg-[#D4A017]/90"
-                    : "border border-[#1A1410]/40 text-[#1A1410] hover:border-[#1A1410]/70 hover:bg-[#1A1410]/5"
-                )}
-              >
-                {plan.cta}
-              </Link>
-            </motion.div>
-          ))}
+          <Link
+            href="#apply"
+            onClick={scrollToApply("first_session")}
+            className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
+          >
+            Book Your First Session
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </motion.div>
 
         <div className="max-w-3xl mt-10 px-1">
@@ -894,7 +868,11 @@ const FAQ_ITEMS = [
   },
   {
     q: "What if I apply and it's not the right fit?",
-    a: "The discovery call is free and there's no commitment before it. You apply, I review it, and you have a 20 minute conversation. You decide from there. No pitch.",
+    a: "The First Session is free and there's no commitment before it. You apply, I review it, and you have a 20 minute conversation. You decide from there. No pitch.",
+  },
+  {
+    q: "What does coaching actually cost?",
+    a: "Standard is $130/month, Premium is $200/month, both with a 12-week minimum. Nothing is charged before your First Session — we'll go over pricing and which plan fits in plain terms on that call, so you're never guessing what you'd be paying for.",
   },
   {
     q: "I don't know if I have the time right now.",
@@ -915,7 +893,7 @@ function FAQ() {
   const inView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
+    <section className="bg-[#EAE1D4] py-20 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader label="Before You Apply" line1="Common questions." line2="Real answers." />
         <motion.div
@@ -1025,6 +1003,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
     e.preventDefault()
     setError("")
     setSubmitting(true)
+    trackEvent("apply_form_submit", { status: "attempt" })
 
     const body = {
       firstName: form.firstName,
@@ -1045,8 +1024,10 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
       const json = await res.json()
       if (!res.ok) throw new Error(json.error ?? "Something went wrong.")
       setSubmitted(true)
+      trackEvent("apply_form_submit", { status: "success" })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.")
+      trackEvent("apply_form_submit", { status: "error" })
     } finally {
       setSubmitting(false)
     }
@@ -1107,7 +1088,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               You&apos;re in.
             </h3>
             <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
-              Pick a time for your free 20-minute discovery call. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
+              Pick a time for your free 20-minute First Session. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
             <p className="text-[#1A1410]/65 text-sm leading-relaxed mb-10">
               Want to hit the ground running?{" "}
@@ -1123,7 +1104,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               onClick={openBooking}
               className="inline-flex items-center gap-3 border border-[#D4A017] px-8 py-4 text-[#D4A017] text-sm tracking-[0.15em] uppercase hover:bg-[#D4A017] hover:text-[#1A1410] transition-all duration-300 cursor-pointer"
             >
-              Book Your Discovery Call <ArrowRight size={16} />
+              Book Your First Session <ArrowRight size={16} />
             </button>
           </motion.div>
         ) : (
@@ -1138,7 +1119,7 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               <div className="w-12 h-px bg-[#D4A017] mb-8" />
               <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
                 Fill out the application. Once you submit, you&apos;ll book your free
-                20-minute discovery call directly. No waiting, no pitch.
+                20-minute First Session directly. No waiting, no pitch.
               </p>
               <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-12">
                 I only take clients I know I can genuinely help.
@@ -1325,7 +1306,7 @@ function Footer() {
                 ["#about", "About"],
                 ["#process", "Process"],
                 ["#results", "Results"],
-                ["#pricing", "Pricing"],
+                ["#first-session", "First Session"],
                 ["#apply", "Apply"],
               ].map(([href, label]) => (
                 <Link
@@ -1403,7 +1384,7 @@ export function LandingPage() {
       <Transformation />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <MidPageCTA />
-      <Pricing />
+      <FirstSession />
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <FAQ />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />

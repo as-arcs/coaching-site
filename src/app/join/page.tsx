@@ -9,7 +9,7 @@ import { Suspense } from "react"
 const PLANS = {
   standard: {
     name: "Standard",
-    price: "$297",
+    price: "$130",
     note: "per month · billed monthly · 12-week minimum",
     features: [
       "Custom training program",
@@ -22,7 +22,7 @@ const PLANS = {
   },
   premium: {
     name: "Premium",
-    price: "$397",
+    price: "$200",
     note: "per month · billed monthly · 12-week minimum",
     features: [
       "Everything in Standard",

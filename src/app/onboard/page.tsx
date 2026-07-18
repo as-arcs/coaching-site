@@ -7,8 +7,8 @@ import { Check, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const PLANS = {
-  standard: "Standard — $297/month",
-  premium: "Premium — $397/month",
+  standard: "Standard — $130/month",
+  premium: "Premium — $200/month",
 }
 
 const ACKNOWLEDGMENTS = [

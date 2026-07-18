@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { trackEvent } from "@/lib/analytics"
 
 export interface QuizAnswers {
   firstName: string
@@ -114,6 +115,14 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
     }
     return null
   }, [sectionsSeen, dismissed, answers])
+
+  const quizStartTracked = useRef(false)
+  useEffect(() => {
+    if (activeQuestion && !quizStartTracked.current) {
+      quizStartTracked.current = true
+      trackEvent("quiz_start", { section: activeQuestion.sectionId })
+    }
+  }, [activeQuestion])
 
   const cardQuestion = encouragementFor
     ? (QUESTIONS.find(q => q.id === encouragementFor) ?? null)
@@ -236,7 +245,10 @@ export function ScrollQuiz({ answers, onAnswer }: Props) {
                 Your application is pre-filled. Ready to submit?
               </p>
               <button
-                onClick={() => document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => {
+                  trackEvent("apply_click", { location: "quiz_complete" })
+                  document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" })
+                }}
                 className="w-full bg-[#D4A017] text-[#0E0C0A] text-[11px] tracking-[0.18em] uppercase font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#B8860F] transition-colors"
               >
                 Apply Now <ArrowRight className="h-3.5 w-3.5" />

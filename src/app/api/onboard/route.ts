@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
           firstName,
           lastName,
           email,
-          plan === "standard" ? "Standard ($297/mo)" : "Premium ($497/mo)",
+          plan === "standard" ? "Standard ($130/mo)" : "Premium ($200/mo)",
           startDate,
           knownConditions ?? "None disclosed",
           signature,
