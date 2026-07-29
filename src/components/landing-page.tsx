@@ -1374,6 +1374,7 @@ export function LandingPage() {
     <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <Nav />
       <Hero />
+      <Apply quizAnswers={quizAnswers} />
       <Marquee />
       <Included />
       <Testimonials />
@@ -1388,7 +1389,6 @@ export function LandingPage() {
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <FAQ />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
-      <Apply quizAnswers={quizAnswers} />
       <Footer />
       <StickyApplyCTA />
       <ScrollQuiz answers={quizAnswers} onAnswer={handleQuizAnswer} />
