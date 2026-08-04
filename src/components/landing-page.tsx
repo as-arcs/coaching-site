@@ -107,7 +107,7 @@ function Nav() {
           onClick={scrollToApply("nav")}
           className="cta-glow hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase font-semibold bg-[#D4A017] text-[#1A1410] px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200"
         >
-          Apply
+          Apply for a Free Session
           <ArrowRight className="h-3 w-3" />
         </Link>
 
@@ -146,7 +146,7 @@ function Nav() {
         className="md:hidden overflow-hidden bg-[#FAF7F2] border-b border-[#1A1410]/[0.07]"
       >
         <div className="px-6 pb-6 pt-2 space-y-1">
-          {([...NAV_LINKS, ["#apply", "Apply"]] as [string, string][]).map(([href, label]) => (
+          {([...NAV_LINKS, ["#apply", "Apply for a Free Session"]] as [string, string][]).map(([href, label]) => (
             <Link
               key={href}
               href={href}
@@ -235,7 +235,7 @@ function Hero() {
             onClick={scrollToApply("hero")}
             className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
           >
-            Apply for Coaching
+            Apply for a Free Session
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
@@ -255,6 +255,15 @@ function Hero() {
           style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
         >
           Reviewing applications for July
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
+          className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/70 mt-2"
+          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
+        >
+          Free 20-min call · No card or payment info required to apply · You only set up billing if you decide to start coaching after we talk
         </motion.p>
       </div>
 
@@ -436,7 +445,7 @@ function Philosophy() {
               onClick={scrollToApply("philosophy")}
               className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#D4A017] border-b border-[#D4A017]/40 pb-1 hover:border-[#D4A017] transition-colors duration-200 group"
             >
-              Apply Now
+              Apply for a Free Session
               <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -677,7 +686,7 @@ function MidPageCTA() {
           onClick={scrollToApply("mid_page")}
           className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
         >
-          Apply for Coaching
+          Apply for a Free Session
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
       </motion.div>
@@ -721,7 +730,7 @@ function StickyApplyCTA() {
             onClick={scrollToApply("sticky")}
             className="inline-flex items-center gap-2 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200 group ml-auto"
           >
-            Apply Now
+            Apply for a Free Session
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -1120,6 +1129,10 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
                 Fill out the application. Once you submit, you&apos;ll book your free
                 20-minute First Session directly. No waiting, no pitch.
+              </p>
+              <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
+                This step is free — no payment or card details are collected here.
+                Billing only comes up if you choose to continue after your free session.
               </p>
               <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-12">
                 I only take clients I know I can genuinely help.
