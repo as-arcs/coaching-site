@@ -655,45 +655,6 @@ function Testimonials() {
   )
 }
 
-// ── Mid-Page CTA ──────────────────────────────────────────────────────
-function MidPageCTA() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.3 })
-
-  return (
-    <section id="mid-cta" className="bg-[#FAF7F2] border-t border-[#D4A017]/20">
-      <motion.div
-        ref={ref}
-        variants={reveal}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-10"
-      >
-        <div>
-          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-4">
-            Reviewing applications for July
-          </p>
-          <h2
-            className="font-display leading-tight"
-            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
-          >
-            <span className="font-light text-[#1A1410]">July is</span>
-            <span className="font-black italic text-[#1A1410]"> almost full.</span>
-          </h2>
-        </div>
-        <Link
-          href="#apply"
-          onClick={scrollToApply("mid_page")}
-          className="cta-glow flex-shrink-0 inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
-        >
-          Apply for a Free Session
-          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-        </Link>
-      </motion.div>
-    </section>
-  )
-}
-
 // ── Sticky Apply CTA ──────────────────────────────────────────────────
 function StickyApplyCTA() {
   const [visible, setVisible] = useState(false)
@@ -1397,7 +1358,6 @@ export function LandingPage() {
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <Transformation />
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
-      <MidPageCTA />
       <FirstSession />
       <SectionSeam from="#FAF7F2" to="#EAE1D4" />
       <FAQ />
