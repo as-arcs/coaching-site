@@ -254,7 +254,7 @@ function Hero() {
           className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/85 mt-6"
           style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
         >
-          Reviewing applications for July
+          Reviewing applications for August
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -684,7 +684,7 @@ function StickyApplyCTA() {
       <div className="bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#1A1410]/[0.07] px-6 py-4 pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
           <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/70 hidden sm:block">
-            Reviewing applications for July
+            Reviewing applications for August
           </p>
           <Link
             href="#apply"
