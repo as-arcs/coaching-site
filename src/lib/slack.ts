@@ -87,19 +87,27 @@ interface ApplicationData {
   firstName: string
   lastName: string
   email: string
-  goal: string
+  goal?: string
   trainingDays?: string
-  biggestObstacle?: string
-  priorCoaching?: string
+  trainingExperience?: string
+  equipment?: string
+  injuries?: string
+  stage?: "contact" | "complete"
 }
 
 export async function notifyNewApplication(data: ApplicationData): Promise<void> {
-  const lines = [
-    `🟢 New application: *${data.firstName} ${data.lastName}*`,
-    `Email: ${data.email}`,
-    `Goal: ${data.goal}`,
-    `Training days: ${data.trainingDays || "—"} | Obstacle: ${data.biggestObstacle || "—"} | Prior coaching: ${data.priorCoaching || "—"}`,
-  ]
+  const lines = data.stage === "contact"
+    ? [
+        `📅 New contact scheduling a call: *${data.firstName} ${data.lastName}*`,
+        `Email: ${data.email}`,
+      ]
+    : [
+        `🟢 New application: *${data.firstName} ${data.lastName}*`,
+        `Email: ${data.email}`,
+        `Goal: ${data.goal}`,
+        `Experience: ${data.trainingExperience || "—"} | Days: ${data.trainingDays || "—"} | Equipment: ${data.equipment || "—"}`,
+        `Injuries/medical: ${data.injuries || "—"}`,
+      ]
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 5000)

@@ -5,18 +5,25 @@ import { notifyNewApplication } from "@/lib/slack"
 import { rateLimit } from "@/lib/rate-limit"
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!
-const SHEET_RANGE = "Application Form!A:I"
+const SHEET_RANGE = "Application Form!A:J"
 
-const ApplySchema = z.object({
-  firstName:       z.string().min(1).max(100),
-  lastName:        z.string().min(1).max(100),
-  email:           z.string().email().max(254),
-  goal:            z.string().min(1).max(2000),
-  trainingDays:    z.string().max(50).optional(),
-  biggestObstacle: z.string().max(500).optional(),
-  budget:          z.string().max(100).optional(),
-  priorCoaching:   z.string().max(100).optional(),
-})
+const ApplySchema = z
+  .object({
+    firstName:          z.string().min(1).max(100),
+    lastName:           z.string().min(1).max(100),
+    email:              z.string().email().max(254),
+    goal:               z.string().max(2000).optional(),
+    trainingDays:       z.string().max(50).optional(),
+    trainingExperience: z.string().max(50).optional(),
+    equipment:          z.string().max(50).optional(),
+    injuries:           z.string().max(500).optional(),
+    stage:              z.enum(["contact", "complete"]).optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.stage !== "contact" && !data.goal?.trim()) {
+      ctx.addIssue({ code: "custom", message: "Goal is required.", path: ["goal"] })
+    }
+  })
 
 function getSheetsAuth() {
   return new google.auth.JWT({
@@ -38,7 +45,7 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "Invalid input." }, { status: 400 })
     }
 
-    const { firstName, lastName, email, goal, trainingDays, biggestObstacle, budget, priorCoaching } =
+    const { firstName, lastName, email, goal, trainingDays, trainingExperience, equipment, injuries, stage } =
       parsed.data
 
     const auth = getSheetsAuth()
@@ -55,17 +62,18 @@ export async function POST(request: NextRequest) {
             firstName,
             lastName,
             email,
-            goal,
+            goal ?? "",
             trainingDays ?? "",
-            biggestObstacle ?? "",
-            budget ?? "",
-            priorCoaching ?? "",
+            trainingExperience ?? "",
+            equipment ?? "",
+            injuries ?? "",
+            stage ?? "complete",
           ],
         ],
       },
     })
 
-    notifyNewApplication({ firstName, lastName, email, goal, trainingDays, biggestObstacle, priorCoaching })
+    notifyNewApplication({ firstName, lastName, email, goal, trainingDays, trainingExperience, equipment, injuries, stage })
       .catch((err) => console.error("[slack]", err))
 
     return Response.json({ success: true })

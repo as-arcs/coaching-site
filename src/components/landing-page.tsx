@@ -5,7 +5,6 @@ import Link from "next/link"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight, ArrowDown } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { ScrollQuiz, type QuizAnswers } from "@/components/scroll-quiz"
 import { trackEvent } from "@/lib/analytics"
 
 // ── Animation Variants ────────────────────────────────────────────────
@@ -107,7 +106,7 @@ function Nav() {
           onClick={scrollToApply("nav")}
           className="cta-glow hidden md:inline-flex items-center gap-2 text-xs tracking-widest uppercase font-semibold bg-[#D4A017] text-[#1A1410] px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200"
         >
-          Apply for a Free Session
+          Book a Free Session
           <ArrowRight className="h-3 w-3" />
         </Link>
 
@@ -146,7 +145,7 @@ function Nav() {
         className="md:hidden overflow-hidden bg-[#FAF7F2] border-b border-[#1A1410]/[0.07]"
       >
         <div className="px-6 pb-6 pt-2 space-y-1">
-          {([...NAV_LINKS, ["#apply", "Apply for a Free Session"]] as [string, string][]).map(([href, label]) => (
+          {([...NAV_LINKS, ["#apply", "Book a Free Session"]] as [string, string][]).map(([href, label]) => (
             <Link
               key={href}
               href={href}
@@ -235,7 +234,7 @@ function Hero() {
             onClick={scrollToApply("hero")}
             className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
           >
-            Apply for a Free Session
+            Book a Free Session
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
@@ -247,24 +246,16 @@ function Hero() {
           </Link>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.3 }}
-          className="text-[10px] tracking-[0.25em] uppercase text-[#f0ece4]/85 mt-6"
-          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
+          className="mt-8 inline-flex flex-col items-center gap-1.5 border border-[#D4A017]/50 bg-[#1A1410]/60 backdrop-blur-sm px-6 py-3"
         >
-          Reviewing applications for August
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-          className="text-[10px] tracking-[0.2em] uppercase text-[#f0ece4]/70 mt-2"
-          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}
-        >
-          Free 20-min call · No card or payment info required to apply · You only set up billing if you decide to start coaching after we talk
-        </motion.p>
+          <p className="text-[11px] sm:text-xs tracking-[0.08em] uppercase text-[#f0ece4] font-medium">
+            Free 40-min call · No card or payment info required to book · We only set up billing if you decide to start coaching after we talk
+          </p>
+        </motion.div>
       </div>
 
       <motion.div
@@ -445,7 +436,7 @@ function Philosophy() {
               onClick={scrollToApply("philosophy")}
               className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#D4A017] border-b border-[#D4A017]/40 pb-1 hover:border-[#D4A017] transition-colors duration-200 group"
             >
-              Apply for a Free Session
+              Book a Free Session
               <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -534,8 +525,8 @@ function Included() {
 
 // ── Process ───────────────────────────────────────────────────────────
 const STEPS = [
-  { num: "01", title: "Apply", body: "Short form. I review every application personally before any money changes hands." },
-  { num: "02", title: "First Session", body: "Free 20-min call to talk goals, obstacles, and fit. No pitch." },
+  { num: "01", title: "Reach Out", body: "Short form. I personally review every request before any money changes hands." },
+  { num: "02", title: "First Session", body: "Free 40-min call to talk goals, obstacles, and fit. No pitch." },
   { num: "03", title: "Your Program", body: "Custom training + nutrition delivered within 48 hours of signing." },
   { num: "04", title: "Weekly Check-ins", body: "Submit data every Sunday. Adjustments live within 24 hours." },
   { num: "05", title: "Results", body: "Progressive recomposition with habits that hold up long after the program ends." },
@@ -548,7 +539,7 @@ function Process() {
   return (
     <section id="process" className="bg-[#EAE1D4] py-24 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader label="The Process" line1="Application to results." line2="Five steps." />
+        <SectionHeader label="The Process" line1="Free session to results." line2="Five steps." />
         <motion.div
           ref={ref}
           variants={stagger}
@@ -684,14 +675,14 @@ function StickyApplyCTA() {
       <div className="bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#1A1410]/[0.07] px-6 py-4 pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
           <p className="text-[10px] tracking-[0.25em] uppercase text-[#1A1410]/70 hidden sm:block">
-            Reviewing applications for August
+            Booking Free Sessions for August
           </p>
           <Link
             href="#apply"
             onClick={scrollToApply("sticky")}
             className="inline-flex items-center gap-2 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 hover:bg-[#D4A017]/90 transition-colors duration-200 group ml-auto"
           >
-            Apply for a Free Session
+            Book a Free Session
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -787,7 +778,7 @@ function FirstSession() {
             Nothing is charged until after we talk.
           </p>
           <p className="text-[#1A1410]/70 text-sm mt-1">
-            Your First Session is free — 20 minutes to map out what 6 months of good health actually looks like for you. You decide from there. No pitch.
+            Your First Session is free — 40 minutes to map out what 6 months of good health actually looks like for you. You decide from there. No pitch.
           </p>
         </div>
         <SectionHeader
@@ -808,7 +799,7 @@ function FirstSession() {
             onClick={scrollToApply("first_session")}
             className="cta-glow inline-flex items-center gap-3 bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold px-10 py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 group"
           >
-            Book Your First Session
+            Book a Free Session
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
@@ -837,8 +828,8 @@ const FAQ_ITEMS = [
     a: "We're not fixing your workout. We're fixing your lifestyle. Bland food and rigid schedules don't stick because they were never built for your life. This is. Work with me. Get results.",
   },
   {
-    q: "What if I apply and it's not the right fit?",
-    a: "The First Session is free and there's no commitment before it. You apply, I review it, and you have a 20 minute conversation. You decide from there. No pitch.",
+    q: "What if I book and it's not the right fit?",
+    a: "The First Session is free and there's no commitment before it. You submit a quick form, I review it, and we hop on a 40-minute call. You decide from there. No pitch.",
   },
   {
     q: "What does coaching actually cost?",
@@ -865,7 +856,7 @@ function FAQ() {
   return (
     <section className="bg-[#EAE1D4] py-20 border-t border-[#1A1410]/[0.08]">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader label="Before You Apply" line1="Common questions." line2="Real answers." />
+        <SectionHeader label="Before You Book" line1="Common questions." line2="Real answers." />
         <motion.div
           ref={ref}
           variants={stagger}
@@ -917,19 +908,57 @@ function RadioGroup({
   )
 }
 
-const CAL_URL = "https://cal.com/amir-cohen-simayof-vxjysx/20min"
+function CheckboxGroup({
+  name, label, options, values, onChange,
+}: {
+  name: string; label: string; options: string[]; values: string[]; onChange: (v: string[]) => void
+}) {
+  const toggle = (opt: string) => {
+    onChange(values.includes(opt) ? values.filter(v => v !== opt) : [...values, opt])
+  }
+  return (
+    <div>
+      <label className="block text-xs tracking-[0.15em] uppercase text-[#1A1410] mb-3">
+        {label}
+      </label>
+      <div className="flex flex-wrap gap-2">
+        {options.map((opt) => (
+          <label key={opt} className="cursor-pointer select-none">
+            <input
+              type="checkbox"
+              name={name}
+              value={opt}
+              checked={values.includes(opt)}
+              onChange={() => toggle(opt)}
+              className="sr-only peer"
+            />
+            <span className="inline-block border border-[#1A1410]/[0.22] px-4 py-2 text-xs tracking-wide text-[#1A1410] transition-colors duration-200 peer-checked:border-[#D4A017] peer-checked:text-[#D4A017] hover:border-[#1A1410]/35 hover:text-[#1A1410]">
+              {opt}
+            </span>
+          </label>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const CAL_URL = "https://cal.com/amir-cohen-simayof-vxjysx/40min"
 
 interface FormState {
   firstName: string
   lastName: string
   email: string
-  goal: string
-  biggestObstacle: string
+  goals: string[]
+  goalOther: string
+  trainingExperience: string
   days: string
-  prior: string
+  equipment: string
+  injuries: string
 }
 
-function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
+type ApplyStage = "contact" | "details" | "submitted"
+
+function Apply() {
   const splashRef = useRef(null)
   const leftRef = useRef(null)
   const rightRef = useRef(null)
@@ -937,52 +966,46 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
   const leftInView = useInView(leftRef, { once: true, amount: 0.2 })
   const rightInView = useInView(rightRef, { once: true, amount: 0.1 })
 
+  const [stage, setStage] = useState<ApplyStage>("contact")
   const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
   const [agreed, setAgreed] = useState(false)
   const [form, setForm] = useState<FormState>({
-    firstName: quizAnswers.firstName,
-    lastName: quizAnswers.lastName,
-    email: quizAnswers.email,
-    goal: quizAnswers.goal,
-    biggestObstacle: quizAnswers.biggestObstacle,
-    days: quizAnswers.trainingDays,
-    prior: quizAnswers.priorCoaching,
+    firstName: "",
+    lastName: "",
+    email: "",
+    goals: [],
+    goalOther: "",
+    trainingExperience: "",
+    days: "",
+    equipment: "",
+    injuries: "",
   })
 
-  useEffect(() => {
-    setForm(prev => ({
-      firstName: prev.firstName || quizAnswers.firstName,
-      lastName: prev.lastName || quizAnswers.lastName,
-      email: prev.email || quizAnswers.email,
-      goal: prev.goal || quizAnswers.goal,
-      biggestObstacle: prev.biggestObstacle || quizAnswers.biggestObstacle,
-      days: prev.days || quizAnswers.trainingDays,
-      prior: prev.prior || quizAnswers.priorCoaching,
-    }))
-  }, [quizAnswers])
-
-  const openBooking = () => window.open(CAL_URL, "_blank")
+  const openBooking = () => {
+    const params = new URLSearchParams()
+    const name = `${form.firstName} ${form.lastName}`.trim()
+    if (name) params.set("name", name)
+    if (form.email) params.set("email", form.email)
+    const query = params.toString()
+    window.open(query ? `${CAL_URL}?${query}` : CAL_URL, "_blank")
+  }
 
   const inputClass =
     "w-full bg-transparent border-b border-[#1A1410]/[0.22] py-3 text-[#1A1410] text-sm placeholder:text-[#1A1410]/50 focus:outline-none focus:border-[#D4A017]/80 transition-colors duration-200"
   const labelClass = "block text-xs tracking-[0.15em] uppercase text-[#1A1410] mb-3"
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError("")
     setSubmitting(true)
-    trackEvent("apply_form_submit", { status: "attempt" })
+    trackEvent("apply_contact_submit", { status: "attempt" })
 
     const body = {
       firstName: form.firstName,
       lastName: form.lastName,
       email: form.email,
-      goal: form.goal,
-      biggestObstacle: form.biggestObstacle,
-      trainingDays: form.days,
-      priorCoaching: form.prior,
+      stage: "contact",
     }
 
     try {
@@ -993,7 +1016,48 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
       })
       const json = await res.json()
       if (!res.ok) throw new Error(json.error ?? "Something went wrong.")
-      setSubmitted(true)
+      trackEvent("apply_contact_submit", { status: "success" })
+      openBooking()
+      setStage("details")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.")
+      trackEvent("apply_contact_submit", { status: "error" })
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  async function handleDetailsSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setError("")
+    setSubmitting(true)
+    trackEvent("apply_form_submit", { status: "attempt" })
+
+    const goal = form.goals
+      .map(g => (g === "Other" ? `Other: ${form.goalOther.trim() || "unspecified"}` : g))
+      .join(", ")
+
+    const body = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      goal,
+      trainingExperience: form.trainingExperience,
+      trainingDays: form.days,
+      equipment: form.equipment,
+      injuries: form.injuries,
+      stage: "complete",
+    }
+
+    try {
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error ?? "Something went wrong.")
+      setStage("submitted")
       trackEvent("apply_form_submit", { status: "success" })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.")
@@ -1018,12 +1082,12 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
           className="font-display font-black text-[#1A1410] select-none pointer-events-none absolute inset-0 flex items-center justify-center leading-none"
           style={{ fontSize: "clamp(8rem, 22vw, 18rem)", opacity: 0.04 }}
         >
-          APPLY
+          START
         </p>
 
         <div className="relative z-10">
           <p className="text-sm font-semibold tracking-[0.25em] uppercase text-[#D4A017] mb-8">
-            Apply Now
+            Free Session
           </p>
           <h2
             className="font-display leading-tight"
@@ -1033,13 +1097,13 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
             <span className="block font-black italic text-[#1A1410]">we&apos;re a fit.</span>
           </h2>
           <p className="text-[#1A1410]/70 text-base max-w-xs mx-auto leading-relaxed mt-6">
-            Takes about 3 minutes. I personally review every application.
+            Takes about 3 minutes. I personally review every request.
           </p>
         </div>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 py-24">
-        {submitted ? (
+        {stage === "submitted" ? (
           /* ── Success state ── */
           <motion.div
             variants={reveal}
@@ -1049,32 +1113,22 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
           >
             <div className="w-12 h-px bg-[#D4A017] mx-auto mb-10" />
             <p className="text-[10px] tracking-[0.4em] uppercase text-[#D4A017] mb-6">
-              Application Received
+              Request Received
             </p>
             <h3
               className="font-display font-black text-[#1A1410] mb-6"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
             >
-              You&apos;re in.
+              You&apos;re all set.
             </h3>
-            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
-              Pick a time for your free 20-minute First Session. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
-            </p>
-            <p className="text-[#1A1410]/65 text-sm leading-relaxed mb-10">
-              Want to hit the ground running?{" "}
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfgVzHgqmrUM9OfzvWBh5SloIcnlAaR4ah0iavs95BsWwxcoA/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/80 transition-colors"
-              >Fill out the intake form</a> before the call
-              and I can skip the basics and get straight to your plan.
+            <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-10">
+              Your free 40-minute First Session is on the calendar. No pressure, no pitch. Just a real conversation about where you&apos;re at and where you want to go.
             </p>
             <button
               onClick={openBooking}
               className="inline-flex items-center gap-3 border border-[#D4A017] px-8 py-4 text-[#D4A017] text-sm tracking-[0.15em] uppercase hover:bg-[#D4A017] hover:text-[#1A1410] transition-all duration-300 cursor-pointer"
             >
-              Book Your First Session <ArrowRight size={16} />
+              Need to reschedule? Reopen booking <ArrowRight size={16} />
             </button>
           </motion.div>
         ) : (
@@ -1087,10 +1141,17 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               animate={leftInView ? "visible" : "hidden"}
             >
               <div className="w-12 h-px bg-[#D4A017] mb-8" />
-              <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
-                Fill out the application. Once you submit, you&apos;ll book your free
-                20-minute First Session directly. No waiting, no pitch.
-              </p>
+              {stage === "contact" ? (
+                <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+                  Put in your name and email and you&apos;ll go straight to booking your free
+                  40-minute First Session. No waiting, no pitch.
+                </p>
+              ) : (
+                <p className="text-[#1A1410]/82 text-lg leading-relaxed mb-4">
+                  Your call is on the way. A few quick questions so I can prep before
+                  we talk — takes about 2 minutes.
+                </p>
+              )}
               <p className="text-[#1A1410]/70 text-lg leading-relaxed mb-4">
                 This step is free — no payment or card details are collected here.
                 Billing only comes up if you choose to continue after your free session.
@@ -1124,122 +1185,165 @@ function Apply({ quizAnswers }: { quizAnswers: QuizAnswers }) {
               animate={rightInView ? "visible" : "hidden"}
             >
               <p className="text-[10px] tracking-[0.15em] uppercase text-[#1A1410]/75 mb-8">
-                Takes about 3 minutes
+                {stage === "contact" ? "Step 1 of 2 · About 30 seconds" : "Step 2 of 2 · About 2 minutes"}
               </p>
-              <form className="space-y-8" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-6">
+
+              {stage === "contact" ? (
+                <form className="space-y-8" onSubmit={handleContactSubmit}>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label className={labelClass}>First name</label>
+                      <input
+                        name="firstName"
+                        required
+                        value={form.firstName}
+                        onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
+                        className={inputClass}
+                        placeholder="First"
+                      />
+                    </div>
+                    <div>
+                      <label className={labelClass}>Last name</label>
+                      <input
+                        name="lastName"
+                        required
+                        value={form.lastName}
+                        onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
+                        className={inputClass}
+                        placeholder="Last"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className={labelClass}>First name</label>
+                    <label className={labelClass}>Email</label>
                     <input
-                      name="firstName"
+                      name="email"
+                      type="email"
                       required
-                      value={form.firstName}
-                      onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
+                      value={form.email}
+                      onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                       className={inputClass}
-                      placeholder="First"
+                      placeholder="your@email.com"
                     />
                   </div>
-                  <div>
-                    <label className={labelClass}>Last name</label>
-                    <input
-                      name="lastName"
-                      required
-                      value={form.lastName}
-                      onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
-                      className={inputClass}
-                      placeholder="Last"
-                    />
-                  </div>
-                </div>
 
-                <div>
-                  <label className={labelClass}>Email</label>
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    className={inputClass}
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label className={labelClass}>
-                    What are you trying to achieve in 12 weeks?
-                  </label>
-                  <textarea
-                    name="goal"
-                    required
-                    value={form.goal}
-                    onChange={e => setForm(f => ({ ...f, goal: e.target.value }))}
-                    className={cn(inputClass, "resize-none min-h-[90px]")}
-                    placeholder="Be specific: lose 15 lbs before August, get visible abs while keeping strength..."
-                  />
-                </div>
-
-                <div>
-                  <label className={labelClass}>Biggest obstacle right now</label>
-                  <input
-                    name="biggestObstacle"
-                    value={form.biggestObstacle}
-                    onChange={e => setForm(f => ({ ...f, biggestObstacle: e.target.value }))}
-                    className={inputClass}
-                    placeholder="No time, injured shoulder, don't know where to start..."
-                  />
-                </div>
-
-                <RadioGroup
-                  name="days"
-                  label="Training days per week"
-                  options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
-                  value={form.days}
-                  onChange={v => setForm(f => ({ ...f, days: v }))}
-                />
-                <RadioGroup
-                  name="prior"
-                  label="Worked with a coach before?"
-                  options={["Yes", "No", "Sort of"]}
-                  value={form.prior}
-                  onChange={v => setForm(f => ({ ...f, prior: v }))}
-                />
-
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={agreed}
-                    onChange={(e) => setAgreed(e.target.checked)}
-                    className="mt-1 flex-shrink-0 accent-[#D4A017]"
-                    required
-                  />
-                  <span className="text-xs text-[#1A1410]/65 leading-relaxed group-hover:text-[#1A1410]/80 transition-colors">
-                    I have read and agree to the{" "}
-                    <Link href="/terms" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
-                      Terms of Service
-                    </Link>{" "}
-                    and{" "}
-                    <Link href="/privacy" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
-                      Privacy Policy
-                    </Link>. I confirm I am 18 or older and have medical clearance to begin an exercise program.
-                  </span>
-                </label>
-
-                {error && (
-                  <p className="text-red-600 text-xs tracking-wide">{error}</p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting || !agreed}
-                  className="w-full bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {submitting ? "Submitting…" : "Submit Application"}
-                  {!submitting && (
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  {error && (
+                    <p className="text-red-600 text-xs tracking-wide">{error}</p>
                   )}
-                </button>
-              </form>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? "Submitting…" : "Schedule My Free Session"}
+                    {!submitting && (
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    )}
+                  </button>
+                </form>
+              ) : (
+                <form className="space-y-8" onSubmit={handleDetailsSubmit}>
+                  <p className="text-xs text-[#1A1410]/60 -mt-2">
+                    Didn&apos;t get a chance to schedule?{" "}
+                    <button
+                      type="button"
+                      onClick={openBooking}
+                      className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/80 transition-colors cursor-pointer"
+                    >
+                      Reopen booking
+                    </button>
+                  </p>
+
+                  <CheckboxGroup
+                    name="goals"
+                    label="Goals"
+                    options={["Lose Fat", "Build Muscle", "Regain Mobility", "Other"]}
+                    values={form.goals}
+                    onChange={v => setForm(f => ({ ...f, goals: v }))}
+                  />
+                  {form.goals.includes("Other") && (
+                    <div>
+                      <label className={labelClass}>What are you trying to achieve?</label>
+                      <input
+                        name="goalOther"
+                        value={form.goalOther}
+                        onChange={e => setForm(f => ({ ...f, goalOther: e.target.value }))}
+                        className={inputClass}
+                        placeholder="Tell me in your own words..."
+                      />
+                    </div>
+                  )}
+                  <RadioGroup
+                    name="trainingExperience"
+                    label="Training experience"
+                    options={["Never trained consistently", "Under 1 year", "1–4 years", "4+ years"]}
+                    value={form.trainingExperience}
+                    onChange={v => setForm(f => ({ ...f, trainingExperience: v }))}
+                  />
+                  <RadioGroup
+                    name="days"
+                    label="Training days per week"
+                    options={["2–3 days", "3–4 days", "4–5 days", "5+ days"]}
+                    value={form.days}
+                    onChange={v => setForm(f => ({ ...f, days: v }))}
+                  />
+                  <RadioGroup
+                    name="equipment"
+                    label="Equipment access"
+                    options={["Full gym", "Home gym", "Bodyweight only"]}
+                    value={form.equipment}
+                    onChange={v => setForm(f => ({ ...f, equipment: v }))}
+                  />
+
+                  <div>
+                    <label className={labelClass}>Injuries or medical conditions I should know about</label>
+                    <input
+                      name="injuries"
+                      value={form.injuries}
+                      onChange={e => setForm(f => ({ ...f, injuries: e.target.value }))}
+                      className={inputClass}
+                      placeholder="None, or describe briefly..."
+                    />
+                  </div>
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="mt-1 flex-shrink-0 accent-[#D4A017]"
+                      required
+                    />
+                    <span className="text-xs text-[#1A1410]/65 leading-relaxed group-hover:text-[#1A1410]/80 transition-colors">
+                      I have read and agree to the{" "}
+                      <Link href="/terms" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
+                        Terms of Service
+                      </Link>{" "}
+                      and{" "}
+                      <Link href="/privacy" target="_blank" className="text-[#D4A017] underline underline-offset-2 hover:text-[#D4A017]/70">
+                        Privacy Policy
+                      </Link>. I confirm I am 18 or older and have medical clearance to begin an exercise program.
+                    </span>
+                  </label>
+
+                  {error && (
+                    <p className="text-red-600 text-xs tracking-wide">{error}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={submitting || !agreed}
+                    className="w-full bg-[#D4A017] text-[#1A1410] text-xs tracking-[0.2em] uppercase font-semibold py-5 hover:bg-[#D4A017]/90 transition-colors duration-200 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? "Submitting…" : "Finish My Application"}
+                    {!submitting && (
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    )}
+                  </button>
+                </form>
+              )}
             </motion.div>
           </div>
         )}
@@ -1281,7 +1385,7 @@ function Footer() {
                 ["#process", "Process"],
                 ["#results", "Results"],
                 ["#first-session", "First Session"],
-                ["#apply", "Apply"],
+                ["#apply", "Free Session"],
               ].map(([href, label]) => (
                 <Link
                   key={href}
@@ -1327,28 +1431,12 @@ function Footer() {
 }
 
 // ── Main Export ───────────────────────────────────────────────────────
-const EMPTY_QUIZ: QuizAnswers = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  goal: "",
-  biggestObstacle: "",
-  trainingDays: "",
-  priorCoaching: "",
-}
-
 export function LandingPage() {
-  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>(EMPTY_QUIZ)
-
-  function handleQuizAnswer(updates: Partial<QuizAnswers>) {
-    setQuizAnswers(prev => ({ ...prev, ...updates }))
-  }
-
   return (
     <div className="bg-[#FAF7F2] text-[#1A1410] min-h-screen">
       <Nav />
       <Hero />
-      <Apply quizAnswers={quizAnswers} />
+      <Apply />
       <Marquee />
       <Included />
       <Testimonials />
@@ -1364,7 +1452,6 @@ export function LandingPage() {
       <SectionSeam from="#EAE1D4" to="#FAF7F2" />
       <Footer />
       <StickyApplyCTA />
-      <ScrollQuiz answers={quizAnswers} onAnswer={handleQuizAnswer} />
     </div>
   )
 }
